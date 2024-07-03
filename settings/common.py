@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     # Project apps
-    # 'apps.users',
+    'apps.users',
     'sport_shop_api',
 ]
 

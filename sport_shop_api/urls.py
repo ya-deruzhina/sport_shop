@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from django.contrib import admin
 
-from swagger import SwaggerView
+# from swagger import SwaggerView
 from .helpers import GetViewsService
 
 paths = []
@@ -32,6 +32,6 @@ for version in settings.API_VERSIONS:
 
 urlpatterns = paths + [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),  # For Swagger auth
-    path('doc', login_required(SwaggerView.as_view())),
+    # path('doc', login_required(SwaggerView.as_view())),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
