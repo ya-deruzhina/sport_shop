@@ -1,0 +1,120 @@
+{
+  "responses": {
+    "UnauthorizedResponse": {
+      "description": "Returned after making request with invalid credentials",
+      "content": {
+        "application/json": {
+          "schema": {
+            "example": {
+              "errors": {
+                "detail": [
+                  "Authentication credentials were not provided"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "SuccessfulSignInResponse": {
+      "description": "Successful sign in",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Successful authentication response body",
+            "properties": {
+              "user": {
+                "$ref": "#components/schemas/User"
+              },
+              "token": {
+                "$ref": "#components/schemas/Token"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "requestBodies": {
+    "AuthRequestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "identity": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          },
+          "examples": {
+            "test@user.com": {
+              "summary": "An example of a user",
+              "value": {
+                "identity": "admin@test.test",
+                "password": "password"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "schemas": {
+    "Token": {
+      "description": "Token model",
+      "type": "object",
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "Bearer <token>"
+        }
+      }
+    },
+    "User": {
+      "description": "User model",
+      "type": "object",
+      "required": [
+        "email",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "123"
+        },
+        "email": {
+          "type": "string",
+          "example": "test@user.com"
+        },
+        "first_name": {
+          "type": "string",
+          "example": "Jack"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "London"
+        },
+        "status": {
+          "type": "string",
+          "example": "active"
+        }
+      }
+    }
+  },
+  "securitySchemes": {
+    "BearerScheme": {
+      "type": "http",
+      "description": "Enter your JWT token",
+      "scheme": "bearer",
+      "bearerFormat": "Bearer"
+    }
+  }
+}

@@ -1,16 +1,7 @@
-from apps.users.serializers.comment.comment_serializer import CommentSerializer
-from apps.users.serializers.rating.rating_serializer import RatingSerializer
-from apps.users.serializers.basket.basket_serializer import BasketSerializer
-from apps.users.serializers.order.order_serializer import OrderSerializer
-from apps.users.serializers.order.product_order_serializer import OrderProductSerializer
+from .sign_in_serializer import SignInSerializer
+from .user_serializer import UserSerializer
 
-
-all= (
-    'CommentSerializer',
-    'RatingSerializer',
-    'BasketSerializer',
-    'OrderSerializer',
-    'OrderProductSerializer',
-
+__all__ = (
+    'SignInSerializer',
+    'UserSerializer',
 )
-

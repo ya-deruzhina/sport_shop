@@ -1,5 +1,5 @@
 """
-Django settings for sport_shop_api project.
+Django settings for internals project.
 """
 
 import datetime
@@ -49,7 +49,8 @@ INSTALLED_APPS = [
 
     # Project apps
     'apps.users',
-    'sport_shop_api',
+    'apps.shop',
+    'internals',
 ]
 
 MIDDLEWARE = [
@@ -61,10 +62,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'sport_shop_api.middlewares.RequestResponseLoggingMiddleWare',
+    'internals.middlewares.RequestResponseLoggingMiddleWare',
 ]
 
-ROOT_URLCONF = 'sport_shop_api.urls'
+ROOT_URLCONF = 'internals.urls'
 
 TEMPLATES = [
     {
@@ -82,7 +83,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sport_shop_api.wsgi.application'
+WSGI_APPLICATION = 'internals.wsgi.application'
 
 
 # Database
