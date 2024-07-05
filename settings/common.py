@@ -137,11 +137,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'apps.users.services.auth.authentication_service.JSONWebTokenAuthentication',
     ),
     'EXCEPTION_HANDLER': 'core.utils.exception_handler.exception_handler_wrapper',
+
 }
 
 JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')

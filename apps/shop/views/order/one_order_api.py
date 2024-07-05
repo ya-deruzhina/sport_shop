@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 
 from apps.shop.models import OrderModel, ProductInOrder
@@ -12,46 +12,34 @@ class OneOrdersUserView(APIView):
         try:
             order = OrderModel.objects.get(id=order_id)
                 
-        except Exception  as exs:
-            print ('Warming!!!', exs)   
-            template = loader.get_template("main/page_404.html")
-            return HttpResponse(template.render())
+        except:
+            return HttpResponseRedirect ("/404_error/")
         
         else:        
-            all_pizza = ProductInOrder.objects.filter(order=order_id)
-            one_pizza_in_order = {}
+            all_products = ProductInOrder.objects.filter(order=order_id)
+            one_product_in_order = {}
             all_price = round(order.total_money,2)
-            for m in range(0,(len(all_pizza))):
-                one_pizza_name = all_pizza [m].pizza
-                one_pizza_count = all_pizza[m].count
-                one_pizza = {"pizza":one_pizza_name, "count":one_pizza_count}
-                one_pizza_in_order[m] = one_pizza
+            for m in range(0,(len(all_products))):
+                one_product_name = all_products [m].product
+                one_product_count = all_products[m].count
+                one_product = {"product":one_product_name, "count":one_product_count}
+                one_product_in_order[m] = one_product
                 order_time = order.order_time.strftime("%H:%M:%S - %d.%m.%Y ")
                 
-                pizza = {
+                product = {
                     "id":order.id,
                     "order_time": order_time,
                     "comment": order.comment,
-                    "status": order.status,
                     "name": order.name, 
                     "phone": order.phone,
                     "all_price":all_price,
-                    "address":order.address,
-                    "one_pizza_in_order":one_pizza_in_order,
+                    "one_product_in_order":one_product_in_order,
                     }      
-            count_pizza = one_pizza_in_order.keys()
-            if order.status == 'NEW':
-                template = loader.get_template("order/one_order.html")
-                context = {
-                    "pizza":pizza,
-                    "count_pizza":count_pizza,
-                }
-                return HttpResponse(template.render(context,request))
-        
-            else:
-                template = loader.get_template("order/one_order_const.html")
-                context = {
-                    "pizza":pizza,
-                    "count_pizza":count_pizza,
-                }
-                return HttpResponse(template.render(context,request))
+            count_product = one_product_in_order.keys()
+            # template = loader.get_template("order/one_order_const.html")
+            # context = {
+            #     "product":product,
+            #     "count_product":count_product,
+            # }
+            # return HttpResponse(template.render(context,request))
+            return HttpResponseRedirect ("")

@@ -19,60 +19,52 @@ class OrderView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
-    # Страница Заказа после оформления
+    # Order's page after ordering
     def get(self,request):
         try: 
             user = User.objects.get(id=request.user.id)
             order_number = OrderModel.objects.filter(user=request.user.id).order_by('-order_time')[0].id
-            order_pizza = OrderModel.objects.get(id=order_number)
-            pizza_in_order = ProductInOrder.objects.filter(order=order_number)
-            price = round(order_pizza.total_money,2)
+            order_product = OrderModel.objects.get(id=order_number)
+            product_in_order = ProductInOrder.objects.filter(order=order_number)
+            price = round(order_product.total_money,2)
 
-        except Exception as exs:
-            print ('Warming!!!', exs)   
-            template = loader.get_template("main/page_404.html")
-            return HttpResponse(template.render())
+        except:
+            return HttpResponseRedirect ("/404_error/")
 
         else:
-            template = loader.get_template("order/order.html")
-            context = {
-                "order_pizza":order_pizza,
-                "pizza":pizza_in_order,
-                "user":user,
-                "price":price,
-            }
-            return HttpResponse(template.render(context,request))
+            # template = loader.get_template("order/order.html")
+            # context = {
+            #     "order_product":order_product,
+            #     "product":product_in_order,
+            #     "user":user,
+            #     "price":price,
+            # }
+            # return HttpResponse(template.render(context,request))
+            return HttpResponseRedirect ("")
 
 
-    # Формирование Заказа 
+    # Forming an Order
     def post(self,request):
 
         with transaction.atomic():
-           # Формирование заказа и запись в БД Orders и Pizza in order
+           # Forming an Order and recording to DB Orders and Ppoducts in order
             id_user = request.user.id
             basket = BasketModel.objects.filter(user=id_user)
             catalog = GoodsModel.objects.all()
             price_all = 0
             n=1
-            data_pizza = {}
+            data_product = {}
 
-            for pizza in basket:
-                if catalog.get(id = pizza.pizza_id).price_disсont !=0:
-                    price_one = catalog.get(id = pizza.pizza_id).price_disсont
-                    price_one = round(price_one,2)
-                else:
-                    price_one = catalog.get(id = pizza.pizza_id).price
-                    price_one = round(price_one,2)
-                    if User.objects.get(id = id_user).discont != 0:
-                        price_one = (price_one * (1-(User.objects.get(id=id_user).discont/100)))
-                        price_one = round(price_one,2)
-                price_all += price_one * pizza.count
+            for product in basket:
+                price_one = catalog.get(id = product.product_id).price
+                price_one = round(price_one,2)
+                price_all += price_one * product.count
                 price_all = round(price_all,2)
-                data_pizza[n] = {'count':pizza.count, 'pizza':pizza.pizza_id,'price_one':price_one}           
+                data_product[n] = {'count':product.count, 'product':product.product_id,'price_one':price_one}           
                 n+=1
 
 
-            # Получение данных от клиента
+            # !!!!!! Getting client's information
             try:
                 user = request.user.username
                 phone = request.user.phone_number
@@ -91,54 +83,36 @@ class OrderView(APIView):
                 serializer = OrderSerializer(data=data_client)
                 serializer.is_valid(raise_exception=True)
             
-            except Exception as exs:
-                print ('Warming!!!', exs)   
-                template = loader.get_template("main/page_404.html")
-                return HttpResponse(template.render())
+            except:
+                return HttpResponseRedirect ("/404_error/")
             
             else:
                 serializer.save()
 
 
-            # Запись пиццы в PizzaInOrder
+            # Recording Product to ProductInOrder
                 order_number = OrderModel.objects.filter(user=id_user).order_by('-order_time')[0].id
-                for a in data_pizza.keys():
-                    data = data_pizza[a]
+                for a in data_product.keys():
+                    data = data_product[a]
                     price_one = float(data['price_one'])
                     price_one = round(price_one,2)
 
-                    data = {'order':order_number,'count':data['count'], 'pizza':data['pizza'],'price_one':price_one}
+                    data = {'order':order_number,'count':data['count'], 'product':data['product'],'price_one':price_one}
                     try:
                         serializer = OrderProductSerializer(data=data)
                         serializer.is_valid(raise_exception=True)
                     
-                    except Exception as exs:
-                        print ('Warming!!!', exs)   
-                        template = loader.get_template("main/page_404.html")
-                        return HttpResponse(template.render())
+                    except:
+                        return HttpResponseRedirect ("/404_error/")
 
                     else:        
                         serializer.save()
 
-             # Удаление из корзины
+             # Deleting basket
             basket.delete()
 
-            # Запись скидочной карты при заказе от 50р
-            try:
-                user = User.objects.get(id = id_user)
-                discont = user.discont
-
-            except Exception as exs:
-                    print ('Warming!!!', exs)   
-                    template = loader.get_template("main/page_404.html")
-                    return HttpResponse(template.render())
+            # !!!! Sent message 
             
-            else:            
-                if price_all > 50 and discont == 0:
-                    user = User.objects.get (id = id_user)
-                    user.discont = 3      
-                    user.save()
             
-        # import pdb; pdb.set_trace()
-        return HttpResponseRedirect ("/pizza/lisa/order/")
+        return HttpResponseRedirect ("/")
     

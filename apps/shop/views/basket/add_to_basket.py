@@ -5,10 +5,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
 
-from apps.users.models import User
+
 from apps.shop.models import BasketModel, GoodsModel
-from apps.shop.serializers import BasketSerializer
-from apps.shop.forms import CreateOrderForm
+
 
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
@@ -19,33 +18,29 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
 
 class BasketAddView(APIView):
     permission_classes = [IsAuthenticated]
-    # Добавляет 1 шт в корзину
+    # Add to basket
     def get (self,request, basket_id):
         try:
             basket = BasketModel.objects.get(id=basket_id)
 
-        except Exception  as exs:
-            print ('Warming!!!', exs)   
-            template = loader.get_template("main/page_404.html")
-            return HttpResponse(template.render())
+        except:
+            return HttpResponseRedirect ("/404_error/")
         
         else:
             basket.count +=1
 
-
-        try:
-            catalog_amount = GoodsModel.objects.get(id=basket.product_id)
-            if catalog_amount.amount == 0:
-                template = loader.get_template("catalog/error_not_product.html")
-                return HttpResponse(template.render())
-            else:
-                catalog_amount.amount -= 1
-                catalog_amount.save()
+    # !!!! Остаток в наличии
+        # try:
+        #     catalog_amount = GoodsModel.objects.get(id=basket.product_id)
+        #     if catalog_amount.amount == 0:
+        #         template = loader.get_template("catalog/error_not_product.html")
+        #         return HttpResponse(template.render())
+        #     else:
+        #         catalog_amount.amount -= 1
+        #         catalog_amount.save()
             
-        except Exception as exs:
-                print ('Warming!!!', exs)   
-                template = loader.get_template("main/page_404.html")
-                return HttpResponse(template.render())
+        # except:
+        #     return HttpResponseRedirect ("/404_error/")
         
         basket.save()
 

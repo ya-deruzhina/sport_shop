@@ -2,7 +2,7 @@ import sys
 sys.path = ["", ".."] + sys.path[1:]
 import django
 django.setup()
-from core import loggers
+from core.loggers import logger
 from core.scripts import perform
 
 script_names = ('import_data', )

@@ -1,5 +1,4 @@
-from django.template import loader
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponseRedirect
 
 from apps.shop.serializers import RatingSerializer
 
@@ -17,17 +16,15 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
 class Rating(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
-    # Оставить Отзыв о Пицце
+    # leave a mark (rating)
     def post(self,request, product_id):
         try:
-            data = {"user":request.user.id, "product":product_id,"rating":(request.POST.get('rating'))}
+            data = {"user":request.user.id, "product":product_id,"rating":(int(request.POST.get('rating')))}
             serializer = RatingSerializer(data=data)
             serializer.is_valid(raise_exception=True)
        
-        except Exception as exs:
-            print ('Warming!!!', exs)   
-            template = loader.get_template("main/page_404.html")
-            return HttpResponse(template.render())
+        except:
+            return HttpResponseRedirect ("/404_error/")
         
         else:
             serializer.save()

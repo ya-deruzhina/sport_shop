@@ -25,26 +25,22 @@ class BasketDelete(APIView):
             basket = BasketModel.objects.get(id=basket_id)
             
         except Exception  as exs:
-            print ('Warming!!!', exs)   
-            template = loader.get_template("main/page_404.html")
-            return HttpResponse(template.render())
+            return HttpResponseRedirect ("/404_error/")
         
         else:
             basket.count -=1
             basket.save()
-
-            if basket.count == 0:
-                basket.delete()
+            # !!!!! Добавить остаток в наличии
+            # if basket.count == 0:
+            #     basket.delete()
             
-            try:
-                catalog_amount = GoodsModel.objects.get(id=basket.product_id)
-                catalog_amount.amount += 1
-                catalog_amount.save()
+            # try:
+            #     catalog_amount = GoodsModel.objects.get(id=basket.product_id)
+            #     catalog_amount.amount += 1
+            #     catalog_amount.save()
                 
-            except Exception as exs:
-                    print ('Warming!!!', exs)   
-                    template = loader.get_template("main/page_404.html")
-                    return HttpResponse(template.render())
+            # except Exception as exs:
+            #         return HttpResponseRedirect ("/404_error/")
     
         return HttpResponseRedirect ("/basket/")
     

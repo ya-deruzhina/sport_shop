@@ -107,7 +107,38 @@
           "example": "active"
         }
       }
+    },
+    "Products": {
+      "description": "Products model",
+      "type": "object",
+      "required": [
+        "email",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "123"
+        },
+        "name": {
+          "type": "string",
+          "example": "weight"
+        },
+        "description": {
+          "type": "string",
+          "example": "10 kg"
+        },
+        "price": {
+          "type": "float",
+          "example": "10.50"
+        },
+        "id_parent": {
+          "type": "integer",
+          "example": "1"
+        }
+      }
     }
+
   },
   "securitySchemes": {
     "BearerScheme": {
