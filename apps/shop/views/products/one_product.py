@@ -12,14 +12,14 @@ from rest_framework.response import Response
 class ProductView(APIView):
     def get (self,request,product_id):
         try:
-            product = GoodsModel.objects.filter(id=product_id)
+            product = GoodsModel.objects.get(id=product_id)
             comment = CommentOfGoodsModel.objects.filter(product=product_id).order_by('id')
             rating = RatingOfGoodsModel.objects.filter(product=product_id)
-
-            product = [CatalogSerializer (instance=working_service).data for working_service in product]
+            
+            serializer = CatalogSerializer(instance=product).data
 
         except:
-                return HttpResponseRedirect ("/404_error/")
+                return HttpResponseRedirect ("/api/v1/404_error/")
         else:     
             if len(rating) > 0:
                 for i in rating:
@@ -30,7 +30,7 @@ class ProductView(APIView):
             if len (comment) == 0:
                 comment = "No Comment" 
 
-            one_product = {'information':product, 'comment':comment, 'rating':rating}
+            one_product = {'information':serializer, "system":{'comment':comment, 'rating':rating}}
 
         # template = loader.get_template("catalog/pizza.html")
         # context = {
@@ -43,7 +43,7 @@ class ProductView(APIView):
             # }
 
         # return HttpResponse(template.render(context,request))
-        return Response ({"Product": one_product})
+        return JsonResponse (one_product)
 
 
 

@@ -1,5 +1,5 @@
 from rest_framework.generics import RetrieveAPIView
-from core.loggers import IsActive
+from core import IsActive
 from ..serializers import UserSerializer
 
 

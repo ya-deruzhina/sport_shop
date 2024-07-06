@@ -8,6 +8,7 @@ from apps.shop.views.products.comment import Comment
 from apps.shop.views.products.list_of_products import CatalogView
 from apps.shop.views.products.one_product import ProductView
 from apps.shop.views.products.rating import Rating
+from apps.shop.views.system.page_404 import Page404
 
 
 all= (
@@ -21,4 +22,5 @@ all= (
     "CatalogView",
     "ProductView",
     "Rating",
+    "Page404",
 )

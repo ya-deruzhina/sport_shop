@@ -15,13 +15,25 @@
                   }
                 }
               ],
-            "responses": {
+              "responses": {
                 "200": {
-                    "description": "Information about one product",
+                    "$ref": "#/components/responses/OneProductCommon"
+                },
+                "400": {
+                    "description": "Returned when request body is not valid",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/properties" 
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "errors": [
+                                                "404"
+                                            ]
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

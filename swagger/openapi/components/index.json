@@ -34,6 +34,25 @@
           }
         }
       }
+    },
+    "OneProductCommon":{
+      "description": "Page of one product",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "description": "Page of one product",
+              "properties": {
+                "information": {
+                  "$ref": "#components/schemas/Products"
+                },
+                "system": {
+                  "$ref": "#components/schemas/System"
+                }             
+            }
+          }
+        }
+      }
     }
   },
   "requestBodies": {
@@ -108,6 +127,7 @@
         }
       }
     },
+    
     "Products": {
       "description": "Products model",
       "type": "object",
@@ -117,7 +137,7 @@
       "properties": {
         "id": {
           "type": "integer",
-          "example": "123"
+          "example": "1"
         },
         "name": {
           "type": "string",
@@ -137,38 +157,24 @@
         }
       }
     },
-    "Product": {
-      "description": "Product model",
+
+    "System": {
+      "description": "User model",
       "type": "object",
-      "required": [
-        "email",
-        "status"
-      ],
+      "required": [],
       "properties": {
-        "id": {
-          "type": "integer",
-          "example": "123"
-        },
-        "name": {
+        "comment": {
           "type": "string",
-          "example": "weight"
+          "example": "No Comment"
         },
-        "description": {
+        "rating": {
           "type": "string",
-          "example": "10 kg"
-        },
-        "price": {
-          "type": "float",
-          "example": "10.50"
-        },
-        "id_parent": {
-          "type": "integer",
-          "example": "1"
+          "example": "No Rating"
         }
       }
     }
-
   },
+
   "securitySchemes": {
     "BearerScheme": {
       "type": "http",
@@ -176,45 +182,5 @@
       "scheme": "bearer",
       "bearerFormat": "Bearer"
     }
-  },
-
-  "properties": {
-    "Product": {
-        "type": "object",
-        "example": {
-            "information": [
-                {
-                    "id": {
-                        "type": "integer",
-                        "example": "123"
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "weight"
-                    },
-                    "description": {
-                        "type": "string",
-                        "example": "10 kg"
-                    },
-                    "price": {
-                        "type": "float",
-                        "example": "10.50"
-                    },
-                    "id_parent": {
-                        "type": "integer",
-                        "example": "1"
-                    }
-                }
-            ],
-            "comment": {
-                "type": "string",
-                "example": "No Comment"
-            },
-            "rating": {
-                "type": "string",
-                "example": "No Rating"
-            }
-          }
-        }
-      }
+  }
 }

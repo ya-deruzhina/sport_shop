@@ -21,4 +21,7 @@ urlpatterns = [
     path("user/order/",OneOrdersUserView.as_view()),
     path("order/",OrderView.as_view()),
 
+    # System
+    path("404_error/",Page404.as_view()),
+
 ]
