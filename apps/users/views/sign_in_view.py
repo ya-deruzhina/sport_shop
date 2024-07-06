@@ -3,7 +3,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED
 
-from core import NON_FIELD_ERRORS
+from core.loggers import NON_FIELD_ERRORS
 
 from ..serializers import SignInSerializer
 from ..services import AuthPayloadService, SignInService

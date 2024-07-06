@@ -1,0 +1,33 @@
+{
+    "/api/v1/product/{product_id}/": {
+        "get": {
+            "description": "Show one product",
+            "tags": [
+                "Shop"
+            ],
+            "parameters": [
+                {
+                  "name": "product_id",
+                  "in": "path",
+                  "description": "Id of the product",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Information about one product",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/properties" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

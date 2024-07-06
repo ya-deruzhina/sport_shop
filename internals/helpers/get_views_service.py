@@ -1,5 +1,5 @@
 from glob import glob
-from core import logger
+from core.loggers import logger
 
 
 class GetViewsService:

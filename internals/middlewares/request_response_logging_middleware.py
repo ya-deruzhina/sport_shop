@@ -1,4 +1,4 @@
-from core import logger
+from core.loggers import logger
 from django.conf import settings
 import json
 

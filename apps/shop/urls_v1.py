@@ -7,7 +7,7 @@ urlpatterns = [
     path("catalog/",CatalogView.as_view()),
 
     # Product
-    path("product/",ProductView.as_view()),
+    path("product/<int:product_id>/",ProductView.as_view()),
     path("product/comment/",Comment.as_view()),
     path("product/rating/",Rating.as_view()),
 

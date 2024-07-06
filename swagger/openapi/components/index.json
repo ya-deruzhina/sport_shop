@@ -112,6 +112,35 @@
       "description": "Products model",
       "type": "object",
       "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "123"
+        },
+        "name": {
+          "type": "string",
+          "example": "weight"
+        },
+        "description": {
+          "type": "string",
+          "example": "10 kg"
+        },
+        "price": {
+          "type": "float",
+          "example": "10.50"
+        },
+        "id_parent": {
+          "type": "integer",
+          "example": "1"
+        }
+      }
+    },
+    "Product": {
+      "description": "Product model",
+      "type": "object",
+      "required": [
         "email",
         "status"
       ],
@@ -147,5 +176,45 @@
       "scheme": "bearer",
       "bearerFormat": "Bearer"
     }
-  }
+  },
+
+  "properties": {
+    "Product": {
+        "type": "object",
+        "example": {
+            "information": [
+                {
+                    "id": {
+                        "type": "integer",
+                        "example": "123"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "weight"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "10 kg"
+                    },
+                    "price": {
+                        "type": "float",
+                        "example": "10.50"
+                    },
+                    "id_parent": {
+                        "type": "integer",
+                        "example": "1"
+                    }
+                }
+            ],
+            "comment": {
+                "type": "string",
+                "example": "No Comment"
+            },
+            "rating": {
+                "type": "string",
+                "example": "No Rating"
+            }
+          }
+        }
+      }
 }
