@@ -53,8 +53,40 @@
           }
         }
       }
-    }
-  },
+    },
+    "LeavedComment":{
+      "description": "For leaving Comment",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "description": "For leaving Comment",
+              "properties": {
+                "information": {
+                  "$ref": "#components/schemas/Comment"
+                }            
+              }
+            }
+          }
+        }
+      },
+      "LeavedRating":{
+        "description": "For leaving Rating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "For leaving Rating",
+                "properties": {
+                  "information": {
+                    "$ref": "#components/schemas/Rating"
+                  }            
+                }
+              }
+            }
+          }
+        }
+    },
   "requestBodies": {
     "AuthRequestBody": {
       "content": {
@@ -81,7 +113,52 @@
           }
         }
       }
+    },
+    "CommentRequestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "comment": {
+                "type": "string"
+              }
+            }
+          },
+          "examples": {
+            "product_1": {
+              "summary": "An example of a comment",
+              "value": {
+                "comment": "comment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "RatingRequestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "rating": {
+                "type": "integer"
+              }
+            }
+          },
+          "examples": {
+            "product_1": {
+              "summary": "An example of a rating",
+              "value": {
+                "rating": 5
+              }
+            }
+          }
+        }
+      }
     }
+
   },
   "schemas": {
     "Token": {
@@ -172,8 +249,47 @@
           "example": "No Rating"
         }
       }
+    },
+    "Comment": {
+      "description": "Comment model",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "author": {
+          "type": "integer",
+          "example": "1"
+        },
+        "product": {
+          "type": "integer",
+          "example": "1"
+        },
+        "comment": {
+          "type": "string",
+          "example": "comment"
+        }
+      }
+    },
+    "Rating": {
+      "description": "Rating model",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "author": {
+          "type": "integer",
+          "example": "1"
+        },
+        "product": {
+          "type": "integer",
+          "example": "1"
+        },
+        "rating": {
+          "type": "integer",
+          "example": "5"
+        }
+      }
     }
   },
+
 
   "securitySchemes": {
     "BearerScheme": {

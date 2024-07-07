@@ -4,4 +4,4 @@ from apps.shop.models import RatingOfGoodsModel
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = RatingOfGoodsModel
-        fields = ["author","rating","comment"]
+        fields = ["author","product","rating"]

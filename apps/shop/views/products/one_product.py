@@ -1,5 +1,5 @@
 from django.template import loader
-from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
+from django.http import HttpResponse,HttpResponseRedirect
 
 from apps.shop.models import GoodsModel,CommentOfGoodsModel,RatingOfGoodsModel
 from apps.shop.forms import CommentForm, RatingForm
@@ -32,18 +32,13 @@ class ProductView(APIView):
 
             one_product = {'information':serializer, "system":{'comment':comment, 'rating':rating}}
 
-        # template = loader.get_template("catalog/pizza.html")
+        # template = loader.get_template("catalog/product.html")
         # context = {
-                # "product" : product,
-                # "form_comment":CommentForm(),
-                # "form_rating":RatingForm(),
-                # "comment":comment,
-                # "price":price,
-                # "discont":discont,
+                # "product" : one_product,
             # }
 
         # return HttpResponse(template.render(context,request))
-        return JsonResponse (one_product)
+        return Response (one_product)
 
 
 

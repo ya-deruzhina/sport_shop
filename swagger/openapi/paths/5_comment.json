@@ -1,0 +1,48 @@
+{
+    "/api/v1/product/comment/{product_id}/": {
+        "post": {
+            "description": "Leave a comment",
+            "tags": [
+                "Shop"
+            ],
+            "parameters": [
+                {
+                  "name": "product_id",
+                  "in": "path",
+                  "description": "Id of the product",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "requestBody": {
+                "$ref": "#/components/requestBodies/CommentRequestBody"
+            },
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/LeavedComment"
+                },
+                "400": {
+                    "description": "Returned when request body is not valid",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "errors": [
+                                                "404"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

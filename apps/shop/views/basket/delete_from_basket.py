@@ -17,7 +17,7 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
         return   # To not perform the csrf check previously happening
 
 
-class BasketDelete(APIView):
+class BasketDeleteView(APIView):
     permission_classes = [IsAuthenticated]
     # Удаляет 1 шт из корзины - при 0 шт удаляет запись из БД
     def get (self,request, basket_id):
