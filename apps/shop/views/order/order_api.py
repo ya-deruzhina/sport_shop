@@ -9,6 +9,7 @@ from apps.shop.serializers import OrderSerializer,OrderProductSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
 from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from core import IsActive
 
@@ -19,25 +20,26 @@ class OrderView(APIView):
     # Order's page after ordering
     def get(self,request):
         try: 
-            user = User.objects.get(id=request.user.id)
             order_number = OrderModel.objects.filter(user=request.user.id).order_by('-order_time')[0].id
-            order_product = OrderModel.objects.get(id=order_number)
-            product_in_order = ProductInOrder.objects.filter(order=order_number)
-            price = round(order_product.total_money,2)
+            order_product = OrderSerializer(instance=OrderModel.objects.get(id=order_number)).data
+            product_in_order = {"order_product":order_product}
+            products = ProductInOrder.objects.filter(order=order_number)
+            for order in range (0,len(products)):
+                product_in_order[products[order].id] = OrderProductSerializer(instance=products[order]).data
+            
 
         except:
             return HttpResponseRedirect ("/api/v1/404_error/")
 
         else:
             # template = loader.get_template("order/order.html")
-            # context = {
-            #     "order_product":order_product,
-            #     "product":product_in_order,
-            #     "user":user,
-            #     "price":price,
-            # }
+            context = {
+                "order_product":order_product,
+                "product":product_in_order
+            }
+
             # return HttpResponse(template.render(context,request))
-            return HttpResponseRedirect ("")
+            return Response (product_in_order)
 
 
     # Forming an Order
@@ -115,5 +117,5 @@ class OrderView(APIView):
             # !!!! Sent message 
             
             
-        return HttpResponseRedirect ("/api/v1/basket/")
+        return HttpResponseRedirect ("/api/v1/order/")
     

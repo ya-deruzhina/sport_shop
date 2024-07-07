@@ -168,7 +168,26 @@
                         }
                       }
                     }
-                  }
+                  },
+                  "OrderAfterCreate":{
+                    "description": "Page After Order",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "type": "object",
+                            "description": "Page After Order",
+                            "properties": {
+                              "order_product": {
+                                "$ref": "#components/schemas/OrderProduct"
+                              },
+                              "1": {
+                                "$ref": "#components/schemas/Product"
+                              }             
+                            }
+                          }
+                        }
+                      }
+                    }
     },
   "requestBodies": {
     "AuthRequestBody": {
@@ -465,7 +484,74 @@
           "example": "10.5"
         }
       }
-    }
+    },
+    
+    "OrderProduct": {
+      "description": "Order",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "user": {
+          "type": "integer",
+          "example": "1"
+        },
+        "name": {
+          "type": "string",
+          "example": "admin"
+        },
+        "email": {
+          "type": "string",
+          "example": "admin@admin.admin"
+        },
+        "comment": {
+          "type": "string",
+          "example": "comment"
+        },
+        "pick_up_point": {
+          "type": "integer",
+          "example": "1"
+        },
+        "date_of_pick_up": {
+          "type": "string",
+          "example": "2024-07-10"
+        },
+        "time_of_pick_up": {
+          "type": "integer",
+          "example": "13.00-14.00"
+        },
+        "total_money": {
+          "type": "float",
+          "example": "10.5"
+        }
+      }
+    },
+      "Product": {
+        "description": "Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "order": {
+            "type": "integer",
+            "example": "1"
+          },
+          "product": {
+            "type": "integer",
+            "example": "1"
+          },
+          "count": {
+            "type": "integer",
+            "example": "1"
+          },
+          "price_one": {
+            "type": "float",
+            "example": "10.5"
+          }
+        }
+      }
   },
   "securitySchemes": {
     "BearerScheme": {

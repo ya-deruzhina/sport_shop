@@ -19,7 +19,7 @@ urlpatterns = [
 
     # Order
     path("user/orders/",OrdersUserView.as_view()),
-    path("user/order/",OneOrdersUserView.as_view()),
+    path("order/<int:order_id>/",OneOrdersUserView.as_view()),
     path("order/",OrderView.as_view()),
 
     # System

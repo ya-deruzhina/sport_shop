@@ -8,21 +8,20 @@ from rest_framework.test import force_authenticate
 class OrderViewTestCase(APITestCase):
     fixtures=['dump_data'] 
 
-    # # Тест на OrderView (get)
-    # def test_order_view_true_get(self):
-    #     print("\nMistake is OK!")
-    #     user = User.objects.get(username='for_test')
-    #     request = APIRequestFactory().get('/lisa/order/')
-    #     force_authenticate(request, user=user)
-    #     response = OrderView.as_view()(request)
+    # Test for OrderView (get)
+    def test_order_view_true_get(self):
+        user = User.objects.all()[0]
+        request = APIRequestFactory().get('/api/v1/order/')
+        force_authenticate(request, user=user)
+        response = OrderView.as_view()(request)
         
-    #     response.status_code == 200
+        assert response.status_code == 200
 
 
 class OrderCreateTestCase(APITestCase):
     fixtures=['dump_data'] 
 
-    # Тест на OrderView (post)
+    # Test for OrderView (post)
     def test_order_create_true_post (self):
         user = User.objects.all()[0]
         order_first_count = len(OrderModel.objects.all())
@@ -31,7 +30,7 @@ class OrderCreateTestCase(APITestCase):
             "comment": "comment",
             "pick_up_point": 1,
             "date_of_pick_up": "2024-07-10",
-            "time_of_pick_up": "10.00-11.00" 
+            "time_of_pick_up": "15.00-16.00" 
             }
         request = APIRequestFactory().post('/api/v1/order/',data)
         force_authenticate(request, user=user)

@@ -39,9 +39,9 @@ class OrdersUserView(APIView):
         #         order [i] = (product)
 
         # template = loader.get_template("order/history_orders.html")
-        # context = {
-        #     "order":order,
-        #     "numbers_orders":numbers_orders,
-        # }
+                context = {
+                    "order":order,
+                    "numbers_orders":numbers_orders,
+                }
         # return HttpResponse(template.render(context,request))
                 return HttpResponseRedirect ("")
