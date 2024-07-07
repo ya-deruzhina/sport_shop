@@ -85,7 +85,55 @@
               }
             }
           }
-        }
+        },
+        "AddToBasketFromBasket":{
+          "description": "Add To Basket From Basket",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Add To Basket From Basket",
+                  "properties": {
+                    "information": {
+                      "$ref": "#components/schemas/BasketView"
+                    }            
+                  }
+                }
+              }
+            }
+          },
+          "DeleteFromBasket":{
+            "description": "Delete From Basket",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "description": "Delete From Basket",
+                    "properties": {
+                      "information": {
+                        "$ref": "#components/schemas/BasketView"
+                      }            
+                    }
+                  }
+                }
+              }
+            },
+            "AddToBasketFromPage":{
+              "description": "Add To Basket From Page",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "description": "Add To Basket From Page",
+                      "properties": {
+                        "information": {
+                          "$ref": "#components/schemas/BasketView"
+                        }            
+                      }
+                    }
+                  }
+                }
+              }
     },
   "requestBodies": {
     "AuthRequestBody": {
@@ -106,8 +154,8 @@
             "test@user.com": {
               "summary": "An example of a user",
               "value": {
-                "identity": "admin@test.test",
-                "password": "password"
+                "identity": "admin",
+                "password": "admin"
               }
             }
           }
@@ -287,10 +335,27 @@
           "example": "5"
         }
       }
+    },
+    "BasketView": {
+      "description": "Basket View",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "user": {
+          "type": "integer",
+          "example": "1"
+        },
+        "product": {
+          "type": "integer",
+          "example": "1"
+        },
+        "count": {
+          "type": "integer",
+          "example": "2"
+        }
+      }
     }
   },
-
-
   "securitySchemes": {
     "BearerScheme": {
       "type": "http",

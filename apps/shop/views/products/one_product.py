@@ -20,11 +20,12 @@ class ProductView(APIView):
 
         except:
                 return HttpResponseRedirect ("/api/v1/404_error/")
-        else:     
+        else:
+            rating_all = 0     
             if len(rating) > 0:
                 for i in rating:
-                    i += i
-                rating = i/len(rating)
+                    rating_all += i.rating
+                rating = rating_all/len(rating)
             else:
                 rating = "No Rating"
             if len (comment) == 0:

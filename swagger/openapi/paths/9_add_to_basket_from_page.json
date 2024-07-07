@@ -1,0 +1,45 @@
+{
+    "/api/v1/basket/{product_id}/": {
+        "post": {
+            "description": "Add to Basket from Page",
+            "tags": [
+                "Shop"
+            ],
+            "parameters": [
+                {
+                  "name": "product_id",
+                  "in": "path",
+                  "description": "Id of the Product",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/AddToBasketFromPage"
+                },
+                "400": {
+                    "description": "Returned when request body is not valid",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "errors": [
+                                                "404"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

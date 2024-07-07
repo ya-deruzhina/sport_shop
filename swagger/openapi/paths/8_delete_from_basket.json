@@ -1,0 +1,64 @@
+{
+    "/api/v1/basket/delete/{basket_id}/": {
+        "get": {
+            "description": "Delete from Basket",
+            "tags": [
+                "Shop"
+            ],
+            "parameters": [
+                {
+                  "name": "basket_id",
+                  "in": "path",
+                  "description": "Id of the Basket",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/DeleteFromBasket"
+                },
+                "302": {
+                    "description": "Returned when all count deleted from basket",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "information": [
+                                                "OK"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Returned when request body is not valid",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "errors": [
+                                                "404"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

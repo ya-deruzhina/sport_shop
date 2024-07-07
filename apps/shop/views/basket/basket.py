@@ -1,63 +1,64 @@
 from django.template import loader
 from django.http import HttpResponse,HttpResponseRedirect
 
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
+from rest_framework.response import Response
 
-from apps.users.models import User
-from apps.shop.models import BasketModel, GoodsModel
+from apps.shop.models import BasketModel
 from apps.shop.serializers import BasketSerializer
 from apps.shop.forms import CreateOrderForm
 
+from core import IsActive
 
-class CsrfExemptSessionAuthentication(SessionAuthentication):
 
-    def enforce_csrf(self, request):
-        return   # To not perform the csrf check previously happening
 
 
 class BasketView(APIView):
-    # Страница корзины
+    permission_classes = (IsActive,)
+    # # Страница корзины
 
     def get(self,request, **kwargs):
-        id_user = request.user.id
-        user_basket = BasketModel.objects.filter(user_id=id_user).order_by('product_id')
-        basket_with_price = {}
-        all_price = 0
+    #     id_user = request.user.id
+    #     user_basket = BasketModel.objects.filter(user_id=id_user).order_by('product_id')
+    #     basket_with_price = {}
+    #     all_price = 0
 
-        for basket in range (0,len(user_basket)):
-            baskets ={}
-            baskets['product'] = user_basket[basket].product.name
-            baskets['count'] = user_basket[basket].count
-            baskets['price_one'] = user_basket[basket].product.price
+    #     for basket in range (0,len(user_basket)):
+    #         baskets ={}
+    #         baskets['product'] = user_basket[basket].product.name
+    #         baskets['count'] = user_basket[basket].count
+    #         baskets['price_one'] = user_basket[basket].product.price
 
-            baskets['price'] = round((baskets['count'] * baskets['price_one']),2)
-            all_price += baskets['price']
+    #         baskets['price'] = round((baskets['count'] * baskets['price_one']),2)
+    #         all_price += baskets['price']
                                     
-            baskets['id'] = user_basket[basket].id
-            basket_with_price[basket] = baskets
+    #         baskets['id'] = user_basket[basket].id
+    #         basket_with_price[basket] = baskets
         
-        all_price = round(all_price,2)
+    #     all_price = round(all_price,2)
 
-        keys = basket_with_price.keys()
-        context = {
-            "basket_with_price":basket_with_price,
-            "form":CreateOrderForm(),
-            "keys":keys,
-            "all_price": all_price,
-        }
+    #     keys = basket_with_price.keys()
+    #     context = {
+    #         "basket_with_price":basket_with_price,
+    #         "form":CreateOrderForm(),
+    #         "keys":keys,
+    #         "all_price": all_price,
+    #     }
         
-        template = loader.get_template("basket/basket.html")
+    #     template = loader.get_template("basket/basket.html")
 
-        return HttpResponse(template.render(context,request))
+        # return HttpResponse(template.render(context,request))
+        return Response ({"information":"OK"})  
+
     
+    # Add Product to Basket
     def post (self, request, product_id):
         user_id = request.user.id
         product_for_user = BasketModel.objects.filter(product=product_id)
 
         try:
             users_with_product = product_for_user.get(user=user_id)
+        
         except:
             basket = {'user':user_id,'product':product_id,'count':1}
             try:
@@ -66,11 +67,12 @@ class BasketView(APIView):
                 serializer.save()
         
             except Exception as exs:
-                return HttpResponseRedirect ("/404_error/")
+                return HttpResponseRedirect ("/api/v1/404_error/")
         
         else:
             users_with_product.count += 1
             users_with_product.save()
+            serializer = BasketSerializer(instance=users_with_product)
 
         # !!!!!! Amount
         # try:
@@ -83,7 +85,8 @@ class BasketView(APIView):
         #         catalog_amount.save()
 
         # except Exception as exs:
-        #         return HttpResponseRedirect ("/404_error/")
+        #         return HttpResponseRedirect ("/api/v1/404_error/")
 
-        return HttpResponseRedirect ("/basket/") 
+        # return HttpResponseRedirect ("/api/v1/basket/")
+        return Response ({"information":serializer.data})     
     

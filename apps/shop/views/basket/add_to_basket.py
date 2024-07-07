@@ -1,33 +1,28 @@
 from django.template import loader
 from django.http import HttpResponse,HttpResponseRedirect
 
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
+from rest_framework.response import Response 
 
-
+from apps.shop.serializers import BasketSerializer
 from apps.shop.models import BasketModel, GoodsModel
 
-
-
-class CsrfExemptSessionAuthentication(SessionAuthentication):
-
-    def enforce_csrf(self, request):
-        return   # To not perform the csrf check previously happening
+from core import IsActive
 
 
 class BasketAddView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = (IsActive,)
     # Add to basket
-    def get (self,request, basket_id):
+    def post (self,request, basket_id):
         try:
             basket = BasketModel.objects.get(id=basket_id)
 
         except:
-            return HttpResponseRedirect ("/404_error/")
+            return HttpResponseRedirect ("/api/v1/404_error/")
         
         else:
             basket.count +=1
+        
 
     # !!!! Остаток в наличии
         # try:
@@ -43,5 +38,13 @@ class BasketAddView(APIView):
         #     return HttpResponseRedirect ("/404_error/")
         
         basket.save()
+        serializer = BasketSerializer(instance=basket)
 
-        return HttpResponseRedirect ("/basket/")
+        # return HttpResponseRedirect ("/basket/")
+        return Response ({"information":serializer.data}) 
+
+
+    
+
+  
+  
