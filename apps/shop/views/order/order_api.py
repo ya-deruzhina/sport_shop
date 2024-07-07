@@ -10,14 +10,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
 from rest_framework.views import APIView
 
-class CsrfExemptSessionAuthentication(SessionAuthentication):
-
-    def enforce_csrf(self, request):
-        return  # To not perform the csrf check previously happening
+from core import IsActive
 
 class OrderView(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
+    permission_classes = (IsActive,)
+
 
     # Order's page after ordering
     def get(self,request):
@@ -29,7 +26,7 @@ class OrderView(APIView):
             price = round(order_product.total_money,2)
 
         except:
-            return HttpResponseRedirect ("/404_error/")
+            return HttpResponseRedirect ("/api/v1/404_error/")
 
         else:
             # template = loader.get_template("order/order.html")
@@ -50,6 +47,8 @@ class OrderView(APIView):
            # Forming an Order and recording to DB Orders and Ppoducts in order
             id_user = request.user.id
             basket = BasketModel.objects.filter(user=id_user)
+            if len(basket) == 0:
+                return HttpResponseRedirect ("/api/v1/404_error/")
             catalog = GoodsModel.objects.all()
             price_all = 0
             n=1
@@ -63,28 +62,32 @@ class OrderView(APIView):
                 data_product[n] = {'count':product.count, 'product':product.product_id,'price_one':price_one}           
                 n+=1
 
-
-            # !!!!!! Getting client's information
+            # !!!!!! Getting client's information            
             try:
                 user = request.user.username
-                phone = request.user.phone_number
+                email = request.user.email
                 comment = request.POST.get('comment')
-                address =  request.POST.get('address',"Self-pickup")
-                
-                data_client = {
-                    "user":id_user, 
-                    "name":user,
-                    "phone":phone,
-                    "comment":comment,
-                    "address":address,
-                    "total_money":price_all
-                    }
-                
-                serializer = OrderSerializer(data=data_client)
-                serializer.is_valid(raise_exception=True)
-            
-            except:
-                return HttpResponseRedirect ("/404_error/")
+                pick_up_point =  request.POST.get('pick_up_point')
+                date_of_pick_up =  request.POST.get('date_of_pick_up')
+                time_of_pick_up = request.POST.get('time_of_pick_up')
+                if len(OrderModel.objects.filter(pick_up_point = pick_up_point).filter(date_of_pick_up=date_of_pick_up).filter(time_of_pick_up=time_of_pick_up)) <= 4:
+                    data_client = {
+                        "user":id_user, 
+                        "name":user,
+                        "email":email,
+                        "comment":comment,
+                        "pick_up_point":pick_up_point,
+                        "date_of_pick_up":date_of_pick_up,
+                        "time_of_pick_up":time_of_pick_up,
+                        "total_money":price_all
+                        }
+
+                    serializer = OrderSerializer(data=data_client)
+                    serializer.is_valid(raise_exception=True)
+                else:  
+                    return HttpResponseRedirect ("/api/v1/404_error/")
+            except:              
+                return HttpResponseRedirect ("/api/v1/404_error/")
             
             else:
                 serializer.save()
@@ -94,16 +97,14 @@ class OrderView(APIView):
                 order_number = OrderModel.objects.filter(user=id_user).order_by('-order_time')[0].id
                 for a in data_product.keys():
                     data = data_product[a]
-                    price_one = float(data['price_one'])
-                    price_one = round(price_one,2)
-
+                    price_one = round(float(data['price_one']),2)
                     data = {'order':order_number,'count':data['count'], 'product':data['product'],'price_one':price_one}
                     try:
                         serializer = OrderProductSerializer(data=data)
                         serializer.is_valid(raise_exception=True)
                     
                     except:
-                        return HttpResponseRedirect ("/404_error/")
+                        return HttpResponseRedirect ("/api/v1/404_error/")
 
                     else:        
                         serializer.save()
@@ -114,5 +115,5 @@ class OrderView(APIView):
             # !!!! Sent message 
             
             
-        return HttpResponseRedirect ("/")
+        return HttpResponseRedirect ("/api/v1/basket/")
     

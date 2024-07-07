@@ -6,7 +6,6 @@ from apps.shop.models.pick_up_point import PickUpModel
 from apps.shop.models.product_in_order import ProductInOrder
 from apps.shop.models.rating import RatingOfGoodsModel
 from apps.shop.models.teg import TegsOfGoodsModel
-from apps.shop.models.time_pick_up import TimePickUpModel
 
 
 all= (
@@ -18,6 +17,5 @@ all= (
     'ProductInOrder',
     'RatingOfGoodsModel',
     'TegsOfGoodsModel',
-    'TimePickUpModel',
 )
 

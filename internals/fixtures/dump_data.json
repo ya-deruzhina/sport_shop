@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$390000$NiYT9D8Gl4zGkiVym99Ycq$Es3OS1KqoCzC2KOLbXuEkX+anLDbzb2ngLbRETgAmr0=",
-        "last_login": "2024-07-07T11:32:03.753Z",
+        "last_login": "2024-07-07T17:09:29.992Z",
         "is_superuser": true,
         "username": "admin",
         "is_staff": true,
@@ -16,9 +16,9 @@
         "status": "active",
         "role": "user",
         "created_at": "2024-07-05T17:52:55.251Z",
-        "updated_at": "2024-07-07T11:32:20.022Z",
+        "updated_at": "2024-07-07T17:09:42.999Z",
         "deleted": false,
-        "last_request_at": "2024-07-07T11:32:20.022Z",
+        "last_request_at": "2024-07-07T17:09:42.999Z",
         "last_login_attempt_at": "2024-07-05T17:52:55.161Z",
         "login_attempts_count": 0,
         "groups": [],
@@ -37,11 +37,11 @@
 },
 {
     "model": "shop.basketmodel",
-    "pk": 18,
+    "pk": 26,
     "fields": {
         "user": 1,
         "product": 1,
-        "count": 3
+        "count": 2
     }
 },
 {
@@ -96,6 +96,164 @@
         "product": 1,
         "comment": "comment",
         "author": 1
+    }
+},
+{
+    "model": "shop.pickupmodel",
+    "pk": 1,
+    "fields": {
+        "adres": "Minsk",
+        "description": "Working time: 10-18"
+    }
+},
+{
+    "model": "shop.ordermodel",
+    "pk": 5,
+    "fields": {
+        "order_time": "2024-07-07T15:47:28.004Z",
+        "user": 1,
+        "name": "admin",
+        "email": "admin@admin.admin",
+        "pick_up_point": 1,
+        "date_of_pick_up": "2024-07-10",
+        "time_of_pick_up": "9.00-10.00",
+        "comment": "comment",
+        "total_money": 10.5
+    }
+},
+{
+    "model": "shop.ordermodel",
+    "pk": 6,
+    "fields": {
+        "order_time": "2024-07-07T15:49:15.600Z",
+        "user": 1,
+        "name": "admin",
+        "email": "admin@admin.admin",
+        "pick_up_point": 1,
+        "date_of_pick_up": "2024-07-10",
+        "time_of_pick_up": "9.00-10.00",
+        "comment": "comment",
+        "total_money": 21.0
+    }
+},
+{
+    "model": "shop.ordermodel",
+    "pk": 9,
+    "fields": {
+        "order_time": "2024-07-07T15:52:16.623Z",
+        "user": 1,
+        "name": "admin",
+        "email": "admin@admin.admin",
+        "pick_up_point": 1,
+        "date_of_pick_up": "2024-07-10",
+        "time_of_pick_up": "9.00-10.00",
+        "comment": "comment",
+        "total_money": 10.5
+    }
+},
+{
+    "model": "shop.ordermodel",
+    "pk": 10,
+    "fields": {
+        "order_time": "2024-07-07T15:52:25.253Z",
+        "user": 1,
+        "name": "admin",
+        "email": "admin@admin.admin",
+        "pick_up_point": 1,
+        "date_of_pick_up": "2024-07-10",
+        "time_of_pick_up": "9.00-10.00",
+        "comment": "comment",
+        "total_money": 10.5
+    }
+},
+{
+    "model": "shop.ordermodel",
+    "pk": 11,
+    "fields": {
+        "order_time": "2024-07-07T15:52:31.181Z",
+        "user": 1,
+        "name": "admin",
+        "email": "admin@admin.admin",
+        "pick_up_point": 1,
+        "date_of_pick_up": "2024-07-10",
+        "time_of_pick_up": "9.00-10.00",
+        "comment": "comment",
+        "total_money": 10.5
+    }
+},
+{
+    "model": "shop.ordermodel",
+    "pk": 12,
+    "fields": {
+        "order_time": "2024-07-07T16:53:38.951Z",
+        "user": 1,
+        "name": "admin",
+        "email": "admin@admin.admin",
+        "pick_up_point": 1,
+        "date_of_pick_up": "2024-07-10",
+        "time_of_pick_up": "10.00-11.00",
+        "comment": "comment",
+        "total_money": 31.5
+    }
+},
+{
+    "model": "shop.productinorder",
+    "pk": 1,
+    "fields": {
+        "order": 5,
+        "product": 1,
+        "count": 1,
+        "price_one": 10.5
+    }
+},
+{
+    "model": "shop.productinorder",
+    "pk": 2,
+    "fields": {
+        "order": 6,
+        "product": 1,
+        "count": 2,
+        "price_one": 10.5
+    }
+},
+{
+    "model": "shop.productinorder",
+    "pk": 3,
+    "fields": {
+        "order": 9,
+        "product": 1,
+        "count": 1,
+        "price_one": 10.5
+    }
+},
+{
+    "model": "shop.productinorder",
+    "pk": 4,
+    "fields": {
+        "order": 10,
+        "product": 1,
+        "count": 1,
+        "price_one": 10.5
+    }
+},
+{
+    "model": "shop.productinorder",
+    "pk": 5,
+    "fields": {
+        "order": 11,
+        "product": 1,
+        "count": 1,
+        "price_one": 10.5
+    }
+},
+{
+    "model": "shop.productinorder",
+    "pk": 6,
+    "fields": {
+        "order": 12,
+        "product": 1,
+        "count": 3,
+        "price_one": 10.5
     }
 },
 {

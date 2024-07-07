@@ -5,6 +5,7 @@ from internals.tests.basket.add_to_basket_from_basket_test import BasketAddFromB
 from internals.tests.basket.add_to_basket_from_page_test import BasketAddFromPageTestCase
 from internals.tests.basket.delete_from_basket_test import BasketDeleteViewTestCase
 from internals.tests.basket.view_basket_test import BasketViewTestCase
+from internals.tests.order.order_api_test import OrderCreateTestCase
 
 all =(
     "ProductViewTestCase",
@@ -14,5 +15,6 @@ all =(
     "BasketAddFromPageTestCase",
     "BasketDeleteViewTestCase",
     "BasketViewTestCase",
+    "OrderCreateTestCase",
 
 )

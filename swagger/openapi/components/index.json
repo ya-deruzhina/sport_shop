@@ -152,7 +152,23 @@
                       }
                     }
                   }
-                }
+                },
+                "Order":{
+                  "description": "Create of Order",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "description": "Create of Order",
+                          "properties": {
+                            "system": {
+                              "$ref": "#components/schemas/PriceAll"
+                            }             
+                          }
+                        }
+                      }
+                    }
+                  }
     },
   "requestBodies": {
     "AuthRequestBody": {
@@ -219,6 +235,40 @@
               "summary": "An example of a rating",
               "value": {
                 "rating": 5
+              }
+            }
+          }
+        }
+      }
+    },
+    "OrderRequestBody": {
+      "content": {
+        "multipart/form-data": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "comment": {
+                "type": "string"
+              },
+              "pick_up_point": {
+                "type": "integer"
+              },
+              "date_of_pick_up": {
+                "type": "string"
+              },
+              "time_of_pick_up": {
+                "type": "string"
+              }
+            }
+          },
+          "examples": {
+            "order": {
+              "summary": "An example of a Order",
+              "value": {
+                "comment": "comment",
+                "pick_up_point": 1,
+                "date_of_pick_up": "2024-07-10",
+                "time_of_pick_up": "10.00-11.00" 
               }
             }
           }
