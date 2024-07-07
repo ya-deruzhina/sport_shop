@@ -1,29 +1,16 @@
 {
-    "/api/v1/basket/delete/{basket_id}/": {
+    "/api/v1/basket/": {
         "get": {
-            "description": "Delete from Basket",
+            "description": "View Basket from User",
             "tags": [
                 "Shop"
             ],
-            "parameters": [
-                {
-                  "name": "basket_id",
-                  "in": "path",
-                  "description": "Id of the Basket",
-                  "schema": {
-                    "type": "integer"
-                  }
-                }
-              ],
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/DeleteFromBasket"
-                },
-                "302": {
                     "$ref": "#/components/responses/Basket"
                 },
-                "400": {
-                    "description": "Returned when request body is not valid",
+                "401": {
+                    "description": "Returned after sending invalid set of credentials",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -31,8 +18,8 @@
                                     "errors": {
                                         "type": "object",
                                         "example": {
-                                            "errors": [
-                                                "404"
+                                            "detail": [
+                                                "Authentication credentials were not provided."
                                             ]
                                         }
                                     }

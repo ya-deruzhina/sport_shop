@@ -15,29 +15,29 @@ from core import IsActive
 
 class BasketView(APIView):
     permission_classes = (IsActive,)
-    # # Страница корзины
+    # Page of Basket
 
     def get(self,request, **kwargs):
-    #     id_user = request.user.id
-    #     user_basket = BasketModel.objects.filter(user_id=id_user).order_by('product_id')
-    #     basket_with_price = {}
-    #     all_price = 0
+        id_user = request.user.id
+        user_basket = BasketModel.objects.filter(user_id=id_user).order_by('product_id')
+        basket_with_price = {}
+        all_price = 0
 
-    #     for basket in range (0,len(user_basket)):
-    #         baskets ={}
-    #         baskets['product'] = user_basket[basket].product.name
-    #         baskets['count'] = user_basket[basket].count
-    #         baskets['price_one'] = user_basket[basket].product.price
+        for basket in range (0,len(user_basket)):
+            baskets ={}
+            baskets['product'] = user_basket[basket].product.name
+            baskets['count'] = user_basket[basket].count
+            baskets['price_one'] = user_basket[basket].product.price
 
-    #         baskets['price'] = round((baskets['count'] * baskets['price_one']),2)
-    #         all_price += baskets['price']
+            baskets['price'] = round((baskets['count'] * baskets['price_one']),2)
+            all_price += baskets['price']
                                     
-    #         baskets['id'] = user_basket[basket].id
-    #         basket_with_price[basket] = baskets
+            baskets['id'] = user_basket[basket].id
+            basket_with_price[basket] = baskets
         
-    #     all_price = round(all_price,2)
+        basket_with_price['system'] = {'all_price': (round(all_price,2))}
 
-    #     keys = basket_with_price.keys()
+        keys = basket_with_price.keys()
     #     context = {
     #         "basket_with_price":basket_with_price,
     #         "form":CreateOrderForm(),
@@ -48,7 +48,8 @@ class BasketView(APIView):
     #     template = loader.get_template("basket/basket.html")
 
         # return HttpResponse(template.render(context,request))
-        return Response ({"information":"OK"})  
+        return Response (basket_with_price)
+        # return Response ({"information":"OK"})  
 
     
     # Add Product to Basket

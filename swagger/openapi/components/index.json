@@ -49,11 +49,11 @@
                 "system": {
                   "$ref": "#components/schemas/System"
                 }             
+              }
             }
           }
         }
-      }
-    },
+      },
     "LeavedComment":{
       "description": "For leaving Comment",
         "content": {
@@ -133,7 +133,26 @@
                     }
                   }
                 }
-              }
+              },
+              "Basket":{
+                "description": "Page of Basket",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "description": "Page of Basket",
+                        "properties": {
+                          "0": {
+                            "$ref": "#components/schemas/Basket"
+                          },
+                          "system": {
+                            "$ref": "#components/schemas/PriceAll"
+                          }             
+                        }
+                      }
+                    }
+                  }
+                }
     },
   "requestBodies": {
     "AuthRequestBody": {
@@ -341,7 +360,10 @@
       "type": "object",
       "required": [],
       "properties": {
-        "user": {
+        "id": {
+          "type": "integer",
+          "example": "1"
+        },"user": {
           "type": "integer",
           "example": "1"
         },
@@ -352,6 +374,45 @@
         "count": {
           "type": "integer",
           "example": "2"
+        }
+      }
+    },
+    "Basket": {
+      "description": "Basket",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "product": {
+          "type": "string",
+          "example": "Test"
+        },
+        "count": {
+          "type": "integer",
+          "example": "1"
+        },
+        "price_one": {
+          "type": "float",
+          "example": "31.5"
+        },
+        "price": {
+          "type": "float",
+          "example": "31.5"
+        },
+        "id": {
+          "type": "integer",
+          "example": "1"
+        }
+      }
+    },
+
+    "PriceAll": {
+      "description": "Price of Order",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "all_price": {
+          "type": "float",
+          "example": "10.5"
         }
       }
     }

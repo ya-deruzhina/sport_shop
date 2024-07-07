@@ -4,7 +4,7 @@ from apps.shop.models import BasketModel
 class BasketSerializer(serializers.ModelSerializer):
     class Meta:
         model = BasketModel
-        fields = ['user','product','count']
+        fields = ['id','user','product','count']
         
         def create(self, validated_data):
             return BasketModel.objects.create(**validated_data)
