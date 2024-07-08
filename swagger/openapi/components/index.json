@@ -187,7 +187,42 @@
                           }
                         }
                       }
-                    }
+                    },
+                    "OneOrder":{
+                      "description": "Page of Order",
+                        "content": {
+                          "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "description": "Page of Order",
+                              "properties": {
+                                "product": {
+                                  "$ref": "#components/schemas/OrderInf"
+                                },
+                                "one_product_in_order": {
+                                  "$ref": "#components/schemas/ProductInOrder"
+                                }             
+                              }
+                            }
+                          }
+                        }
+                      },
+                    "AllOrders":{
+                        "description": "Page of All Orders",
+                          "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "description": "Page of All Orders",
+                                "properties": {
+                                  "orders": {
+                                    "$ref": "#components/schemas/OrderInfInAll"
+                                  }         
+                                }
+                              }
+                            }
+                          }
+                        }
     },
   "requestBodies": {
     "AuthRequestBody": {
@@ -549,6 +584,123 @@
           "price_one": {
             "type": "float",
             "example": "10.5"
+          }
+        }
+      },
+      "OrderInf": {
+        "description": "Information about Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "order_time": {
+            "type": "string",
+            "example": "15:47:28 - 07.07.2024 "
+          },
+          "comment": {
+            "type": "string",
+            "example": "comment"
+          },
+          "name": {
+            "type": "string",
+            "example": "admin"
+          },
+          "email": {
+            "type": "string",
+            "example": "admin@admin.admin"
+          },
+          "pick_up_point": {
+            "type": "string",
+            "example": "Minsk"
+          },
+          "date_of_pick_up": {
+            "type": "string",
+            "example": "2024-07-10"
+          },
+          "time_of_pick_up": {
+            "type": "string",
+            "example": "9.00-10.00"
+          },
+          "all_price": {
+            "type": "float",
+            "example": "10.5"
+          }
+        }
+      },
+      "ProductInOrder": {
+        "description": "Product In Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "0": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/ProductInfoInOrder"}
+          }           
+        }
+      },
+      "ProductInfoInOrder": {
+        "description": "Information about Product in Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "product": {
+            "type": "string",
+            "example": "Test"
+          },
+          "count": {
+            "type": "integer",
+            "example": "1"
+          }
+        }
+      },
+      "OrderInfInAll": {
+        "description": "I",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "0": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/InformationAboutOrder"}
+          },
+          "1": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/InformationAboutOrder"}
+          },
+          "2": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/InformationAboutOrder"}
+          }           
+           
+           
+        }
+      },
+      "InformationAboutOrder": {
+        "description": "Information about Product in Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "order_time": {
+            "type": "string",
+            "example": "20:38:30 - 07.07.2024"
+          },
+          "pick_up_point": {
+            "type": "string",
+            "example": "Minsk"
+          },
+          "date_of_pick_up": {
+            "type": "string",
+            "example": "Minsk"
+          },
+          "time_of_pick_up": {
+            "type": "string",
+            "example": "Minsk"
+          },
+          "all_price": {
+            "type": "string",
+            "example": "Minsk"
           }
         }
       }

@@ -3,12 +3,13 @@ from django.template import loader
 
 from apps.shop.models import OrderModel, ProductInOrder
 
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+from rest_framework.response import Response
 
+from core import IsActive
 
 class OrdersUserView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = (IsActive,)
     
     # Connect models OrderModel and ProductInOrder by order's number
     def get(self,request):        
@@ -30,18 +31,20 @@ class OrdersUserView(APIView):
                 return HttpResponseRedirect ("/404_error/")
             
             else:
-        #         order_time = orders.order_time.strftime("%H:%M:%S - %d.%m.%Y ")
-        #         product = {
-        #             "status": orders.status,
-        #             "order_time": order_time,
-        #             "all_price":all_price,
-        #             }      
-        #         order [i] = (product)
+                order_time = orders.order_time.strftime("%H:%M:%S - %d.%m.%Y ")
+                product = {
+                    "order_time": order_time,
+                    "pick_up_point": orders.pick_up_point.adres,
+                    "date_of_pick_up" : orders.date_of_pick_up,
+                    "time_of_pick_up" : orders.time_of_pick_up,
+                    "all_price":all_price,
+                    }      
+                order [i] = [product]
 
         # template = loader.get_template("order/history_orders.html")
-                context = {
-                    "order":order,
-                    "numbers_orders":numbers_orders,
+        context = {
+            "orders":order,
+            # "numbers_orders":numbers_orders,
                 }
         # return HttpResponse(template.render(context,request))
-                return HttpResponseRedirect ("")
+        return Response (context)

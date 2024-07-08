@@ -18,7 +18,7 @@ urlpatterns = [
     path("basket/delete/<int:basket_id>/",BasketDeleteView.as_view()),
 
     # Order
-    path("user/orders/",OrdersUserView.as_view()),
+    path("orders/",OrdersUserView.as_view()),
     path("order/<int:order_id>/",OneOrdersUserView.as_view()),
     path("order/",OrderView.as_view()),
 

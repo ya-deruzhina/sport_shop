@@ -24,7 +24,7 @@ class OneOrdersUserView(APIView):
             for m in range(0,(len(all_products))):
                 one_product_name = all_products [m].product.name
                 one_product_count = all_products[m].count
-                one_product = {"product":one_product_name, "count":one_product_count}
+                one_product = [{"product":one_product_name, "count":one_product_count}]
                 one_product_in_order[m] = one_product
                 order_time = order.order_time.strftime("%H:%M:%S - %d.%m.%Y ")
                 
