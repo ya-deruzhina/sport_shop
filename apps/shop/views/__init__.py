@@ -5,7 +5,7 @@ from apps.shop.views.order.history_of_orders_api import OrdersUserView
 from apps.shop.views.order.one_order_api import OneOrdersUserView
 from apps.shop.views.order.order_api import OrderView
 from apps.shop.views.products.comment import CommentView
-from apps.shop.views.products.list_of_products import CatalogView
+from apps.shop.views.products.catalog import CatalogView
 from apps.shop.views.products.one_product import ProductView
 from apps.shop.views.products.rating import RatingView
 from apps.shop.views.system.page_404 import Page404

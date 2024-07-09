@@ -51,7 +51,11 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.shop',
     'internals',
+
+    # Admin
+    'smart_selects',
 ]
+USE_DJANGO_JQUERY = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

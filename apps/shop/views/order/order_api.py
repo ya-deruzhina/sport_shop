@@ -3,11 +3,9 @@ from django.template import loader
 from django.db import transaction
 
 from apps.users.models import User
-from apps.shop.models import GoodsModel,BasketModel,OrderModel, ProductInOrder
+from apps.shop.models import GoodsModel,BasketModel,OrderModel, ProductInOrder,PickUpModel
 from apps.shop.serializers import OrderSerializer,OrderProductSerializer
 
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -86,7 +84,7 @@ class OrderView(APIView):
 
                     serializer = OrderSerializer(data=data_client)
                     serializer.is_valid(raise_exception=True)
-                else:  
+                else:
                     return HttpResponseRedirect ("/api/v1/404_error/")
             except:              
                 return HttpResponseRedirect ("/api/v1/404_error/")

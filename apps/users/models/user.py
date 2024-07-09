@@ -43,7 +43,7 @@ class User(AbstractUser):
     login_attempts_count = SmallIntegerField(default=0)
 
     def __str__(self):
-        return f'{self.id}. {self.email}'
+        return f'{self.id}. {self.username}'
 
     @property
     def app_role(self):

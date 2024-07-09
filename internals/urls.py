@@ -36,6 +36,8 @@ urlpatterns = paths + [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),  # For Swagger auth
     path('doc', login_required(SwaggerView.as_view())),
     path('admin/', admin.site.urls),
+    path('chaining/', include('smart_selects.urls'))
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

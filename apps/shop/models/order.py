@@ -1,7 +1,7 @@
 from django.db import models
 from apps.users.models.user import User
 from apps.shop.models.pick_up_point import PickUpModel
-
+from django.core.exceptions import ValidationError
 
 class OrderModel(models.Model):
     AM_9_10 = "9.00-10.00"
@@ -31,9 +31,11 @@ class OrderModel(models.Model):
     name = models.CharField(null = False,max_length = 100)
     email = models.CharField(null = False,max_length = 100)
     pick_up_point = models.ForeignKey(PickUpModel, null=False, on_delete=models.CASCADE)
-    date_of_pick_up = models.DateField()
+    date_of_pick_up = models.DateField(null = False)
     time_of_pick_up = models.CharField (choices=TIME_IN_PICK_UP,max_length = 100)
     comment = models.TextField(null = True, default = 'Order without Comment')
     total_money = models.FloatField(null=False)
-
     
+    # def validate_data (self):
+    #     if len(OrderModel.objects.filter(pick_up_point = self.pick_up_point).filter(date_of_pick_up=self.date_of_pick_up).filter(time_of_pick_up=self.time_of_pick_up)) >= 5:
+    #         return ValidationError

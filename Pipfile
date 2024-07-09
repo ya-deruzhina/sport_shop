@@ -16,6 +16,7 @@ python-dotenv = "*"
 loguru = "*"
 gunicorn = "*"
 celery = "*"
+django-smart-selects ="*"
 
 [dev-packages]
 pre-commit = "*"
