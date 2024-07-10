@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 
 from apps.shop.models import GoodsModel,CommentOfGoodsModel,RatingOfGoodsModel
 from apps.shop.forms import CommentForm, RatingForm
-from apps.shop.serializers import CatalogSerializer
+from apps.shop.serializers import CatalogSerializer, CommentSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -13,23 +13,29 @@ class ProductView(APIView):
     def get (self,request,product_id):
         try:
             product = GoodsModel.objects.get(id=product_id)
-            comment = CommentOfGoodsModel.objects.filter(product=product_id).order_by('id')
-            rating = RatingOfGoodsModel.objects.filter(product=product_id)
+            comment_filter = CommentOfGoodsModel.objects.filter(product=product_id).order_by('id')
+            rating_filter = RatingOfGoodsModel.objects.filter(product=product_id)
             
             serializer = CatalogSerializer(instance=product).data
 
         except:
                 return HttpResponseRedirect ("/api/v1/404_error/")
         else:
-            rating_all = 0     
-            if len(rating) > 0:
-                for i in rating:
+            rating_all = 0
+            comment = [{}]     
+            
+            if len(rating_filter) > 0:
+                for i in rating_filter:
                     rating_all += i.rating
-                rating = rating_all/len(rating)
+                rating = rating_all/len(rating_filter)
             else:
                 rating = "No Rating"
-            if len (comment) == 0:
-                comment = "No Comment" 
+            if len (comment_filter) == 0:
+                comment = "No Comment"
+            else:
+                for n in range (len (comment_filter)):
+                    serializer_comment = CommentSerializer(instance=comment_filter[n]).data
+                    comment[0][comment_filter[n].author.id] = [serializer_comment]
 
             one_product = {'information':serializer, "system":{'comment':comment, 'rating':rating}}
 

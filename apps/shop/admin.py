@@ -1,6 +1,8 @@
 from django.contrib import admin
 from apps.shop.models import *
 from apps.users.models import User
+from django.core.exceptions import ValidationError
+from django.forms import ModelForm
 
 # Register your models here.
 
@@ -20,7 +22,7 @@ class RatingInline(admin.TabularInline):
 
 @admin.register(GoodsModel)
 class GoodsModelAdmin (admin.ModelAdmin):
-    fields = ["name","description","price","category","subcategory"]
+    fields = ["name","description","price","amount","category","subcategory"]
     inlines = [CommentInline,RatingInline]
     list_display = ["name","category","subcategory","price"]
     list_filter = ["category","subcategory"]
@@ -29,13 +31,6 @@ class ProductInOrderInline (admin.TabularInline):
     model = ProductInOrder
     fields = ["product", "count", "price_one"]
     ordering = ["-id"]
-
-@admin.register(OrderModel)
-class OrderModelAdmin (admin.ModelAdmin):
-    inlines = [ProductInOrderInline]
-    date_hierarchy = 'order_time'
-    list_display = ["user","order_time","pick_up_point","date_of_pick_up","time_of_pick_up","comment"]
-    list_filter = ["user__username","pick_up_point__adres","time_of_pick_up"]
 
 class SubCategoryInOrderInline (admin.TabularInline):
     model = SubCategoryModel
@@ -59,5 +54,21 @@ class UserAdmin (admin.ModelAdmin):
     inlines = [BasketInOrderInline]
     ordering = ["-username"]
 
+class OrderForm(ModelForm):
+    class Meta:
+        model = OrderModel
+        fields = ('pick_up_point','date_of_pick_up','time_of_pick_up')
 
+    def clean(self):
+        cleaned_data = super(OrderForm, self).clean()
+        if len(OrderModel.objects.filter(pick_up_point = cleaned_data.get("pick_up_point")).filter(date_of_pick_up=cleaned_data.get("date_of_pick_up")).filter(time_of_pick_up=cleaned_data.get("time_of_pick_up"))) >= 5:
+            raise ValidationError
+        return cleaned_data
 
+@admin.register(OrderModel)
+class OrderAdmin(admin.ModelAdmin):
+    form = OrderForm
+    inlines = [ProductInOrderInline]
+    date_hierarchy = 'order_time'
+    list_display = ["user","order_time","pick_up_point","date_of_pick_up","time_of_pick_up","comment"]
+    list_filter = ["user__username","pick_up_point__adres","date_of_pick_up","time_of_pick_up"]

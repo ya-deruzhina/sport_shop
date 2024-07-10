@@ -5,7 +5,8 @@ from smart_selects.db_fields import ChainedForeignKey
 class GoodsModel(models.Model):
     name = models.CharField(null = False, max_length = 100)
     description = models.TextField(null = False)
-    price = models.FloatField(null = False)
+    price = models.DecimalField(max_digits=10,decimal_places=2,null = False)
+    amount = models.IntegerField()
     category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, null = True)
     subcategory = ChainedForeignKey(
         SubCategoryModel,

@@ -35,19 +35,17 @@ class BasketDeleteView(APIView):
         else:
             basket.count -=1
         
-
-            # !!!!! Добавить остаток в наличии
             if basket.count == 0:
                 basket.delete()
                 return HttpResponseRedirect ("/api/v1/basket/")
             
-            # try:
-            #     catalog_amount = GoodsModel.objects.get(id=basket.product_id)
-            #     catalog_amount.amount += 1
-            #     catalog_amount.save()
+            try:
+                catalog_amount = GoodsModel.objects.get(id=basket.product_id)
+                catalog_amount.amount += 1
+                catalog_amount.save()
                 
-            # except Exception as exs:
-            #         return HttpResponseRedirect ("/404_error/")
+            except Exception:
+                return HttpResponseRedirect ("/api/v1/404_error/")
         
         basket.save()
         serializer = BasketSerializer(instance=basket)

@@ -412,12 +412,27 @@
       "required": [],
       "properties": {
         "comment": {
-          "type": "string",
-          "example": "No Comment"
+            "type": "array",
+            "items": {"$ref": "#components/schemas/InformationComment"}
         },
         "rating": {
           "type": "string",
           "example": "No Rating"
+        }
+      }
+    },
+    "InformationComment": {
+      "description": "Information about Comment",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "1": 
+        {"type": "array",
+        "items": {"$ref": "#components/schemas/Comment"}
+        },
+        "2": 
+        {"type": "array",
+        "items": {"$ref": "#components/schemas/Comment"}
         }
       }
     },

@@ -4,7 +4,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from apps.shop.models import BasketModel
+from apps.shop.models import BasketModel, GoodsModel
 from apps.shop.serializers import BasketSerializer
 from apps.shop.forms import CreateOrderForm
 
@@ -76,17 +76,18 @@ class BasketView(APIView):
             serializer = BasketSerializer(instance=users_with_product)
 
         # !!!!!! Amount
-        # try:
-        #     catalog_amount = GoodsModel.objects.get(id=product_id)
-        #     if catalog_amount.amount == 0:
-        #         template = loader.get_template("catalog/error_not_pizza.html")
-        #         return HttpResponse(template.render())
-        #     else:
-        #         catalog_amount.amount -= 1
-        #         catalog_amount.save()
+        try:
+            catalog_amount = GoodsModel.objects.get(id=product_id)
+            if catalog_amount.amount == 0:
+                return HttpResponseRedirect ("/api/v1/404_error/")
+                # template = loader.get_template("catalog/error_not_pizza.html")
+                # return HttpResponse(template.render())
+            else:
+                catalog_amount.amount -= 1
+                catalog_amount.save()
 
-        # except Exception as exs:
-        #         return HttpResponseRedirect ("/api/v1/404_error/")
+        except Exception as exs:
+                return HttpResponseRedirect ("/api/v1/404_error/")
 
         # return HttpResponseRedirect ("/api/v1/basket/")
         return Response ({"information":serializer.data})     

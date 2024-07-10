@@ -24,18 +24,18 @@ class BasketAddView(APIView):
             basket.count +=1
         
 
-    # !!!! Остаток в наличии
-        # try:
-        #     catalog_amount = GoodsModel.objects.get(id=basket.product_id)
-        #     if catalog_amount.amount == 0:
-        #         template = loader.get_template("catalog/error_not_product.html")
-        #         return HttpResponse(template.render())
-        #     else:
-        #         catalog_amount.amount -= 1
-        #         catalog_amount.save()
+        try:
+            catalog_amount = GoodsModel.objects.get(id=basket.product_id)
+            if catalog_amount.amount == 0:
+                return HttpResponseRedirect ("/404_error/")
+                # template = loader.get_template("catalog/error_not_product.html")
+                # return HttpResponse(template.render())
+            else:
+                catalog_amount.amount -= 1
+                catalog_amount.save()
             
-        # except:
-        #     return HttpResponseRedirect ("/404_error/")
+        except:
+            return HttpResponseRedirect ("/404_error/")
         
         basket.save()
         serializer = BasketSerializer(instance=basket)

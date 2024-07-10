@@ -21,8 +21,8 @@ class ProductViewTestCase(APITestCase):
         self.assertEqual(item['information']['id'], product.id)
         self.assertEqual(item['information']['name'], product.name)
         self.assertEqual(item['information']['description'], product.description)
-        self.assertEqual(item['information']['price'], product.price)
-        self.assertEqual(item['information']['id_parent'], product.id_parent)
+        self.assertEqual(float(item['information']['price']), float(product.price))
+        
 
         assert item['system']['comment'] != None
         assert item['system']['rating'] != None

@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$390000$NiYT9D8Gl4zGkiVym99Ycq$Es3OS1KqoCzC2KOLbXuEkX+anLDbzb2ngLbRETgAmr0=",
-        "last_login": "2024-07-07T21:01:28.652Z",
+        "last_login": "2024-07-10T20:19:55.954Z",
         "is_superuser": true,
         "username": "admin",
         "is_staff": true,
@@ -16,13 +16,51 @@
         "status": "active",
         "role": "user",
         "created_at": "2024-07-05T17:52:55.251Z",
-        "updated_at": "2024-07-07T21:02:15.607Z",
+        "updated_at": "2024-07-10T20:20:11.732Z",
         "deleted": false,
-        "last_request_at": "2024-07-07T21:02:15.607Z",
+        "last_request_at": "2024-07-10T20:20:11.732Z",
         "last_login_attempt_at": "2024-07-05T17:52:55.161Z",
         "login_attempts_count": 0,
         "groups": [],
         "user_permissions": []
+    }
+},
+{
+    "model": "shop.categorymodel",
+    "pk": 1,
+    "fields": {
+        "category": "First"
+    }
+},
+{
+    "model": "shop.categorymodel",
+    "pk": 2,
+    "fields": {
+        "category": "Second"
+    }
+},
+{
+    "model": "shop.subcategorymodel",
+    "pk": 1,
+    "fields": {
+        "id_parent": 1,
+        "subcategory": "SubFirst"
+    }
+},
+{
+    "model": "shop.subcategorymodel",
+    "pk": 2,
+    "fields": {
+        "id_parent": 2,
+        "subcategory": "SubSecond"
+    }
+},
+{
+    "model": "shop.subcategorymodel",
+    "pk": 3,
+    "fields": {
+        "id_parent": 1,
+        "subcategory": "SubFirstNEW"
     }
 },
 {
@@ -31,13 +69,27 @@
     "fields": {
         "name": "Test",
         "description": "10 kg",
-        "price": 10.5,
-        "id_parent": 1
+        "price": "10.50",
+        "amount": 1,
+        "category": 1,
+        "subcategory": 1
+    }
+},
+{
+    "model": "shop.goodsmodel",
+    "pk": 2,
+    "fields": {
+        "name": "New",
+        "description": "New",
+        "price": "10.00",
+        "amount": 1,
+        "category": 1,
+        "subcategory": 1
     }
 },
 {
     "model": "shop.basketmodel",
-    "pk": 42,
+    "pk": 43,
     "fields": {
         "user": 1,
         "product": 1,
@@ -46,56 +98,22 @@
 },
 {
     "model": "shop.commentofgoodsmodel",
-    "pk": 1,
+    "pk": 14,
     "fields": {
         "product": 1,
+        "author": 1,
         "comment": "comment",
-        "author": 1
+        "time_comment": "2024-07-10T19:29:33.424Z"
     }
 },
 {
     "model": "shop.commentofgoodsmodel",
-    "pk": 2,
+    "pk": 15,
     "fields": {
         "product": 1,
+        "author": 1,
         "comment": "comment",
-        "author": 1
-    }
-},
-{
-    "model": "shop.commentofgoodsmodel",
-    "pk": 3,
-    "fields": {
-        "product": 1,
-        "comment": "comment",
-        "author": 1
-    }
-},
-{
-    "model": "shop.commentofgoodsmodel",
-    "pk": 4,
-    "fields": {
-        "product": 1,
-        "comment": "comment",
-        "author": 1
-    }
-},
-{
-    "model": "shop.commentofgoodsmodel",
-    "pk": 5,
-    "fields": {
-        "product": 1,
-        "comment": "comment",
-        "author": 1
-    }
-},
-{
-    "model": "shop.commentofgoodsmodel",
-    "pk": 6,
-    "fields": {
-        "product": 1,
-        "comment": "comment",
-        "author": 1
+        "time_comment": "2024-07-10T20:08:17.638Z"
     }
 },
 {
@@ -116,9 +134,9 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "9.00-10.00",
+        "time_of_pick_up": "17.00-18.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -131,9 +149,9 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "9.00-10.00",
+        "time_of_pick_up": "17.00-18.00",
         "comment": "comment",
-        "total_money": 21.0
+        "total_money": "21.00"
     }
 },
 {
@@ -146,9 +164,9 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "9.00-10.00",
+        "time_of_pick_up": "17.00-18.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -161,9 +179,9 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "9.00-10.00",
+        "time_of_pick_up": "17.00-18.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -178,7 +196,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "9.00-10.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -193,7 +211,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "10.00-11.00",
         "comment": "comment",
-        "total_money": 31.5
+        "total_money": "31.50"
     }
 },
 {
@@ -208,7 +226,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "10.00-11.00",
         "comment": "comment",
-        "total_money": 31.5
+        "total_money": "31.50"
     }
 },
 {
@@ -223,7 +241,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "10.00-11.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -236,9 +254,9 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "10.00-11.00",
+        "time_of_pick_up": "9.00-10.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -251,9 +269,9 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "10.00-11.00",
+        "time_of_pick_up": "9.00-10.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -266,9 +284,9 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "11.00-12.00",
+        "time_of_pick_up": "10.00-11.00",
         "comment": "comment",
-        "total_money": 21.0
+        "total_money": "21.00"
     }
 },
 {
@@ -281,9 +299,9 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "11.00-12.00",
+        "time_of_pick_up": "10.00-11.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -298,7 +316,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "11.00-12.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -313,7 +331,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "11.00-12.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -328,7 +346,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "11.00-12.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -343,7 +361,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "12.00-13.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -358,7 +376,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "12.00-13.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -373,7 +391,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "12.00-13.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -388,7 +406,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "12.00-13.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -403,7 +421,7 @@
         "date_of_pick_up": "2024-07-10",
         "time_of_pick_up": "12.00-13.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -416,9 +434,9 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "13.00-14.00",
+        "time_of_pick_up": "9.00-10.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
     }
 },
 {
@@ -431,9 +449,24 @@
         "email": "admin@admin.admin",
         "pick_up_point": 1,
         "date_of_pick_up": "2024-07-10",
-        "time_of_pick_up": "13.00-14.00",
+        "time_of_pick_up": "9.00-10.00",
         "comment": "comment",
-        "total_money": 10.5
+        "total_money": "10.50"
+    }
+},
+{
+    "model": "shop.ordermodel",
+    "pk": 29,
+    "fields": {
+        "order_time": "2024-07-10T20:10:11.746Z",
+        "user": 1,
+        "name": "admin",
+        "email": "admin@admin.admin",
+        "pick_up_point": 1,
+        "date_of_pick_up": "2024-07-10",
+        "time_of_pick_up": "15.00-16.00",
+        "comment": "comment",
+        "total_money": "21.00"
     }
 },
 {
@@ -443,7 +476,7 @@
         "order": 5,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -453,7 +486,7 @@
         "order": 6,
         "product": 1,
         "count": 2,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -463,7 +496,7 @@
         "order": 9,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -473,7 +506,7 @@
         "order": 10,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -483,7 +516,7 @@
         "order": 11,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -493,7 +526,7 @@
         "order": 12,
         "product": 1,
         "count": 3,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -503,7 +536,7 @@
         "order": 13,
         "product": 1,
         "count": 3,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -513,7 +546,7 @@
         "order": 14,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -523,7 +556,7 @@
         "order": 15,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -533,7 +566,7 @@
         "order": 16,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -543,7 +576,7 @@
         "order": 17,
         "product": 1,
         "count": 2,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -553,7 +586,7 @@
         "order": 18,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -563,7 +596,7 @@
         "order": 19,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -573,7 +606,7 @@
         "order": 20,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -583,7 +616,7 @@
         "order": 21,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -593,7 +626,7 @@
         "order": 22,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -603,7 +636,7 @@
         "order": 23,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -613,7 +646,7 @@
         "order": 24,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -623,7 +656,7 @@
         "order": 25,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -633,7 +666,7 @@
         "order": 26,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -643,7 +676,7 @@
         "order": 27,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
     }
 },
 {
@@ -653,25 +686,37 @@
         "order": 28,
         "product": 1,
         "count": 1,
-        "price_one": 10.5
+        "price_one": "10.50"
+    }
+},
+{
+    "model": "shop.productinorder",
+    "pk": 23,
+    "fields": {
+        "order": 29,
+        "product": 1,
+        "count": 2,
+        "price_one": "10.50"
     }
 },
 {
     "model": "shop.ratingofgoodsmodel",
-    "pk": 1,
+    "pk": 5,
     "fields": {
         "product": 1,
+        "author": 1,
         "rating": 5,
-        "author": 1
+        "time_rating": "2024-07-10T20:18:47.090Z"
     }
 },
 {
     "model": "shop.ratingofgoodsmodel",
-    "pk": 2,
+    "pk": 6,
     "fields": {
         "product": 1,
+        "author": 1,
         "rating": 5,
-        "author": 1
+        "time_rating": "2024-07-10T20:20:11.741Z"
     }
 }
 ]
