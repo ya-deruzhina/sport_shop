@@ -7,7 +7,8 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register(r"search", CatalogSearchViewSet)
+# router.register(r"search", CatalogSearchViewSet)
+# router.register(r"search", SearchName.as_view())
 
 
 urlpatterns = [
@@ -15,7 +16,7 @@ urlpatterns = [
     # Catalog
     # path("catalog/",CatalogView.as_view()),
     path("catalog/",include(router.urls)),
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
     path('catalog/<str:query>/', SearchName.as_view()),
 
     # Product
