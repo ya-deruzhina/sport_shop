@@ -1,10 +1,22 @@
 from django.urls import path
-from apps.shop.views import * 
+from apps.shop.views import *
+from apps.search.views import * 
+
+from django.urls import path, include
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register(r"search", CatalogSearchViewSet)
+
 
 urlpatterns = [
 
     # Catalog
-    path("catalog/",CatalogView.as_view()),
+    # path("catalog/",CatalogView.as_view()),
+    path("catalog/",include(router.urls)),
+    path('', include(router.urls)),
+    path('catalog/<str:query>/', SearchName.as_view()),
 
     # Product
     path("product/<int:product_id>/",ProductView.as_view()),

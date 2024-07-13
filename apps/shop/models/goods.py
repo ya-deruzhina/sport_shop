@@ -6,8 +6,8 @@ class GoodsModel(models.Model):
     name = models.CharField(null = False, max_length = 100)
     description = models.TextField(null = False)
     price = models.DecimalField(max_digits=10,decimal_places=2,null = False)
-    amount = models.IntegerField()
-    category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, null = True)
+    amount = models.IntegerField(default = 0)
+    category = models.ForeignKey(to = CategoryModel, on_delete=models.CASCADE, null = True,related_name='categories')
     subcategory = ChainedForeignKey(
         SubCategoryModel,
         chained_field="category",

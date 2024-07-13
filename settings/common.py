@@ -54,7 +54,19 @@ INSTALLED_APPS = [
 
     # Admin
     'smart_selects',
+
+    #Search
+    'django_elasticsearch_dsl',
+    'apps.search',
+
+    # Django REST framework Elasticsearch integration (this package)
+    'django_elasticsearch_dsl_drf',
 ]
+
+# Name of the Elasticsearch index
+ELASTICSEARCH_INDEX_NAMES = {
+    'search.documents.documents_for_catalog': 'catalog',
+}
 USE_DJANGO_JQUERY = True
 
 MIDDLEWARE = [
@@ -146,6 +158,8 @@ REST_FRAMEWORK = {
         'apps.users.services.auth.authentication_service.JSONWebTokenAuthentication',
     ),
     'EXCEPTION_HANDLER': 'core.utils.exception_handler.exception_handler_wrapper',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 25
 
 }
 
@@ -156,6 +170,16 @@ JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=30),
 }
+
+# Elasticsearch
+# https://django-elasticsearch-dsl.readthedocs.io/en/latest/settings.html
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
+
 
 TIMEOUT_IN_MINUTES_TIME = int(os.environ.get('TIMEOUT_IN_MINUTES_TIME', 0))
 
@@ -231,3 +255,4 @@ LOGURU_FORMAT = (
     "[<level>{level}</level>] "
     "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>\n"
 )
+

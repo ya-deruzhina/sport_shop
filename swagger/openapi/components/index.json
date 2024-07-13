@@ -222,7 +222,23 @@
                               }
                             }
                           }
-                        }
+                        },
+                      "Products":{
+                            "description": "Page of Products",
+                              "content": {
+                                "application/json": {
+                                  "schema": {
+                                    "type": "object",
+                                    "description": "Page of Products",
+                                    "properties": {
+                                      "catalog": {
+                                        "$ref": "#components/schemas/ProductsInfo"
+                                      }         
+                                    }
+                                  }
+                                }
+                              }
+                            }
     },
   "requestBodies": {
     "AuthRequestBody": {
@@ -375,7 +391,21 @@
         }
       }
     },
-    
+    "ProductsInfo": {
+      "description": "Information about Products",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "1": 
+        {"type": "array",
+        "items": {"$ref": "#components/schemas/Products"}
+        },
+        "2": 
+        {"type": "array",
+        "items": {"$ref": "#components/schemas/Products"}
+        }
+      }
+    },
     "Products": {
       "description": "Products model",
       "type": "object",
@@ -396,10 +426,18 @@
           "example": "10 kg"
         },
         "price": {
-          "type": "float",
+          "type": "string",
           "example": "10.50"
         },
-        "id_parent": {
+        "amount": {
+          "type": "integer",
+          "example": "1"
+        },
+        "category": {
+          "type": "integer",
+          "example": "1"
+        },
+        "subcategory": {
           "type": "integer",
           "example": "1"
         }
@@ -707,15 +745,15 @@
           },
           "date_of_pick_up": {
             "type": "string",
-            "example": "Minsk"
+            "example": "2024-07-10"
           },
           "time_of_pick_up": {
             "type": "string",
-            "example": "Minsk"
+            "example": "17.00-18.00"
           },
           "all_price": {
             "type": "string",
-            "example": "Minsk"
+            "example": "17.5"
           }
         }
       }

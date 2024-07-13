@@ -17,6 +17,10 @@ loguru = "*"
 gunicorn = "*"
 celery = "*"
 django-smart-selects ="*"
+elasticsearch="7.17"
+elasticsearch-dsl="*"
+django-elasticsearch-dsl="*"
+django-elasticsearch-dsl-drf="*"
 
 [dev-packages]
 pre-commit = "*"

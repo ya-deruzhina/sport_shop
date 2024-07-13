@@ -1,0 +1,16 @@
+{
+    "/api/v1/catalog/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Shop"
+            ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/Products"
+                }
+            }
+        }
+    }
+
+}
