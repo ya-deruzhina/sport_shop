@@ -9,6 +9,10 @@ from apps.shop.views.products.catalog import CatalogViewSets
 from apps.shop.views.products.one_product import ProductView
 from apps.shop.views.products.rating import RatingView
 from apps.shop.views.system.page_404 import Page404
+from apps.shop.views.filters.filter_by_price_max import FilterPriceMaxView
+from apps.shop.views.filters.filter_by_price_min import FilterPriceMinView
+from apps.shop.views.filters.filter_amount_less import FilterAmountLessView
+from apps.shop.views.filters.filter_amount_over import FilterAmountOverView
 
 
 all= (
@@ -23,4 +27,8 @@ all= (
     "ProductView",
     "RatingView",
     "Page404",
+    "FilterPriceMinView",
+    "FilterPriceMaxView",
+    "FilterAmountOverView",
+    "FilterAmountLessView",
 )

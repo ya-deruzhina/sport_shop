@@ -2,22 +2,21 @@ from django.urls import path
 from apps.shop.views import *
 from apps.search.views import * 
 
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
 
-
-router = routers.DefaultRouter()
-# router.register(r"search", CatalogSearchViewSet)
-# router.register(r"search", SearchName.as_view())
 
 
 urlpatterns = [
 
-    # Catalog
-    # path("catalog/",CatalogView.as_view()),
-    path("catalog/",include(router.urls)),
-    # path('', include(router.urls)),
-    path('catalog/<str:query>/', SearchName.as_view()),
+    # Search
+    path('catalog/search_name/<str:query>/', SearchNameView.as_view()),
+    path('catalog/search_category/<str:query>/', SearchCategoryView.as_view()),
+    path('catalog/search_subcategory/<str:query>/', SearchSubCategoryView.as_view()),
+    path('catalog/search_description/<str:query>/',SearchDescriptionView.as_view()),    
+    path('catalog/search__by_amount_over/<int:query>/',FilterAmountOverView.as_view()),
+    path('catalog/search__by_amount_less/<int:query>/',FilterAmountLessView.as_view()),
+    path('catalog/search__by_price/from_min/',FilterPriceMinView.as_view()),
+    path('catalog/search__by_price/from_max/',FilterPriceMaxView.as_view()),
 
     # Product
     path("product/<int:product_id>/",ProductView.as_view()),

@@ -1,17 +1,17 @@
 from apps.search.views import PaginatedElasticSearchAPIView
 from apps.shop.serializers import CatalogSerializer
+from apps.shop.models import SubCategoryModel
 from apps.search.documents import CatalogDocument
 from elasticsearch_dsl import Q
 
-class SearchNameView(PaginatedElasticSearchAPIView):
+class SearchSubCategoryView(PaginatedElasticSearchAPIView):
     serializer_class = CatalogSerializer
     document_class = CatalogDocument
 
-    # Полное совпадение
     def generate_q_expression(self, query):
+        query = SubCategoryModel.objects.get(subcategory=query).id
         return Q(
                 'multi_match', query=query,
                 fields=[
-                    'name'
+                    'subcategory.id'
                 ])
-    
