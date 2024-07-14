@@ -18,6 +18,10 @@ class CatalogDocument(Document):
     })
 
     class Index:
+        {
+            "index.blocks.read_only_allow_delete": None,
+            "index.blocks.read_only": False
+        }
         name = 'search'
         settings = {
             'number_of_shards': 1,
@@ -33,4 +37,3 @@ class CatalogDocument(Document):
             'amount',
             
         ]
-        related_models = [CategoryModel, SubCategoryModel]

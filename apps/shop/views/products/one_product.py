@@ -12,10 +12,11 @@ from rest_framework.response import Response
 class ProductView(APIView):
     def get (self,request,product_id):
         try:
+            # import pdb; pdb.set_trace()
             product = GoodsModel.objects.get(id=product_id)
             comment_filter = CommentOfGoodsModel.objects.filter(product=product_id).order_by('id')
             rating_filter = RatingOfGoodsModel.objects.filter(product=product_id)
-            
+
             serializer = CatalogSerializer(instance=product).data
 
         except:

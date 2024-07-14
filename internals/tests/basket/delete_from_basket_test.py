@@ -5,8 +5,10 @@ from apps.shop.models import BasketModel, GoodsModel
 from apps.users.models import User
 from apps.shop.views import BasketDeleteView
 
+from internals.tests.index import Index
 
 class BasketDeleteViewTestCase(APITestCase):
+    Index()
     fixtures=['dump_data'] 
 
     def test_delete_basket_get(self):

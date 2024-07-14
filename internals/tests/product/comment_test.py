@@ -6,9 +6,11 @@ from rest_framework.test import force_authenticate
 from apps.shop.models import GoodsModel, CommentOfGoodsModel
 
 from django.urls import reverse
+from internals.tests.index import Index
 
 # Test for CommentViewы by user+product (post)
 class CommentViewTestCase(APITestCase):
+    Index()
     fixtures=['dump_data'] 
 
     def test_comment_view_post(self):

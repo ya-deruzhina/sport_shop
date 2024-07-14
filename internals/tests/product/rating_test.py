@@ -7,8 +7,11 @@ from apps.shop.models import GoodsModel, RatingOfGoodsModel
 
 from django.urls import reverse
 
+from internals.tests.index import Index    
+
 # Test for RatingView by user+product (post)
 class RatingViewTestCase(APITestCase):
+    Index()
     fixtures=['dump_data'] 
 
     def test_rating_view_post(self):

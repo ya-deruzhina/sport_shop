@@ -4,8 +4,11 @@ from apps.shop.views import OrdersUserView
 from rest_framework import status
 from rest_framework.test import force_authenticate
 
+from internals.tests.index import Index
+
 # Test for OrdersUserView (get)
 class OrdersViewTestCase(APITestCase):
+    Index()
     fixtures=['dump_data'] 
 
     def test_orders_view_get(self):

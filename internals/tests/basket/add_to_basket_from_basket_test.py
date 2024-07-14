@@ -5,8 +5,11 @@ from apps.shop.models import BasketModel, GoodsModel
 from apps.users.models import User
 from apps.shop.views import BasketAddView
 
+from internals.tests.index import Index
+
 
 class BasketAddFromBasketTestCase(APITestCase):
+    Index()
     fixtures=['dump_data'] 
 
     def test_add_view_basket_post(self):
