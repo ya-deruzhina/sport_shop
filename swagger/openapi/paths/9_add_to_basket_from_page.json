@@ -3,7 +3,7 @@
         "post": {
             "description": "Add to Basket from Page",
             "tags": [
-                "Shop"
+                "Basket"
             ],
             "parameters": [
                 {
@@ -28,9 +28,7 @@
                                     "errors": {
                                         "type": "object",
                                         "example": {
-                                            "errors": [
-                                                "404"
-                                            ]
+                                            "errors": "404"
                                         }
                                     }
                                 }

@@ -3,7 +3,7 @@
         "get": {
             "description": "Show num of orders and Inf",
             "tags": [
-                "Shop"
+                "Order"
             ],
             "responses": {
                 "200": {

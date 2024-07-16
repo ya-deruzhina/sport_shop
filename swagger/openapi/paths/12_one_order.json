@@ -3,7 +3,7 @@
         "get": {
             "description": "Show one order",
             "tags": [
-                "Shop"
+                "Order"
             ],
             "parameters": [
                 {
@@ -28,9 +28,7 @@
                                     "errors": {
                                         "type": "object",
                                         "example": {
-                                            "errors": [
-                                                "404"
-                                            ]
+                                            "errors": "404"
                                         }
                                     }
                                 }

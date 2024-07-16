@@ -13,10 +13,10 @@ urlpatterns = [
     path('catalog/search_category/<str:query>/', SearchCategoryView.as_view()),
     path('catalog/search_subcategory/<str:query>/', SearchSubCategoryView.as_view()),
     path('catalog/search_description/<str:query>/',SearchDescriptionView.as_view()),    
-    path('catalog/search__by_amount_over/<int:query>/',FilterAmountOverView.as_view()),
-    path('catalog/search__by_amount_less/<int:query>/',FilterAmountLessView.as_view()),
-    path('catalog/search__by_price/from_min/',FilterPriceMinView.as_view()),
-    path('catalog/search__by_price/from_max/',FilterPriceMaxView.as_view()),
+    path('catalog/search_by_amount_over/<int:query>/',FilterAmountOverView.as_view()),
+    path('catalog/search_by_amount_less/<int:query>/',FilterAmountLessView.as_view()),
+    path('catalog/search_by_price/from_min/',FilterPriceMinView.as_view()),
+    path('catalog/search_by_price/from_max/',FilterPriceMaxView.as_view()),
 
     # Product
     path("catalog/",CatalogView.as_view()),

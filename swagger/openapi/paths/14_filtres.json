@@ -1,0 +1,223 @@
+{
+    "/api/v1/catalog/search_name/{query}/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Search"
+            ],
+            "parameters": [
+                {
+                  "name": "query",
+                  "in": "path",
+                  "description": "Name for search",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Search by Name",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/v1/catalog/search_category/{query}/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Search"
+            ],
+            "parameters": [
+                {
+                  "name": "query",
+                  "in": "path",
+                  "description": "Category for search",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Search by Category",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/v1/catalog/search_subcategory/{query}/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Search"
+            ],
+            "parameters": [
+                {
+                  "name": "query",
+                  "in": "path",
+                  "description": "Subategory for search",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Search by Subcategory",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/v1/catalog/search_description/{query}/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Search"
+            ],
+            "parameters": [
+                {
+                  "name": "query",
+                  "in": "path",
+                  "description": "Description for search",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Search by Description",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/v1/catalog/search_by_amount_over/{query}/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Search"
+            ],
+            "parameters": [
+                {
+                  "name": "query",
+                  "in": "path",
+                  "description": "Amount over for search",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Search by Amount - over",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/v1/catalog/search_by_amount_less/{query}/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Search"
+            ],
+            "parameters": [
+                {
+                  "name": "query",
+                  "in": "path",
+                  "description": "Amount less for search",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Search by Amount - less",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/v1/catalog/search_by_price/from_min/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Search"
+            ],
+            "responses": {
+                "200": {
+                    "description": "Search by Price - from min",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/v1/catalog/search_by_price/from_max/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Search"
+            ],
+            "responses": {
+                "200": {
+                    "description": "Search by Price - from max",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

@@ -3,7 +3,7 @@
         "post": {
             "description": "Create Order",
             "tags": [
-                "Shop"
+                "Order"
             ],
             "requestBody": {
                 "$ref": "#/components/requestBodies/OrderRequestBody"
@@ -21,9 +21,7 @@
                                     "errors": {
                                         "type": "object",
                                         "example": {
-                                            "errors": [
-                                                "404"
-                                            ]
+                                            "errors":"404"
                                         }
                                     }
                                 }

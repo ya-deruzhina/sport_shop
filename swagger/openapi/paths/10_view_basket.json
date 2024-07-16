@@ -3,7 +3,7 @@
         "get": {
             "description": "View Basket from User",
             "tags": [
-                "Shop"
+                "Basket"
             ],
             "responses": {
                 "200": {

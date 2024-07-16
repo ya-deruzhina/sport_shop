@@ -3,7 +3,7 @@
         "get": {
             "description": "Delete from Basket",
             "tags": [
-                "Shop"
+                "Basket"
             ],
             "parameters": [
                 {
@@ -31,9 +31,7 @@
                                     "errors": {
                                         "type": "object",
                                         "example": {
-                                            "errors": [
-                                                "404"
-                                            ]
+                                            "errors": "404"
                                         }
                                     }
                                 }
