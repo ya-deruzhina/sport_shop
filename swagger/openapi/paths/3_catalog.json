@@ -7,7 +7,14 @@
             ],
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/Products"
+                    "description": "Catalog",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
                 }
             }
         }

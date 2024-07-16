@@ -7,29 +7,13 @@ from rest_framework.response import Response
 from apps.shop.models import GoodsModel
 from apps.shop.serializers import CatalogSerializer
 
-
-
-
-# class CatalogView(APIView):  
+class CatalogView(APIView):  
     
-#     def get(self,request):
-#         all_goods = GoodsModel.objects.filter(amount__gte=0)
-        
-#         goods = {}
-#         for n in all_goods:
-#             serializer_goods = CatalogSerializer(instance=n).data
-#             goods[n.id] = [serializer_goods]
-
-
-# #         # template = loader.get_template("catalog/catalog.html")
-# #         # context = {
-# #         #     "catalog":catalog,
-# #         # }
-# #         # return HttpResponse(template.render(context,request))
-            
-#         return Response ({"catalog":goods})
-
-from rest_framework import viewsets
-class CatalogViewSets(viewsets.ModelViewSet):
-    serializer_class = CatalogSerializer
-    queryset = GoodsModel.objects.all()
+    def get(self,request):
+        products = GoodsModel.objects.all()
+        products_with_filter = {"count":(len(products)),"next":"null","previous":"null"}
+        results = []
+        for product in products:
+            results.append (CatalogSerializer(instance=product).data)
+        products_with_filter['results'] = results
+        return Response (products_with_filter)

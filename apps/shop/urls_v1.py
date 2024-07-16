@@ -19,6 +19,7 @@ urlpatterns = [
     path('catalog/search__by_price/from_max/',FilterPriceMaxView.as_view()),
 
     # Product
+    path("catalog/",CatalogView.as_view()),
     path("product/<int:product_id>/",ProductView.as_view()),
     path("product/comment/<int:product_id>/",CommentView.as_view()),
     path("product/rating/<int:product_id>/",RatingView.as_view()),

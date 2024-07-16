@@ -222,24 +222,9 @@
                               }
                             }
                           }
-                        },
-                      "Products":{
-                            "description": "Page of Products",
-                              "content": {
-                                "application/json": {
-                                  "schema": {
-                                    "type": "object",
-                                    "description": "Page of Products",
-                                    "properties": {
-                                      "catalog": {
-                                        "$ref": "#components/schemas/ProductsInfo"
-                                      }         
-                                    }
-                                  }
-                                }
-                              }
-                            }
-    },
+                        }
+  },
+                           
   "requestBodies": {
     "AuthRequestBody": {
       "content": {
@@ -434,12 +419,32 @@
           "example": "1"
         },
         "category": {
-          "type": "integer",
-          "example": "1"
-        },
+              "$ref": "#components/schemas/InformationCategory"
+          },         
         "subcategory": {
-          "type": "integer",
-          "example": "1"
+          "$ref": "#components/schemas/InformationSubCategory"
+        }
+      }
+    },
+    "InformationCategory": {
+      "description": "Information about Category",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "category": {
+          "type": "string",
+          "example": "Category"
+        }
+      }
+    },
+    "InformationSubCategory": {
+      "description": "Information about SubCategory",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "subcategory": {
+          "type": "string",
+          "example": "Subcategory"
         }
       }
     },
@@ -756,7 +761,43 @@
             "example": "17.5"
           }
         }
-      }
+      },
+      "Catalog": {
+        "description": "Catalog",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "count": {
+            "type": "string",
+            "example": "2"
+          },
+          "next": {
+            "type": "nullable",
+            "example": "null"
+          },
+          "previous": {
+            "type": "nullable",
+            "example": "null"
+          },
+          "results": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/QuerySetsProducts"
+            }
+          }
+        }
+      },
+      "QuerySetsProducts": {
+        "anyOf":[
+          {"type": "array",
+          "$ref": "#components/schemas/Products"
+            },
+          {"type": "array",
+          "$ref": "#components/schemas/Products"
+            }
+
+          ]
+        }
+      
   },
   "securitySchemes": {
     "BearerScheme": {
