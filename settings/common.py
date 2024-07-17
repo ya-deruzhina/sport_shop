@@ -138,13 +138,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_PORT = os.environ['EMAIL_PORT']
 # EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
 
-# EMAIL_HOST = 'smtp.mail.ru'
-# EMAIL_PORT = 2525
-# EMAIL_USE_TLS = False
-# EMAIL_USE_SSL = False
-# EMAIL_HOST_USER = 'moya_powta@list.ru'
-# EMAIL_HOST_PASSWORD = 'ukwm2SqMzsmzJ6nRp8dZ'
-
 # MailCatcher
 EMAIL_HOST = '127.0.0.1'
 EMAIL_PORT = 1025
