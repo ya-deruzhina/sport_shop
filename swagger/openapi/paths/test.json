@@ -1,0 +1,23 @@
+{
+    "/api/v1/test/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Shop"
+            ],
+            "responses": {
+                "200": {
+                    "description": "Catalog",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

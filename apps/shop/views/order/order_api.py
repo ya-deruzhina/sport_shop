@@ -1,6 +1,17 @@
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.db import transaction
+from django.core.mail import send_mail
+
+import smtplib
+from smtplib import SMTP_SSL, SMTP, SMTPAuthenticationError
+from ssl import create_default_context
+from email.message import EmailMessage
+
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 from apps.users.models import User
 from apps.shop.models import GoodsModel,BasketModel,OrderModel, ProductInOrder,PickUpModel
@@ -10,6 +21,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from core import IsActive
+
 
 class OrderView(APIView):
     permission_classes = (IsActive,)
@@ -70,7 +82,8 @@ class OrderView(APIView):
                 pick_up_point =  request.POST.get('pick_up_point')
                 date_of_pick_up =  request.POST.get('date_of_pick_up')
                 time_of_pick_up = request.POST.get('time_of_pick_up')
-                if len(OrderModel.objects.filter(pick_up_point = pick_up_point).filter(date_of_pick_up=date_of_pick_up).filter(time_of_pick_up=time_of_pick_up)) <= 4:
+                # import pdb; pdb.set_trace()
+                if len(OrderModel.objects.filter(pick_up_point = pick_up_point,date_of_pick_up=date_of_pick_up,time_of_pick_up=time_of_pick_up)) <= 4:
                     data_client = {
                         "user":id_user, 
                         "name":user,
@@ -83,6 +96,7 @@ class OrderView(APIView):
                         }
 
                     serializer = OrderSerializer(data=data_client)
+                    
                     serializer.is_valid(raise_exception=True)
                 else:
                     return HttpResponseRedirect ("/api/v1/404_error/")
@@ -112,8 +126,23 @@ class OrderView(APIView):
              # Deleting basket
             basket.delete()
 
-            # !!!! Sent message 
-            
+            # Sent message
+            send_mail(
+                'Subject',
+                'Message',
+                'moya_powta@list.ru',
+                ["moya_powta@list.ru"],
+            )             
             
         return HttpResponseRedirect ("/api/v1/order/")
     
+class SentMessage(APIView):
+    def get(self,request):
+        send_mail(
+        'Subject',
+        "Message",
+        'moya_powta@list.ru',
+        ["moya_powta@list.ru"],
+        ) 
+        test = {"Servise":"OK"}
+        return Response (test)

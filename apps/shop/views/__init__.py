@@ -14,6 +14,8 @@ from apps.shop.views.filters.filter_by_price_min import FilterPriceMinView
 from apps.shop.views.filters.filter_amount_less import FilterAmountLessView
 from apps.shop.views.filters.filter_amount_over import FilterAmountOverView
 
+from apps.shop.views.order.order_api import SentMessage
+
 
 all= (
     "BasketAddView",
@@ -31,4 +33,5 @@ all= (
     "FilterPriceMaxView",
     "FilterAmountOverView",
     "FilterAmountLessView",
+    "SentMessage",
 )

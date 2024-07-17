@@ -63,10 +63,6 @@ INSTALLED_APPS = [
     'django_elasticsearch_dsl_drf',
 ]
 
-# Name of the Elasticsearch index
-ELASTICSEARCH_INDEX_NAMES = {
-    'search.documents.documents_for_catalog': 'catalog',
-}
 USE_DJANGO_JQUERY = True
 
 MIDDLEWARE = [
@@ -133,6 +129,31 @@ CELERY_DEFAULT_ROUTING_KEY = os.environ['CELERY_DEFAULT_QUEUE']
 CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# # MailCatcher
+# EMAIL_HOST = os.environ['EMAIL_HOST']
+# EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+# EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+# EMAIL_PORT = os.environ['EMAIL_PORT']
+# EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
+
+# EMAIL_HOST = 'smtp.mail.ru'
+# EMAIL_PORT = 2525
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False
+# EMAIL_HOST_USER = 'moya_powta@list.ru'
+# EMAIL_HOST_PASSWORD = 'ukwm2SqMzsmzJ6nRp8dZ'
+
+# MailCatcher
+EMAIL_HOST = '127.0.0.1'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+
+DEFAULT_FROM_EMAIL  = 'moya_powta@list.ru'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -173,6 +194,11 @@ JWT_AUTH = {
 
 # Elasticsearch
 # https://django-elasticsearch-dsl.readthedocs.io/en/latest/settings.html
+
+# Name of the Elasticsearch index
+ELASTICSEARCH_INDEX_NAMES = {
+    'search.documents.documents_for_catalog': 'catalog',
+}
 
 ELASTICSEARCH_DSL = {
     'default': {
