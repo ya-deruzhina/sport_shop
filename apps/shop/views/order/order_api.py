@@ -3,16 +3,6 @@ from django.template import loader
 from django.db import transaction
 from django.core.mail import send_mail
 
-import smtplib
-from smtplib import SMTP_SSL, SMTP, SMTPAuthenticationError
-from ssl import create_default_context
-from email.message import EmailMessage
-
-import os
-from pathlib import Path
-from dotenv import load_dotenv
-load_dotenv()
-
 from apps.users.models import User
 from apps.shop.models import GoodsModel,BasketModel,OrderModel, ProductInOrder,PickUpModel
 from apps.shop.serializers import OrderSerializer,OrderProductSerializer
@@ -74,7 +64,7 @@ class OrderView(APIView):
                 data_product[n] = {'count':product.count, 'product':product.product_id,'price_one':price_one}           
                 n+=1
 
-            # !!!!!! Getting client's information            
+            # ! Getting client's information            
             try:
                 user = request.user.username
                 email = request.user.email
@@ -94,9 +84,7 @@ class OrderView(APIView):
                         "time_of_pick_up":time_of_pick_up,
                         "total_money":price_all
                         }
-
                     serializer = OrderSerializer(data=data_client)
-                    
                     serializer.is_valid(raise_exception=True)
                 else:
                     return HttpResponseRedirect ("/api/v1/404_error/")
@@ -125,24 +113,11 @@ class OrderView(APIView):
 
              # Deleting basket
             basket.delete()
-
             # Sent message
             send_mail(
-                'Subject',
-                'Message',
+                f'Order {order_number}',
+                'Thank you for your order',
                 'moya_powta@list.ru',
                 ["moya_powta@list.ru"],
-            )             
-            
+            )                
         return HttpResponseRedirect ("/api/v1/order/")
-    
-class SentMessage(APIView):
-    def get(self,request):
-        send_mail(
-        'Subject',
-        "Message",
-        'moya_powta@list.ru',
-        ["moya_powta@list.ru"],
-        ) 
-        test = {"Servise":"OK"}
-        return Response (test)

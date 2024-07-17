@@ -38,6 +38,4 @@ urlpatterns = [
     # System
     path("404_error/",Page404.as_view()),
 
-    path("test/",SentMessage.as_view()),
-
 ]
