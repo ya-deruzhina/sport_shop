@@ -177,12 +177,18 @@
                             "type": "object",
                             "description": "Page After Order",
                             "properties": {
-                              "order_product": {
+                              "Your order Send": {
+                                "type": "string",
+                                "example": "Order Number 62"
+                              },
+                              "order_inf": {
                                 "$ref": "#components/schemas/OrderProduct"
                               },
-                              "1": {
-                                "$ref": "#components/schemas/Product"
-                              }             
+                              "product": {
+                                  "type": "array",
+                                  "items": {"$ref": "#components/schemas/QuerySetsProductsInOrder"
+                                  }
+                                }             
                             }
                           }
                         }
@@ -198,10 +204,7 @@
                               "properties": {
                                 "product": {
                                   "$ref": "#components/schemas/OrderInf"
-                                },
-                                "one_product_in_order": {
-                                  "$ref": "#components/schemas/ProductInOrder"
-                                }             
+                                }
                               }
                             }
                           }
@@ -303,27 +306,20 @@
             "type": "object",
             "properties": {
               "comment": {
-                "type": "string"
+                "type": "string",
+                "example": "comment"
               },
               "pick_up_point": {
-                "type": "integer"
+                "type": "integer",
+                "example": "1"
               },
               "date_of_pick_up": {
-                "type": "string"
+                "type": "string",
+                "example": "2024-07-01"
               },
               "time_of_pick_up": {
-                "type": "string"
-              }
-            }
-          },
-          "examples": {
-            "order": {
-              "summary": "An example of a Order",
-              "value": {
-                "comment": "comment",
-                "pick_up_point": 1,
-                "date_of_pick_up": "2024-07-10",
-                "time_of_pick_up": "10.00-11.00" 
+                "type": "string",
+                "example": "10.00-11.00"
               }
             }
           }
@@ -796,7 +792,19 @@
             }
 
           ]
+        },
+        "QuerySetsProductsInOrder": {
+          "anyOf":[
+            {"type": "array",
+            "$ref": "#components/schemas/Product"
+              },
+            {"type": "array",
+            "$ref": "#components/schemas/Product"
+              }
+  
+            ]
         }
+
       
   },
   "securitySchemes": {

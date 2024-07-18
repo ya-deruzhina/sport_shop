@@ -10,7 +10,7 @@
             },
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/Order"
+                    "$ref": "#/components/responses/OrderAfterCreate"
                 },
                 "400": {
                     "description": "Returned when request body is not valid",

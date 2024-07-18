@@ -21,12 +21,12 @@ class OrderView(APIView):
     def get(self,request):
         try: 
             order_number = OrderModel.objects.filter(user=request.user.id).order_by('-order_time')[0].id
-            order_product = OrderSerializer(instance=OrderModel.objects.get(id=order_number)).data
-            product_in_order = {"order_product":order_product}
+            order_inf = OrderSerializer(instance=OrderModel.objects.get(id=order_number)).data
+            product_in_order = []
             products = ProductInOrder.objects.filter(order=order_number)
             for order in range (0,len(products)):
-                product_in_order[products[order].id] = OrderProductSerializer(instance=products[order]).data
-            
+                # product_in_order[products[order].id] = OrderProductSerializer(instance=products[order]).data
+                product_in_order.append(OrderProductSerializer(instance=products[order]).data)
 
         except:
             return HttpResponseRedirect ("/api/v1/404_error/")
@@ -34,12 +34,13 @@ class OrderView(APIView):
         else:
             # template = loader.get_template("order/order.html")
             context = {
-                "order_product":order_product,
+                "Your order Send": (f'Order Number {order_number}'),
+                "order_inf":order_inf,
                 "product":product_in_order
             }
 
             # return HttpResponse(template.render(context,request))
-            return Response (product_in_order)
+            return Response (context)
 
 
     # Forming an Order

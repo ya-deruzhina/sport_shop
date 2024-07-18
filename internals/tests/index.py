@@ -3,7 +3,7 @@ import pytest
 class Index():
     @pytest.fixture(autouse=True)
     def spam_index(self, elasticsearch):
-        elasticsearch.indices.create(index='search_test')
+        elasticsearch.indices.create(index='search')
         elasticsearch.indices.put_mapping(body={
                     'properties': {
                         'id': {
