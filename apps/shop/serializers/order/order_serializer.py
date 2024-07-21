@@ -9,4 +9,4 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ['user','name','email','comment','pick_up_point','date_of_pick_up','time_of_pick_up','total_money']
         
         def create(self, validated_data):
-            return OrderModel.objects.create(**validated_data)
+            return OrderModel.objects.get_or_create(**validated_data)

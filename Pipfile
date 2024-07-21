@@ -23,6 +23,7 @@ django-elasticsearch-dsl="*"
 django-elasticsearch-dsl-drf="*"
 pytest = "*"
 pytest_elasticsearch ="*"
+faker = "*"
 
 [dev-packages]
 pre-commit = "*"

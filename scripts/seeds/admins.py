@@ -5,8 +5,8 @@ from apps.users.services import UsersService
 def get_admin_params():
     return {
         "username": "admin",
-        "email": "admin@test.test",
-        "password": "password",
+        "email": "admin@admin.admin",
+        "password": "admin",
         "status": User.ACTIVE,
         "is_superuser": True,
         "role": User.ADMIN,

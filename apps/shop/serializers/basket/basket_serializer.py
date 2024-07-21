@@ -7,4 +7,4 @@ class BasketSerializer(serializers.ModelSerializer):
         fields = ['id','user','product','count']
         
         def create(self, validated_data):
-            return BasketModel.objects.create(**validated_data)
+            return BasketModel.objects.get_or_create(**validated_data)

@@ -7,7 +7,6 @@ from django.forms import ModelForm
 # Register your models here.
 
 admin.site.register(PickUpModel)
-admin.site.register(TegsOfGoodsModel)
 
 
 class CommentInline(admin.TabularInline):

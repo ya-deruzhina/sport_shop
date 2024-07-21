@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bccb2598f027822ac37ed41ef5d7d86cee87628d3278999e725787654ba76dee"
+            "sha256": "d03bad12a3b90fda483a74afe89acea421267a30081db08fda0b06463a733706"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -230,6 +230,15 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==2.0.1"
+        },
+        "faker": {
+            "hashes": [
+                "sha256:0f60978314973de02c00474c2ae899785a42b2cf4f41b7987e93c132a2b8a4a9",
+                "sha256:886ee28219be96949cd21ecc96c4c742ee1680e77f687b095202c8def1a08f06"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==26.0.0"
         },
         "gunicorn": {
             "hashes": [
@@ -473,12 +482,12 @@
         },
         "pytest": {
             "hashes": [
-                "sha256:c434598117762e2bd304e526244f67bf66bbd7b5d6cf22138be51ff661980343",
-                "sha256:de4bb8104e201939ccdc688b27a89a7be2079b22e2bd2b07f806b6ba71117977"
+                "sha256:7e8e5c5abd6e93cb1cc151f23e57adc31fcf8cfd2a3ff2da63e23f732de35db6",
+                "sha256:e9600ccf4f563976e2c99fa02c7624ab938296551f280835ee6516df8bc4ae8c"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==8.2.2"
+            "version": "==8.3.1"
         },
         "pytest-elasticsearch": {
             "hashes": [
@@ -514,11 +523,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:f171bab1dfbc86b132997f26a119f6056a57950d058587841a0082e8830f9dc5",
-                "sha256:fe384da74336c398e0d956d1cae0669bc02eed936cdb1d49b57de1990dc11ffc"
+                "sha256:48297e5d393a62b7cb2a10b8f76c63a73af933bd809c9e0d0d6352a1a0135dd8",
+                "sha256:ed2feca703be3bdbd94e6bb17365d91c6935c6b2a8d0bb09b66a2c435ba0b1a5"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==70.3.0"
+            "version": "==71.0.4"
         },
         "six": {
             "hashes": [

@@ -8,3 +8,6 @@ class CatalogSerializer(serializers.ModelSerializer):
     class Meta:
         model = GoodsModel
         fields = ["id","name","description","price","amount","category","subcategory"]
+                
+        def create(self, validated_data):
+            return GoodsModel.objects.create(**validated_data)

@@ -5,3 +5,7 @@ class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = RatingOfGoodsModel
         fields = ["author","product","rating"]
+
+                        
+        def create(self, validated_data):
+            return RatingOfGoodsModel.objects.create(**validated_data)
