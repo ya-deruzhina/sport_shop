@@ -19,13 +19,7 @@ TIME_IN_PICK_UP = [
     "17.00-18.00",
     ]
 
-user = User.objects.all()[0]
-product = GoodsModel.objects.all()[0].id
-pick_up_point = PickUpModel.objects.all()[0].id
-date_of_pick_up = fake.date() 
-time_of_pick_up = random.choices(TIME_IN_PICK_UP)[0]
-
-def get_order_params():
+def get_order_params(user,pick_up_point, date_of_pick_up, time_of_pick_up):
     return {
         "user": user.id,
         "name":user.username,
@@ -40,5 +34,12 @@ def get_order_params():
 
 
 def perform(*args, **kwargs):
-    if len(OrderModel.objects.filter(pick_up_point = pick_up_point,date_of_pick_up=date_of_pick_up,time_of_pick_up=time_of_pick_up)) <= 4:
-        OrderService.create(get_order_params())
+    user = User.objects.all()
+    pick_up_point = PickUpModel.objects.all()
+    date_of_pick_up = fake.date_this_month() 
+    time_of_pick_up = random.choices(TIME_IN_PICK_UP)[0]
+    
+    for i in user:
+        for m in pick_up_point:
+            if len(OrderModel.objects.filter(pick_up_point = m.id,date_of_pick_up=date_of_pick_up,time_of_pick_up=time_of_pick_up)) <= 4:
+                OrderService.create(get_order_params(i,m.id, date_of_pick_up,time_of_pick_up))

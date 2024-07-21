@@ -6,6 +6,7 @@ from .pick_up_service import PickUpService
 from .order_service import OrderService
 from .product_in_order_service import ProductInOrderService
 from .basket_service import BasketService
+from .goods_service import GoodsService
 
 all= (
     'CategoryService',
@@ -16,5 +17,6 @@ all= (
     'OrderService',
     'ProductInOrderService',
     'BasketService',
+    'GoodService'
 
 )

@@ -1,4 +1,4 @@
-from apps.shop.models import OrderModel, GoodsModel
+from apps.shop.models import OrderModel, GoodsModel, ProductInOrder
 from apps.shop.services import ProductInOrderService
 
 from faker import Faker
@@ -6,11 +6,7 @@ fake = Faker()
 
 import random
 
-product = GoodsModel.objects.all()[0].id
-order = OrderModel.objects.all()[0].id
-
-
-def get_order_params():
+def get_order_params(order, product):
     return {
         "order": order,
         "product":product,
@@ -19,6 +15,10 @@ def get_order_params():
     }
 
 
-
 def perform(*args, **kwargs):
-    ProductInOrderService.create(get_order_params())
+    product = GoodsModel.objects.all()
+    order = OrderModel.objects.all()
+    for i in order:
+        for m in product:
+            if not ProductInOrder.objects.filter(product = m.id, order = i.id).exists():
+                ProductInOrderService.create(get_order_params(i.id, m.id))

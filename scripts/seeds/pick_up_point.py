@@ -4,9 +4,7 @@ from apps.shop.services import PickUpService
 from faker import Faker
 fake = Faker()
 
-adres = "Mogilev"
-
-def get_category_params():
+def get_category_params(adres):
     return {
         "adres": adres,
         "description":fake.sentence(),
@@ -14,6 +12,8 @@ def get_category_params():
 
 
 def perform(*args, **kwargs):
+    adres = fake.city()
+    # import pdb; pdb.set_trace()
     if not PickUpModel.objects.filter(adres=adres).exists():
-        PickUpService.create(get_category_params())
+        PickUpService.create(get_category_params(adres))
     

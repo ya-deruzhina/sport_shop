@@ -1,14 +1,10 @@
-from apps.shop.models import GoodsModel
+from apps.shop.models import GoodsModel, RatingOfGoodsModel
 from apps.users.models import User
 from apps.shop.services import RatingService
 
 import random
 
-
-author = User.objects.all()[0].id
-product = GoodsModel.objects.all()[0].id
-
-def get_rating_params():
+def get_rating_params(author, product):
     return {
         "author": author,
         "product":product,
@@ -18,5 +14,10 @@ def get_rating_params():
 
 
 def perform(*args, **kwargs):
-    RatingService.create(get_rating_params())
+    goods = GoodsModel.objects.all()
+    author = User.objects.all()
+    for i in goods:
+        for m in author:
+            if not RatingOfGoodsModel.objects.filter(product = i.id, author = m.id).exists():
+                RatingService.create(get_rating_params(m.id, i.id))
     

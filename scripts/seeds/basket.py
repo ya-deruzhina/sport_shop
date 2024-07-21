@@ -1,12 +1,9 @@
-from apps.shop.models import GoodsModel
+from apps.shop.models import GoodsModel, BasketModel
 from apps.users.models import User
 from apps.shop.services import BasketService
 import random
 
-user = User.objects.all()[0].id
-product = GoodsModel.objects.all()[0].id
-
-def get_comment_params():
+def get_comment_params(user, product):
     return {
         "user": user,
         "product":product,
@@ -14,7 +11,11 @@ def get_comment_params():
     }
 
 
-
 def perform(*args, **kwargs):
-    BasketService.create(get_comment_params())
+    user = User.objects.all()
+    product = GoodsModel.objects.all()
+    for i in user:
+        for m in product:
+            if not BasketModel.objects.filter(product = m.id, user = i.id).exists():
+                BasketService.create(get_comment_params(i.id, m.id))
     
