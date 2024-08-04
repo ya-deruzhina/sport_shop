@@ -14,7 +14,7 @@ class CatalogDocument(Document):
     subcategory = fields.ObjectField(properties={
         'id': fields.IntegerField(),
         'subcategory' : fields.TextField(),
-        'category' : fields.TextField()
+        'id_parent' : fields.TextField()
     })
 
     class Index:

@@ -24,6 +24,7 @@ django-elasticsearch-dsl-drf="*"
 pytest = "*"
 pytest_elasticsearch ="*"
 faker = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 pre-commit = "*"

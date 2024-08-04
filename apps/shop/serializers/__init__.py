@@ -4,8 +4,9 @@ from apps.shop.serializers.basket.basket_serializer import BasketSerializer
 from apps.shop.serializers.order.order_serializer import OrderSerializer
 from apps.shop.serializers.order.product_order_serializer import OrderProductSerializer
 from apps.shop.serializers.catalog.catalog import CatalogSerializer
-from apps.shop.serializers.catalog.category import CategorySerializer,SubCategorySerializer
+from apps.shop.serializers.catalog.category import CategorySerializer,SubCategorySerializer,SubCategorySearchSerializer,CategorySearchSerializer
 from apps.shop.serializers.order.pick_up_point import PickUpSerializer
+from apps.shop.serializers.catalog.catalog_serializer_for_search import GoodsSearchSerializer
 
 
 all= (
@@ -18,6 +19,9 @@ all= (
     'CategorySerializer',
     'SubCategorySerializer',
     'PickUpSerializer',
+    'GoodsSearchSerializer',
+    'SubCategorySearchSerializer',
+    'CategorySearchSerializer',
 
 )
 

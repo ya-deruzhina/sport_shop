@@ -75,7 +75,6 @@ class BasketView(APIView):
             users_with_product.save()
             serializer = BasketSerializer(instance=users_with_product)
 
-        # !!!!!! Amount
         try:
             catalog_amount = GoodsModel.objects.get(id=product_id)
             if catalog_amount.amount == 0:
