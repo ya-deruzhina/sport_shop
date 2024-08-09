@@ -5,8 +5,9 @@ Django settings for internals project.
 import datetime
 import os
 from pathlib import Path
-from dotenv import load_dotenv
+from dotenv import load_dotenv,find_dotenv
 load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import pytz
@@ -18,7 +19,8 @@ BASE_FOLDER = os.path.dirname(BASE_DIR)
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = load_dotenv(find_dotenv('SECRET_KEY'))
 # ENV = os.getenv('ENV')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -104,11 +106,11 @@ WSGI_APPLICATION = 'internals.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ['DB_HOST'],
-        'PORT': os.environ['DB_PORT'],
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASS'],
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASS'),
     },
 }
 
@@ -122,10 +124,10 @@ SHELL_PLUS_PRE_IMPORTS = [
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
 
-CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
-CELERY_DEFAULT_QUEUE = os.environ['CELERY_DEFAULT_QUEUE']
-CELERY_DEFAULT_EXCHANGE = os.environ['CELERY_DEFAULT_QUEUE']
-CELERY_DEFAULT_ROUTING_KEY = os.environ['CELERY_DEFAULT_QUEUE']
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
+CELERY_DEFAULT_QUEUE = os.getenv('CELERY_DEFAULT_QUEUE')
+CELERY_DEFAULT_EXCHANGE = os.getenv('CELERY_DEFAULT_QUEUE')
+CELERY_DEFAULT_ROUTING_KEY = os.getenv('CELERY_DEFAULT_QUEUE')
 CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True
 
