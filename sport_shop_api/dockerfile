@@ -11,16 +11,13 @@ WORKDIR /code
 COPY Pipfile Pipfile.lock ./
 RUN python -m pip install --upgrade pip
 RUN pip install pipenv 
-RUN pipenv install
 
-# COPY . /code
-COPY . .
-# RUN pipenv run python manage.py migrate
-# RUN pipenv run seed all
-
+COPY . /code
+RUN pipenv install && bash -c pipenv run python manage.py migrate && bash -c pipenv run seed all
 
 # COPY . /code
 
 RUN chmod a+x /code/entrypoint.sh
-# ENTRYPOINT ["/bin/sh", "/code/entrypoint.sh"]
-ENTRYPOINT ["/bin/sh", "-c", "tail -f /dev/null"]
+ENTRYPOINT ["/bin/sh", "/code/entrypoint.sh"]
+# ENTRYPOINT ["/bin/sh", "-c", "tail -f /dev/null"]
+

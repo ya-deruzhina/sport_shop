@@ -19,17 +19,51 @@ services:
         restart: unless-stopped
 
 
-    backend:
+    web:
         container_name: Django
         build:  ./sport_shop_api
+        restart: always
         volumes:
             - postgres:/code/postgres
         ports:
             - 8000:8000
         depends_on:
-            - postgres        
+            - postgres
+            - elasticsearch        
         networks:
               - djangonetwork
+    
+    redis:
+        container_name: Redis
+        restart: always
+        ports:
+            - 6379:6379
+        image: redis
+        networks:
+              - djangonetwork
+    
+    
+    elasticsearch:
+        image: elasticsearch:7.16.1
+        container_name: es
+        environment:
+            discovery.type: single-node
+            ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+        ports:
+        - "9200:9200"
+        networks:
+            - djangonetwork
+    
+    
+    kibana:
+        image: kibana:7.16.1
+        container_name: kib
+        ports:
+        - "5601:5601"
+        depends_on:
+        - elasticsearch
+        networks:
+        - djangonetwork
 
 networks:
       djangonetwork:
