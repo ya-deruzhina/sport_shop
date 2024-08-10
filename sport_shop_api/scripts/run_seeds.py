@@ -5,7 +5,7 @@ django.setup()
 from core.loggers import logger
 from core.scripts import perform
 
-script_names = ('admins','users','category')
+script_names = ('admins','users','category','subcategory','pick_up_point')
 # script_names = ('admins','users','category','subcategory','comment','rating','pick_up_point','order','product_in_order','goods')
 
 PERFORM_FUNC_NAME = "perform"
