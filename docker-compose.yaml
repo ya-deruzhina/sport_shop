@@ -1,0 +1,39 @@
+version: '3.10'
+
+services:
+    postgres:
+        container_name: PostgreSQL
+        image: postgres
+        environment:
+            - POSTGRES_PASSWORD=Mariwa3886920
+            - POSTGRES_USER=postgres
+        volumes:
+            - postgres:/code/postgres
+        
+        build: ./postgreSQL
+        
+        ports:
+            - 5432:5432
+        networks:
+              - djangonetwork
+        restart: unless-stopped
+
+
+    backend:
+        container_name: Django
+        build:  ./sport_shop_api
+        volumes:
+            - postgres:/code/postgres
+        ports:
+            - 8000:8000
+        depends_on:
+            - postgres        
+        networks:
+              - djangonetwork
+
+networks:
+      djangonetwork:
+          driver: bridge
+
+volumes:
+    postgres:
