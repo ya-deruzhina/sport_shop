@@ -1,8 +1,7 @@
-# from django.contrib.auth.models import User
 from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
 
-from apps.shop.models import GoodsModel, CategoryModel, SubCategoryModel
+from apps.shop.models import GoodsModel
 
 
 @registry.register_document
@@ -14,7 +13,10 @@ class CatalogDocument(Document):
     subcategory = fields.ObjectField(properties={
         'id': fields.IntegerField(),
         'subcategory' : fields.TextField(),
-        'id_parent' : fields.TextField()
+        'id_parent' : fields.Completion({
+            'id': fields.IntegerField(),
+            'category' : fields.TextField()
+        })
     })
 
     class Index:

@@ -4,6 +4,7 @@
 
 # environment variables
 .env
+.env.example
 
 # celery beat schedule file
 celerybeat-schedule
@@ -14,5 +15,6 @@ __pycache__/
 
 # DB dumps
 *.sql
+dump_data.json
 dump.rdb
 .DS_Store

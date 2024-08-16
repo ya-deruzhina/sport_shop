@@ -8,7 +8,7 @@ fake = Faker()
 
 import random
 
-def get_comment_params(category,subcategory):
+def get_goods_params(category,subcategory):
     
     return {
         "name": fake.last_name(),
@@ -23,8 +23,9 @@ def get_comment_params(category,subcategory):
 
 def perform(*args, **kwargs):
     subcategory = SubCategoryModel.objects.all()
-    for i in subcategory:
-        if not GoodsModel.objects.filter(category = i.id_parent.id, subcategory = i.id).exists():
-            GoodsService.create(get_comment_params(i.id_parent.id, i.id))
+    if len(GoodsModel.objects.all()) == 0:
+        for i in subcategory:
+            if not GoodsModel.objects.filter(category = i.id_parent.id, subcategory = i.id).exists():
+                GoodsService.create(get_goods_params(i.id_parent.id, i.id))
 
       

@@ -16,8 +16,8 @@ def get_rating_params(author, product):
 def perform(*args, **kwargs):
     goods = GoodsModel.objects.all()
     author = User.objects.all()
-    for i in goods:
-        for m in author:
-            if not RatingOfGoodsModel.objects.filter(product = i.id, author = m.id).exists():
-                RatingService.create(get_rating_params(m.id, i.id))
-    
+    if len (RatingOfGoodsModel.objects.all()) == 0:
+        for i in goods:
+            for m in author:
+                if not RatingOfGoodsModel.objects.filter(product = i.id, author = m.id).exists():
+                    RatingService.create(get_rating_params(m.id, i.id))

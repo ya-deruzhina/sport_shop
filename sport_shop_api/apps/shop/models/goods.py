@@ -8,6 +8,7 @@ class GoodsModel(models.Model):
     price = models.DecimalField(max_digits=10,decimal_places=2,null = False)
     amount = models.IntegerField(default = 0)
     category = models.ForeignKey(to = CategoryModel, on_delete=models.CASCADE, null = True,related_name='categories')
+    # subcategory = models.ForeignKey(to = SubCategoryModel, on_delete=models.CASCADE)
     subcategory = ChainedForeignKey(
         SubCategoryModel,
         chained_field="category",

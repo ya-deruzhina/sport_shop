@@ -8,7 +8,8 @@ class CatalogSerializer(serializers.ModelSerializer):
         model = GoodsModel
         category = CategorySerializer()
         subcategory = SubCategorySerializer()
-        fields = ["id","name","description","price","amount","category","subcategory"]
+        # fields = ['name','description','price','amount','category','subcategory']
+        fields ='__all__'
                 
         def create(self, validated_data):
-            return GoodsModel.objects.get_or_create(**validated_data)
+            return GoodsModel.objects.get_or_create(**validated_data) 

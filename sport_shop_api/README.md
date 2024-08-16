@@ -62,12 +62,11 @@ to avoid duplication in database
 
 
 
-docker-compose exec -ti service-name python manage.py createsuperuser
-docker exec -it daacbed10925a684cef1b4aabcfc6de230faafdf093f776d4431215dc7a0510 python manage.py createsuperuser
+docker exec -it {{id_container}} pipenv run python manage.py makemigrations
+docker exec -it {{id_container}} pipenv run python manage.py migrate
+docker exec -it {{id_container}} pipenv run python manage.py seed all
 
-pip freeze > ./docker/django/requirements.txt
 
 sudo /etc/init.d/postgresql stop
 sudo /etc/init.d/redis-server stop
 
-/home/appuser/.local/share/virtualenvs/

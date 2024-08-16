@@ -16,12 +16,13 @@ all= (
     'OrderSerializer',
     'OrderProductSerializer',
     'CatalogSerializer',
+    'CatalogSearchSerializer',
+    'GoodsSearchSerializer',
     'CategorySerializer',
     'SubCategorySerializer',
-    'PickUpSerializer',
-    'GoodsSearchSerializer',
+    'PickUpSerializer'
     'SubCategorySearchSerializer',
-    'CategorySearchSerializer',
+    'CategorySearchSerializer'
 
 )
 

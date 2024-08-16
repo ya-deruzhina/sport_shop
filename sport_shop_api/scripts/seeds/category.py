@@ -12,6 +12,6 @@ def get_category_params(category):
 
 def perform(*args, **kwargs):
     category = fake.first_name()
-    if not CategoryModel.objects.filter(category=category).exists():
+    if len(CategoryModel.objects.all())==0:
         CategoryService.create(get_category_params(category))
     

@@ -16,8 +16,9 @@ def get_comment_params(author, product):
 def perform(*args, **kwargs):
     goods = GoodsModel.objects.all()
     author = User.objects.all()
-    for i in goods:
-        for m in author:
-            if not CommentOfGoodsModel.objects.filter(product = i.id, author = m.id).exists():
-                CommentService.create(get_comment_params(m.id, i.id))
-    
+    if len(CommentOfGoodsModel.objects.all()) == 0:
+        for i in goods:
+            for m in author:
+                if not CommentOfGoodsModel.objects.filter(product = i.id, author = m.id).exists():
+                    CommentService.create(get_comment_params(m.id, i.id))
+        

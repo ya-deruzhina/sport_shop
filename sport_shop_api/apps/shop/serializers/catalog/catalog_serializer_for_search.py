@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.shop.serializers.catalog.category import CategorySerializer, SubCategorySearchSerializer,CategorySearchSerializer
+from apps.shop.serializers.catalog.category import SubCategorySearchSerializer,CategorySearchSerializer
 
 
 class GoodsSearchSerializer(serializers.Serializer):
@@ -10,3 +10,4 @@ class GoodsSearchSerializer(serializers.Serializer):
     amount = serializers.IntegerField()
     category = CategorySearchSerializer()
     subcategory = SubCategorySearchSerializer()
+

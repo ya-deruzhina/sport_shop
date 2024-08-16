@@ -31,6 +31,17 @@ class Index():
                                 }
                             }
                         },
+                        # 'category': {
+                        #     'type': 'text',
+                        #     'fields': {
+                        #         'id': {
+                        #             'type': 'keyword',
+                        #         },
+                        #         'category': {
+                        #             'type': 'text',
+                        #         }
+                        #     }
+                        # },
                         'name': {
                             'type': 'text'
                         },

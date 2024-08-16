@@ -38,8 +38,9 @@ def perform(*args, **kwargs):
     pick_up_point = PickUpModel.objects.all()
     date_of_pick_up = fake.date_this_month() 
     time_of_pick_up = random.choices(TIME_IN_PICK_UP)[0]
-    
-    for i in user:
-        for m in pick_up_point:
-            if len(OrderModel.objects.filter(pick_up_point = m.id,date_of_pick_up=date_of_pick_up,time_of_pick_up=time_of_pick_up)) <= 4:
-                OrderService.create(get_order_params(i,m.id, date_of_pick_up,time_of_pick_up))
+
+    if len(OrderModel.objects.all()) == 0:    
+        for i in user:
+            for m in pick_up_point:
+                if len(OrderModel.objects.filter(pick_up_point = m.id,date_of_pick_up=date_of_pick_up,time_of_pick_up=time_of_pick_up)) <= 4:
+                    OrderService.create(get_order_params(i,m.id, date_of_pick_up,time_of_pick_up))

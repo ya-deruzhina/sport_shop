@@ -6,7 +6,7 @@ fake = Faker()
 
 import random
 
-def get_order_params(order, product):
+def get_product_params(order, product):
     return {
         "order": order,
         "product":product,
@@ -18,7 +18,8 @@ def get_order_params(order, product):
 def perform(*args, **kwargs):
     product = GoodsModel.objects.all()
     order = OrderModel.objects.all()
-    for i in order:
-        for m in product:
-            if not ProductInOrder.objects.filter(product = m.id, order = i.id).exists():
-                ProductInOrderService.create(get_order_params(i.id, m.id))
+    if len(ProductInOrder.objects.all()) == 0:
+        for i in order:
+            for m in product:
+                if not ProductInOrder.objects.filter(product = m.id, order = i.id).exists():
+                    ProductInOrderService.create(get_product_params(i.id, m.id))

@@ -11,7 +11,7 @@ admin.site.register(PickUpModel)
 
 class CommentInline(admin.TabularInline):
     model = CommentOfGoodsModel
-    lfields = ["author", "comment"]
+    fields = ["author", "comment"]
     ordering = ["-id"]
 
 class RatingInline(admin.TabularInline):
@@ -19,8 +19,23 @@ class RatingInline(admin.TabularInline):
     fields = ["author", "rating"]
     ordering = ["-id"]
 
+
+# class CatalogForm(ModelForm):
+#     class Meta:
+#         model = GoodsModel
+#         fields = ('subcategory',)
+
+#     def clean(self):
+#         cleaned_data = super(CatalogForm, self).clean()
+#         # import pdb; pdb.set_trace()
+#         cleaned_data['subcategory'].id_parent = cleaned_data['subcategory'].id_parent.id
+#         # if len(OrderModel.objects.filter(pick_up_point = cleaned_data.get("pick_up_point")).filter(date_of_pick_up=cleaned_data.get("date_of_pick_up")).filter(time_of_pick_up=cleaned_data.get("time_of_pick_up"))) >= 5:
+#             # raise ValidationError
+#         return cleaned_data
+
 @admin.register(GoodsModel)
 class GoodsModelAdmin (admin.ModelAdmin):
+    # form = CatalogForm
     fields = ["name","description","price","amount","category","subcategory"]
     inlines = [CommentInline,RatingInline]
     list_display = ["name","category","subcategory","price"]
@@ -70,4 +85,9 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [ProductInOrderInline]
     date_hierarchy = 'order_time'
     list_display = ["user","order_time","pick_up_point","date_of_pick_up","time_of_pick_up","comment"]
-    list_filter = ["user__username","pick_up_point__adres","date_of_pick_up","time_of_pick_up"]
+    list_filter = ["user__username","pick_up_point__address","date_of_pick_up","time_of_pick_up"]
+
+
+@admin.register(SubCategoryModel)
+class SubCategoryAdmin(admin.ModelAdmin):
+    model = SubCategoryModel

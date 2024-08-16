@@ -10,7 +10,7 @@ class CategoryModel (models.Model):
 
 
 class SubCategoryModel (models.Model):
-    id_parent = models.ForeignKey(CategoryModel, on_delete=models.CASCADE)
+    id_parent = models.ForeignKey(to = CategoryModel, on_delete=models.CASCADE)
     subcategory = models.CharField(max_length = 20, null=True)
     
     class Meta:

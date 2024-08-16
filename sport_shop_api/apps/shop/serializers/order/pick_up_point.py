@@ -5,7 +5,7 @@ from apps.shop.models import PickUpModel
 class PickUpSerializer(serializers.ModelSerializer):
     class Meta:
         model = PickUpModel
-        fields = ['adres','description']
+        fields = ['address','description']
 
                         
         def create(self, validated_data):
