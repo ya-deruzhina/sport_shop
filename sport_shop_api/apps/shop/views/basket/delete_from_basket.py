@@ -6,9 +6,9 @@ from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
 
 from apps.users.models import User
-from apps.shop.models import BasketModel, GoodsModel
+from apps.shop.models import BasketModel, ProductsModel
 from apps.shop.serializers import BasketSerializer
-from apps.shop.forms import CreateOrderForm
+
 
 
 from django.template import loader
@@ -18,7 +18,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response 
 
 from apps.shop.serializers import BasketSerializer
-from apps.shop.models import BasketModel, GoodsModel
+from apps.shop.models import BasketModel, ProductsModel
 
 from core import IsActive
 
@@ -40,7 +40,7 @@ class BasketDeleteView(APIView):
                 return HttpResponseRedirect ("/api/v1/basket/")
             
             try:
-                catalog_amount = GoodsModel.objects.get(id=basket.product_id)
+                catalog_amount = ProductsModel.objects.get(id=basket.product_id)
                 catalog_amount.amount += 1
                 catalog_amount.save()
                 

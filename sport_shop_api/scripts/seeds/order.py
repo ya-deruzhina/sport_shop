@@ -1,4 +1,4 @@
-from apps.shop.models import OrderModel, GoodsModel,PickUpModel
+from apps.shop.models import OrderModel,PickUpModel
 from apps.users.models import User
 from apps.shop.services import OrderService
 

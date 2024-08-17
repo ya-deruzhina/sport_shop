@@ -1,4 +1,4 @@
-from apps.shop.models import OrderModel, GoodsModel, ProductInOrder
+from apps.shop.models import OrderModel, ProductsModel, ProductInOrder
 from apps.shop.services import ProductInOrderService
 
 from faker import Faker
@@ -16,7 +16,7 @@ def get_product_params(order, product):
 
 
 def perform(*args, **kwargs):
-    product = GoodsModel.objects.all()
+    product = ProductsModel.objects.all()
     order = OrderModel.objects.all()
     if len(ProductInOrder.objects.all()) == 0:
         for i in order:

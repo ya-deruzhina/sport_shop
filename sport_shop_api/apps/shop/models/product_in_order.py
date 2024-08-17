@@ -1,10 +1,10 @@
 from django.db import models
 from apps.shop.models.order import OrderModel
-from apps.shop.models.goods import GoodsModel
+from apps.shop.models.products import ProductsModel
 
 class ProductInOrder (models.Model):
     order = models.ForeignKey(OrderModel, null=False, on_delete=models.CASCADE)
-    product = models.ForeignKey (GoodsModel, null=False, on_delete=models.CASCADE)
+    product = models.ForeignKey (ProductsModel, null=False, on_delete=models.CASCADE)
     count = models.IntegerField()
     price_one = models.DecimalField(max_digits=10, decimal_places=2,null = False)
 

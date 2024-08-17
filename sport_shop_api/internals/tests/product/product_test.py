@@ -1,7 +1,7 @@
 from rest_framework.test import APIRequestFactory, APITestCase
 from apps.shop.views import ProductView
 from rest_framework import status
-from apps.shop.models import GoodsModel, CommentOfGoodsModel, RatingOfGoodsModel, CategoryModel, SubCategoryModel
+from apps.shop.models import ProductsModel
 from apps.users.models import User
 
 from django.urls import reverse
@@ -17,7 +17,7 @@ class ProductViewTestCase(APITestCase):
     fixtures=['dump_data'] 
 
     def test_product_view_get(self):
-        product = GoodsModel.objects.all()[0]
+        product = ProductsModel.objects.all()[0]
         product_id = product.id
     
         request = APIRequestFactory().get('/api/v1/product/')

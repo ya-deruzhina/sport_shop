@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response 
 
 from apps.shop.serializers import BasketSerializer
-from apps.shop.models import BasketModel, GoodsModel
+from apps.shop.models import BasketModel, ProductsModel
 
 from core import IsActive
 
@@ -25,7 +25,7 @@ class BasketAddView(APIView):
         
 
         try:
-            catalog_amount = GoodsModel.objects.get(id=basket.product_id)
+            catalog_amount = ProductsModel.objects.get(id=basket.product_id)
             if catalog_amount.amount == 0:
                 return HttpResponseRedirect ("/404_error/")
                 # template = loader.get_template("catalog/error_not_product.html")

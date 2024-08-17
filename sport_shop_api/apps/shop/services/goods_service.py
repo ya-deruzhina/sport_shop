@@ -1,9 +1,9 @@
-from ..models import GoodsModel
+from ..models import ProductsModel
 from ..serializers import CatalogSerializer
 
 
 class GoodsService:
-    model = GoodsModel
+    model = ProductsModel
 
     @classmethod
     def create(cls, data):

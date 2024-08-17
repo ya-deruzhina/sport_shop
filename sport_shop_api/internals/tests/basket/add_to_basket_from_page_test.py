@@ -1,7 +1,7 @@
 from rest_framework.test import APIRequestFactory, APITestCase
 from rest_framework.test import force_authenticate
 
-from apps.shop.models import BasketModel, GoodsModel
+from apps.shop.models import BasketModel, ProductsModel
 from apps.users.models import User
 from apps.shop.views import BasketView
 
@@ -17,9 +17,9 @@ class BasketAddFromPageTestCase(APITestCase):
         product_id = basket[0].product.id
         basket_id = basket[0].id
         basket_count_first = basket.get(id = basket_id).count
-        amount = GoodsModel.objects.exclude(amount = 0)[0]
+        amount = ProductsModel.objects.exclude(amount = 0)[0]
         amount_id = amount.id
-        first_amount = GoodsModel.objects.get(id=amount_id).amount
+        first_amount = ProductsModel.objects.get(id=amount_id).amount
 
         request = APIRequestFactory().post('/api/v1/basket/')
         force_authenticate(request, user=user)
@@ -34,7 +34,7 @@ class BasketAddFromPageTestCase(APITestCase):
         self.assertEqual(item['information']['product'], product_id)
 
         assert (basket_count_first + 1 == basket.count)
-        assert (first_amount - 1) == GoodsModel.objects.get(id=amount_id).amount 
+        assert (first_amount - 1) == ProductsModel.objects.get(id=amount_id).amount 
 
     def test_add_basket_false_id_post(self):
         user = User.objects.all()[0]

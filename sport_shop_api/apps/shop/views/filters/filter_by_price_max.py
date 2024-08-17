@@ -1,9 +1,9 @@
-from apps.shop.models import GoodsModel
+from apps.shop.models import ProductsModel
 from apps.shop.serializers import CatalogSerializer
 
 from rest_framework import viewsets
 from rest_framework import generics
 
 class FilterPriceMaxView(generics.ListCreateAPIView):
-    queryset = GoodsModel.objects.all().order_by('-price')
+    queryset = ProductsModel.objects.all().order_by('-price')
     serializer_class = CatalogSerializer

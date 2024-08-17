@@ -1,4 +1,4 @@
-from apps.shop.models import GoodsModel, BasketModel
+from apps.shop.models import ProductsModel, BasketModel
 from apps.users.models import User
 from apps.shop.services import BasketService
 import random
@@ -13,7 +13,7 @@ def get_basket_params(user, product):
 
 def perform(*args, **kwargs):
     user = User.objects.all()
-    product = GoodsModel.objects.all()
+    product = ProductsModel.objects.all()
     if len(BasketModel.objects.all()) == 0:
         for i in user:
             for m in product:

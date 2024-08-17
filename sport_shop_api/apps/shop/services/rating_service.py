@@ -1,9 +1,9 @@
-from ..models import RatingOfGoodsModel
+from ..models import RatingOfProductsModel
 from ..serializers import RatingSerializer
 
 
 class RatingService:
-    model = RatingOfGoodsModel
+    model = RatingOfProductsModel
 
     @classmethod
     def create(cls, data):

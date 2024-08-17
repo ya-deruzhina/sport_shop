@@ -4,9 +4,8 @@ from django.http import HttpResponse,HttpResponseRedirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from apps.shop.models import BasketModel, GoodsModel
+from apps.shop.models import BasketModel, ProductsModel
 from apps.shop.serializers import BasketSerializer
-from apps.shop.forms import CreateOrderForm
 
 from core import IsActive
 
@@ -38,16 +37,6 @@ class BasketView(APIView):
         basket_with_price['system'] = {'all_price': (round(all_price,2))}
 
         keys = basket_with_price.keys()
-    #     context = {
-    #         "basket_with_price":basket_with_price,
-    #         "form":CreateOrderForm(),
-    #         "keys":keys,
-    #         "all_price": all_price,
-    #     }
-        
-    #     template = loader.get_template("basket/basket.html")
-
-        # return HttpResponse(template.render(context,request))
         return Response (basket_with_price)
         # return Response ({"information":"OK"})  
 
@@ -76,7 +65,7 @@ class BasketView(APIView):
             serializer = BasketSerializer(instance=users_with_product)
 
         try:
-            catalog_amount = GoodsModel.objects.get(id=product_id)
+            catalog_amount = ProductsModel.objects.get(id=product_id)
             if catalog_amount.amount == 0:
                 return HttpResponseRedirect ("/api/v1/404_error/")
                 # template = loader.get_template("catalog/error_not_pizza.html")

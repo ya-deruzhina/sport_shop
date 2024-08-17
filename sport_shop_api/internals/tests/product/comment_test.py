@@ -3,7 +3,7 @@ from apps.users.models import User
 from apps.shop.views import CommentView
 from rest_framework import status
 from rest_framework.test import force_authenticate
-from apps.shop.models import GoodsModel, CommentOfGoodsModel
+from apps.shop.models import ProductsModel, CommentOfProductsModel
 
 from django.urls import reverse
 from internals.tests.index import Index
@@ -15,7 +15,7 @@ class CommentViewTestCase(APITestCase):
 
     def test_comment_view_post(self):
         user = User.objects.all()[0]
-        product = GoodsModel.objects.all()[0]
+        product = ProductsModel.objects.all()[0]
         data = {"comment":"comment"}
         request = APIRequestFactory().post('api/v1/comment/',data)
         force_authenticate(request, user=user)
@@ -23,7 +23,7 @@ class CommentViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        comment_by_product = CommentOfGoodsModel.objects.filter(product_id = product.id).order_by('-id')[0]
+        comment_by_product = CommentOfProductsModel.objects.filter(product_id = product.id).order_by('-id')[0]
     
         assert comment_by_product.comment == data['comment']
         assert comment_by_product.product == product
@@ -39,7 +39,7 @@ class CommentViewTestCase(APITestCase):
 
     def test_comment_false_comment_view_post(self):
         user = User.objects.all()[0]
-        product_id = GoodsModel.objects.all()[0].id
+        product_id = ProductsModel.objects.all()[0].id
         request = APIRequestFactory().post('api/v1/comment/')
         force_authenticate(request, user=user)
         response = CommentView.as_view()(request,product_id  = product_id)

@@ -1,8 +1,7 @@
 from django.template import loader
 from django.http import HttpResponse,HttpResponseRedirect
 
-from apps.shop.models import GoodsModel,CommentOfGoodsModel,RatingOfGoodsModel
-from apps.shop.forms import CommentForm, RatingForm
+from apps.shop.models import ProductsModel,CommentOfProductsModel,RatingOfProductsModel
 from apps.shop.serializers import CatalogSerializer, CommentSerializer
 
 from rest_framework.views import APIView
@@ -13,9 +12,9 @@ class ProductView(APIView):
     def get (self,request,product_id):
         try:
             # import pdb; pdb.set_trace()
-            product = GoodsModel.objects.get(id=product_id)
-            comment_filter = CommentOfGoodsModel.objects.filter(product=product_id).order_by('id')
-            rating_filter = RatingOfGoodsModel.objects.filter(product=product_id)
+            product = ProductsModel.objects.get(id=product_id)
+            comment_filter = CommentOfProductsModel.objects.filter(product=product_id).order_by('id')
+            rating_filter = RatingOfProductsModel.objects.filter(product=product_id)
 
             serializer = CatalogSerializer(instance=product).data
 

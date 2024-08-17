@@ -4,7 +4,7 @@ from django.db import transaction
 from django.core.mail import send_mail
 
 from apps.users.models import User
-from apps.shop.models import GoodsModel,BasketModel,OrderModel, ProductInOrder,PickUpModel
+from apps.shop.models import ProductsModel,BasketModel,OrderModel, ProductInOrder,PickUpModel
 from apps.shop.serializers import OrderSerializer,OrderProductSerializer
 
 from rest_framework.views import APIView
@@ -52,7 +52,7 @@ class OrderView(APIView):
             basket = BasketModel.objects.filter(user=id_user)
             if len(basket) == 0:
                 return HttpResponseRedirect ("/api/v1/404_error/")
-            catalog = GoodsModel.objects.all()
+            catalog = ProductsModel.objects.all()
             price_all = 0
             n=1
             data_product = {}

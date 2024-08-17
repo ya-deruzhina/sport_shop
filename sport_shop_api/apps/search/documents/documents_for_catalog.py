@@ -1,7 +1,7 @@
 from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
 
-from apps.shop.models import GoodsModel
+from apps.shop.models import ProductsModel
 
 
 @registry.register_document
@@ -31,7 +31,7 @@ class CatalogDocument(Document):
         }
 
     class Django:
-        model = GoodsModel
+        model = ProductsModel
         fields = [
             'name',
             'description',

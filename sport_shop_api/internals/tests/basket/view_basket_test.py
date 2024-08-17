@@ -1,5 +1,5 @@
 from rest_framework.test import APIRequestFactory, APITestCase
-from apps.shop.models import BasketModel, GoodsModel
+from apps.shop.models import BasketModel
 from apps.users.models import User 
 from apps.shop.views import BasketView
 from rest_framework import status
