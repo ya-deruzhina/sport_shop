@@ -34,7 +34,7 @@ class OneOrdersUserView(APIView):
                     "comment": order.comment,
                     "name": order.name, 
                     "email": order.email,
-                    "pick_up_point": order.pick_up_point.adres,
+                    "pick_up_point": order.pick_up_point.address,
                     "date_of_pick_up": order.date_of_pick_up,
                     "time_of_pick_up": order.time_of_pick_up,
                     "all_price":all_price,

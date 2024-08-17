@@ -34,7 +34,7 @@ class OrdersUserView(APIView):
                 order_time = orders.order_time.strftime("%H:%M:%S - %d.%m.%Y ")
                 product = {
                     "order_time": order_time,
-                    "pick_up_point": orders.pick_up_point.adres,
+                    "pick_up_point": orders.pick_up_point.address,
                     "date_of_pick_up" : orders.date_of_pick_up,
                     "time_of_pick_up" : orders.time_of_pick_up,
                     "all_price":all_price,

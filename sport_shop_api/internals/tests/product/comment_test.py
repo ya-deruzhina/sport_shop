@@ -37,21 +37,21 @@ class CommentViewTestCase(APITestCase):
 
 
 
-    # def test_comment_false_comment_view_post(self):
-    #     user = User.objects.all()[0]
-    #     product_id = GoodsModel.objects.all()[0].id
-    #     request = APIRequestFactory().post('api/v1/comment/')
-    #     force_authenticate(request, user=user)
-    #     response = CommentView.as_view()(request,product_id  = product_id)
-    #     assert response.status_code == 302
+    def test_comment_false_comment_view_post(self):
+        user = User.objects.all()[0]
+        product_id = GoodsModel.objects.all()[0].id
+        request = APIRequestFactory().post('api/v1/comment/')
+        force_authenticate(request, user=user)
+        response = CommentView.as_view()(request,product_id  = product_id)
+        assert response.status_code == 302
         
 
-    # def test_comment_false_product_id_view_post(self):
-    #     user = User.objects.all()[0]
-    #     product_id = 999999999999999999999
-    #     data = {"comment":"comment"}
-    #     request = APIRequestFactory().post('api/v1/comment/',data)
-    #     force_authenticate(request, user=user)
-    #     response = CommentView.as_view()(request,product_id = product_id)
+    def test_comment_false_product_id_view_post(self):
+        user = User.objects.all()[0]
+        product_id = 999999999999999999999
+        data = {"comment":"comment"}
+        request = APIRequestFactory().post('api/v1/comment/',data)
+        force_authenticate(request, user=user)
+        response = CommentView.as_view()(request,product_id = product_id)
 
-    #     assert response.status_code == 302
+        assert response.status_code == 302
