@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from apps.shop.models import BasketModel, ProductsModel
 from apps.shop.serializers import BasketSerializer
+from apps.shop.views.basket.basket_servese import BaskerServiseView
 
 from core import IsActive
 
@@ -14,31 +15,14 @@ from core import IsActive
 
 class BasketView(APIView):
     permission_classes = (IsActive,)
+    
     # Page of Basket
-
     def get(self,request, **kwargs):
         id_user = request.user.id
         user_basket = BasketModel.objects.filter(user_id=id_user).order_by('product_id')
-        basket_with_price = {}
-        all_price = 0
+        basket_with_price = BaskerServiseView.basket_service(user_basket)
 
-        for basket in range (0,len(user_basket)):
-            baskets ={}
-            baskets['product'] = user_basket[basket].product.name
-            baskets['count'] = user_basket[basket].count
-            baskets['price_one'] = user_basket[basket].product.price
-
-            baskets['price'] = round((baskets['count'] * baskets['price_one']),2)
-            all_price += baskets['price']
-                                    
-            baskets['id'] = user_basket[basket].id
-            basket_with_price[basket] = baskets
-        
-        basket_with_price['system'] = {'all_price': (round(all_price,2))}
-
-        keys = basket_with_price.keys()
         return Response (basket_with_price)
-        # return Response ({"information":"OK"})  
 
     
     # Add Product to Basket
@@ -68,8 +52,6 @@ class BasketView(APIView):
             catalog_amount = ProductsModel.objects.get(id=product_id)
             if catalog_amount.amount == 0:
                 return HttpResponseRedirect ("/api/v1/404_error/")
-                # template = loader.get_template("catalog/error_not_pizza.html")
-                # return HttpResponse(template.render())
             else:
                 catalog_amount.amount -= 1
                 catalog_amount.save()

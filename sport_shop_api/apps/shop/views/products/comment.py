@@ -21,5 +21,4 @@ class CommentView(APIView):
         
         else:
             serializer.save()
-            # return HttpResponseRedirect ("")
-            return Response ({"information":serializer.data})
+            return HttpResponseRedirect (f"/api/v1/product/{product_id}/")
