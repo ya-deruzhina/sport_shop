@@ -1,9 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.db import transaction
-# from django.core.mail import send_mail
 from sport_shop_api.tasks import send_message_task
 
-from apps.users.models import User
 from apps.shop.models import ProductsModel,BasketModel,OrderModel
 from apps.shop.serializers import OrderSerializer,OrderProductSerializer
 from apps.shop.views.order.order_service import OrderServiseView
@@ -103,11 +101,5 @@ class OrderView(APIView):
 
             # Sent message
             send_message_task.delay(order_number)
-            # send_mail(
-            #     f'Order {order_number}',
-            #     'Thank you for your order',
-            #     'admin@admin.ru',
-            #     ["user@user.ru"],
-            # )
 
         return HttpResponseRedirect ("/api/v1/order/")

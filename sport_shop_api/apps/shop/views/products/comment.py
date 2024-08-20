@@ -4,7 +4,6 @@ from core import IsActive
 from apps.shop.serializers import CommentSerializer
 
 from rest_framework.views import APIView
-from rest_framework.response import Response  
   
 
 class CommentView(APIView):

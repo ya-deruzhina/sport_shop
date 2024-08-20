@@ -20,7 +20,7 @@
             },
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/LeavedComment"
+                    "$ref": "#/components/responses/OneProduct"
                 },
                 "400": {
                     "description": "Returned when request body is not valid",

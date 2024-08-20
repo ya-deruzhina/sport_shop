@@ -8,7 +8,6 @@ class CatalogSerializer(serializers.ModelSerializer):
         model = ProductsModel
         category = CategorySerializer()
         subcategory = SubCategorySerializer()
-        # fields = ['name','description','price','amount','category','subcategory']
         fields ='__all__'
                 
         def create(self, validated_data):

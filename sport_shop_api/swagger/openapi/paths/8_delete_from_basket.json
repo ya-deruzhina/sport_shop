@@ -17,7 +17,7 @@
               ],
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/DeleteFromBasket"
+                    "$ref": "#/components/responses/Basket"
                 },
                 "302": {
                     "$ref": "#/components/responses/Basket"

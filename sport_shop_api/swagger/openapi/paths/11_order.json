@@ -10,7 +10,7 @@
             },
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/OrderAfterCreate"
+                    "$ref": "#/components/responses/OneOrder"
                 },
                 "400": {
                     "description": "Returned when request body is not valid",
@@ -58,7 +58,7 @@
             ],
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/OrderAfterCreate"
+                    "$ref": "#/components/responses/OneOrder"
                 },
                 "401": {
                     "description": "Returned after sending invalid set of credentials",

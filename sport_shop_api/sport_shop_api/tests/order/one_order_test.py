@@ -4,7 +4,7 @@ from apps.users.models import User
 from apps.shop.views import OneOrdersUserView
 from rest_framework.test import force_authenticate
 
-from internals.tests.index import Index
+from sport_shop_api.tests.index import Index
 
 # Test for One Order (get)
 class OneOrderTestCase(APITestCase):

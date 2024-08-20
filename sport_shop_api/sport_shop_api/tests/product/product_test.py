@@ -9,7 +9,7 @@ from django.urls import reverse
 from unittest import mock
 import pytest
 
-from internals.tests.index import Index
+from sport_shop_api.tests.index import Index
 
 # Test for ProductView (get)
 class ProductViewTestCase(APITestCase):

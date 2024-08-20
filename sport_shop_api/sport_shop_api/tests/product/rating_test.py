@@ -7,7 +7,7 @@ from apps.shop.models import ProductsModel, RatingOfProductsModel
 
 from django.urls import reverse
 
-from internals.tests.index import Index    
+from sport_shop_api.tests.index import Index    
 
 # Test for RatingView by user+product (post)
 class RatingViewTestCase(APITestCase):

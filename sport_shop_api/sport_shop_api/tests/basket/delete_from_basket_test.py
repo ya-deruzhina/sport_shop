@@ -5,7 +5,7 @@ from apps.shop.models import BasketModel, ProductsModel
 from apps.users.models import User
 from apps.shop.views import BasketDeleteView
 
-from internals.tests.index import Index
+from sport_shop_api.tests.index import Index
 
 class BasketDeleteViewTestCase(APITestCase):
     Index()

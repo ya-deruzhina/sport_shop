@@ -1,25 +1,36 @@
-from django.urls import path
+from django.urls import path,re_path
 from apps.shop.views import *
 from apps.search.views import * 
 
-from django.urls import path
 
 
 
 urlpatterns = [
 
     # Search
-    path('catalog/search_name/<str:query>/', SearchNameView.as_view()),
-    path('catalog/search_category/<str:query>/', SearchCategoryView.as_view()),
-    path('catalog/search_subcategory/<str:query>/', SearchSubCategoryView.as_view()),
-    path('catalog/search_description/<str:query>/',SearchDescriptionView.as_view()),    
-    path('catalog/search_by_amount_over/<int:query>/',FilterAmountOverView.as_view()),
-    path('catalog/search_by_amount_less/<int:query>/',FilterAmountLessView.as_view()),
-    path('catalog/search_by_price/from_min/',FilterPriceMinView.as_view()),
-    path('catalog/search_by_price/from_max/',FilterPriceMaxView.as_view()),
+    # Search by price and amount work in path catalog/?
+    #         max_price = 10
+    #         min_price = 10
+    #         price_from_min
+    #         price_from_max
+
+    #         max_amount = 10
+    #         min_amount = 10
+    #         amount_from_min
+    #         amount_from_max
+
+    # Search by params work in path catalog/<str:query>/? query==search
+    #         a complete match
+    #         category
+    #         name
+    #         subcategory
+            
+    #         partial match
+    #         description 
+    path('catalog/<str:query>/', SearchView.as_view()),
+    path("catalog/",CatalogListView.as_view()),
 
     # Product
-    path("catalog/",CatalogListView.as_view()),
     path("product/<int:product_id>/",ProductView.as_view()),
     path("product/comment/<int:product_id>/",CommentView.as_view()),
     path("product/rating/<int:product_id>/",RatingView.as_view()),

@@ -6,7 +6,7 @@ from rest_framework.test import force_authenticate
 from apps.shop.models import ProductsModel, CommentOfProductsModel
 
 from django.urls import reverse
-from internals.tests.index import Index
+from sport_shop_api.tests.index import Index
 
 # Test for CommentViewы by user+product (post)
 class CommentViewTestCase(APITestCase):

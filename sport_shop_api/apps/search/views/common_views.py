@@ -22,13 +22,10 @@ class PaginatedElasticSearchAPIView(APIView, LimitOffsetPagination):
             response = search.execute()
 
             print(f'Found {response.hits.total.value} hit(s) for query: "{query}"')
-            # import pdb; pdb.set_trace()
 
             results = self.paginate_queryset(response, request, view=self)
-            # import pdb; pdb.set_trace()
             serializer = self.serializer_class(results, many=True)
-            # serializer = self.serializer_class([item.dict() for item in results], many=True)
-            # import pdb; pdb.set_trace()
+
             return self.get_paginated_response(serializer.data)
         except Exception as e:
             return HttpResponse(e, status=500)

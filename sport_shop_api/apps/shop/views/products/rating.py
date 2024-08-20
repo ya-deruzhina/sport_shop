@@ -4,8 +4,7 @@ from core import IsActive
 from apps.shop.serializers import RatingSerializer
 from apps.shop.models import RatingOfProductsModel
 
-from rest_framework.views import APIView
-from rest_framework.response import Response      
+from rest_framework.views import APIView  
 
 
 class RatingView(APIView):
@@ -13,6 +12,7 @@ class RatingView(APIView):
     # leave a mark (rating)
     def post(self,request, product_id):
         all_ratings = RatingOfProductsModel.objects.filter(author=request.user.id,product=product_id)
+
         if len(all_ratings) == 0:
             try:
                 data = {"author":request.user.id, "product":product_id,"rating":(request.data['rating'])}
@@ -25,6 +25,7 @@ class RatingView(APIView):
             else:
                 serializer.save()
                 return HttpResponseRedirect (f"/api/v1/product/{product_id}/")
+            
         else:
             rating_new = RatingOfProductsModel.objects.get(author=request.user.id,product=product_id)
             rating_new.rating = request.data['rating']
