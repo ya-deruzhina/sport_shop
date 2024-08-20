@@ -3,30 +3,7 @@ from apps.shop.views import *
 from apps.search.views import * 
 
 
-
-
 urlpatterns = [
-
-    # Search
-    # Search by price and amount work in path catalog/?
-    #         max_price = 10
-    #         min_price = 10
-    #         price_from_min
-    #         price_from_max
-
-    #         max_amount = 10
-    #         min_amount = 10
-    #         amount_from_min
-    #         amount_from_max
-
-    # Search by params work in path catalog/<str:query>/? query==search
-    #         a complete match
-    #         category
-    #         name
-    #         subcategory
-            
-    #         partial match
-    #         description 
     path('catalog/<str:query>/', SearchView.as_view()),
     path("catalog/",CatalogListView.as_view()),
 
