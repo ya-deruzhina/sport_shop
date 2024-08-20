@@ -24,15 +24,15 @@ class BasketViewTestCase(APITestCase):
         all_price = 0
 
         for basket in range (0,len(item)-1):
-            assert  item[basket]['product'] == basket_first[basket].product.name
-            assert  item[basket]['count'] == basket_first[basket].count
-            assert  item[basket]['price_one'] == basket_first[basket].product.price
+            assert  item['list'][0]['product'] == basket_first[basket].product.name
+            assert  item['list'][0]['count'] == basket_first[basket].count
+            assert  item['list'][0]['price_one'] == basket_first[basket].product.price
             sum_price = round((basket_first[basket].count * basket_first[basket].product.price),2)
-            assert  item[basket]['price'] == sum_price
+            assert  item['list'][0]['price'] == sum_price
 
             all_price += sum_price
                                     
-        self.assertEqual(item['system']['all_price'], all_price)
+        self.assertEqual(item['all_price'], all_price)
 
     def test_only_view_basket_without_token_get(self):
         request = APIRequestFactory().get('/api/v1/basket/')

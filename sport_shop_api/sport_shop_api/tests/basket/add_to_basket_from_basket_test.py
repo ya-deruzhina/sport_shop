@@ -3,7 +3,7 @@ from rest_framework.test import force_authenticate
 
 from apps.shop.models import BasketModel, ProductsModel
 from apps.users.models import User
-from apps.shop.views import BasketAddView
+from apps.shop.views import BasketView
 
 from sport_shop_api.tests.index import Index
 
@@ -23,16 +23,11 @@ class BasketAddFromBasketTestCase(APITestCase):
 
         request = APIRequestFactory().post('/api/v1/basket/add/')
         force_authenticate(request, user=user)
-        response = BasketAddView.as_view()(request,basket_id = basket_id)
+        response = BasketView.as_view()(request,basket_id = basket_id)
 
-        assert response.status_code == 200
+        assert response.status_code == 302
         basket = BasketModel.objects.get(id = basket_id)
     
-        item = response.data
-
-        self.assertEqual(item['information']['user'], basket.user.id)
-        self.assertEqual(item['information']['product'], basket.product.id)
-
         assert (basket_count_first + 1 == basket.count)
         assert (first_amount - 1) == ProductsModel.objects.get(id=amount_id).amount 
 
@@ -42,5 +37,5 @@ class BasketAddFromBasketTestCase(APITestCase):
 
         request = APIRequestFactory().post('/api/v1/basket/add/')
         force_authenticate(request, user=user)
-        response = BasketAddView.as_view()(request,basket_id = basket_id)
+        response = BasketView.as_view()(request,basket_id = basket_id)
         assert response.status_code == 302

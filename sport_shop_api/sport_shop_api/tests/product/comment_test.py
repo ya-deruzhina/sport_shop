@@ -21,20 +21,13 @@ class CommentViewTestCase(APITestCase):
         force_authenticate(request, user=user)
         response = CommentView.as_view()(request,product_id = product.id)
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
         comment_by_product = CommentOfProductsModel.objects.filter(product_id = product.id).order_by('-id')[0]
     
         assert comment_by_product.comment == data['comment']
         assert comment_by_product.product == product
         assert comment_by_product.author == user
-
-        item = response.data
-
-        self.assertEqual(item['information']['author'], comment_by_product.author.id)
-        self.assertEqual(item['information']['comment'], comment_by_product.comment)
-        self.assertEqual(item['information']['product'], comment_by_product.product.id)
-
 
 
     def test_comment_false_comment_view_post(self):

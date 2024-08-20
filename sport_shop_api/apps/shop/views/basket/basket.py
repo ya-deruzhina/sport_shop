@@ -24,7 +24,10 @@ class BasketView(APIView):
     def post (self, request, ** kwargs):
         user_id = request.user.id
         if 'basket_id' in kwargs.keys():
-            product_id = BasketModel.objects.get(id=kwargs['basket_id']).product.id
+            try:
+                product_id = BasketModel.objects.get(id=kwargs['basket_id']).product.id
+            except:
+                return HttpResponseRedirect ("/api/v1/404_error/")
         else:
             product_id = kwargs['product_id']
 

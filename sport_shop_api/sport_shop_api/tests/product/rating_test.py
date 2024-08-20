@@ -22,19 +22,14 @@ class RatingViewTestCase(APITestCase):
         force_authenticate(request, user=user)
         response = RatingView.as_view()(request,product_id = product.id)
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
-        rating_by_product = RatingOfProductsModel.objects.filter(product_id = product.id).order_by('-id')[0]
-    
+        rating_by_product = RatingOfProductsModel.objects.filter(product_id = product.id).filter(author_id = user.id).order_by('-id')[0]
+
         assert rating_by_product.rating == data['rating']
         assert rating_by_product.product == product
         assert rating_by_product.author == user
 
-        item = response.data
-
-        self.assertEqual(item['information']['author'], rating_by_product.author.id)
-        self.assertEqual(item['information']['rating'], rating_by_product.rating)
-        self.assertEqual(item['information']['product'], rating_by_product.product.id)
 
 
 

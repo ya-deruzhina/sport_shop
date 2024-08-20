@@ -25,14 +25,14 @@ class ProductViewTestCase(APITestCase):
         item = response.data
         assert response.status_code == 200
 
-        self.assertEqual(item['information']['id'], product_id)
-        self.assertEqual(item['information']['name'], product.name)
-        self.assertEqual(item['information']['description'], product.description)
-        self.assertEqual(float(item['information']['price']), float(product.price))
+        self.assertEqual(item['id'], product_id)
+        self.assertEqual(item['name'], product.name)
+        self.assertEqual(item['description'], product.description)
+        self.assertEqual(float(item['price']), float(product.price))
         
 
-        assert item['system']['comment'] != None
-        assert item['system']['rating'] != None
+        assert item['comment'] != None
+        assert item['rating'] != None
 
 
     def test_product_false_view_get(self):

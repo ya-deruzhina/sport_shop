@@ -24,13 +24,8 @@ class BasketDeleteViewTestCase(APITestCase):
         force_authenticate(request, user=user)
         response = BasketDeleteView.as_view()(request,basket_id = basket_id)
 
-        assert response.status_code == 200
+        assert response.status_code == 302
         basket = BasketModel.objects.get(id = basket_id)
-    
-        item = response.data
-
-        self.assertEqual(item['information']['user'], basket.user.id)
-        self.assertEqual(item['information']['product'], basket.product.id)
 
         assert (basket_count_first - 1 == basket.count)
         assert (first_amount + 1) == ProductsModel.objects.get(id=amount_id).amount 

@@ -27,7 +27,11 @@ class RatingView(APIView):
                 return HttpResponseRedirect (f"/api/v1/product/{product_id}/")
             
         else:
-            rating_new = RatingOfProductsModel.objects.get(author=request.user.id,product=product_id)
-            rating_new.rating = request.data['rating']
-            rating_new.save()
-            return HttpResponseRedirect (f"/api/v1/product/{product_id}/")
+            try:
+                rating_new = RatingOfProductsModel.objects.get(author=request.user.id,product=product_id)
+                rating_new.rating = request.data['rating']
+                rating_new.save()
+            except:
+                return HttpResponseRedirect ("/api/v1/404_error/")
+            else:
+                return HttpResponseRedirect (f"/api/v1/product/{product_id}/")

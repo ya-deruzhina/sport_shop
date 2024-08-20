@@ -29,4 +29,4 @@ class OneOrderTestCase(APITestCase):
         request = APIRequestFactory().get('/api/v1/order/')
         force_authenticate(request, user=user)
         response = OneOrdersUserView.as_view()(request,order_id = order_id)
-        assert response.status_code == 302
+        assert response.data.status_code== 302
