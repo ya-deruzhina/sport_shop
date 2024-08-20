@@ -1,11 +1,12 @@
-from django.http import HttpResponse,HttpResponseRedirect
-from django.template import loader
+from django.http import HttpResponseRedirect
 from django.db import transaction
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
+from sport_shop_api.tasks import send_message_task
 
 from apps.users.models import User
-from apps.shop.models import ProductsModel,BasketModel,OrderModel, ProductInOrder,PickUpModel
+from apps.shop.models import ProductsModel,BasketModel,OrderModel
 from apps.shop.serializers import OrderSerializer,OrderProductSerializer
+from apps.shop.views.order.order_service import OrderServiseView
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,31 +17,18 @@ from core import IsActive
 class OrderView(APIView):
     permission_classes = (IsActive,)
 
-
     # Order's page after ordering
     def get(self,request):
         try: 
             order_number = OrderModel.objects.filter(user=request.user.id).order_by('-order_time')[0].id
-            order_inf = OrderSerializer(instance=OrderModel.objects.get(id=order_number)).data
-            product_in_order = []
-            products = ProductInOrder.objects.filter(order=order_number)
-            for order in range (0,len(products)):
-                # product_in_order[products[order].id] = OrderProductSerializer(instance=products[order]).data
-                product_in_order.append(OrderProductSerializer(instance=products[order]).data)
 
         except:
             return HttpResponseRedirect ("/api/v1/404_error/")
 
         else:
-            # template = loader.get_template("order/order.html")
-            context = {
-                "Your order Send": (f'Order Number {order_number}'),
-                "order_inf":order_inf,
-                "product":product_in_order
-            }
+            product = OrderServiseView.one_order(order_number)
 
-            # return HttpResponse(template.render(context,request))
-            return Response (context)
+            return Response (product)
 
 
     # Forming an Order
@@ -65,7 +53,7 @@ class OrderView(APIView):
                 data_product[n] = {'count':product.count, 'product':product.product_id,'price_one':price_one}           
                 n+=1
 
-            # ! Getting client's information            
+            # Getting client's information            
             try:
                 user = request.user.username
                 email = request.user.email
@@ -73,7 +61,6 @@ class OrderView(APIView):
                 pick_up_point =  request.POST.get('pick_up_point')
                 date_of_pick_up =  request.POST.get('date_of_pick_up')
                 time_of_pick_up = request.POST.get('time_of_pick_up')
-                # import pdb; pdb.set_trace()
                 if len(OrderModel.objects.filter(pick_up_point = pick_up_point,date_of_pick_up=date_of_pick_up,time_of_pick_up=time_of_pick_up)) <= 4:
                     data_client = {
                         "user":id_user, 
@@ -95,7 +82,6 @@ class OrderView(APIView):
             else:
                 serializer.save()
 
-
             # Recording Product to ProductInOrder
                 order_number = OrderModel.objects.filter(user=id_user).order_by('-order_time')[0].id
                 for a in data_product.keys():
@@ -114,11 +100,14 @@ class OrderView(APIView):
 
              # Deleting basket
             basket.delete()
+
             # Sent message
-            send_mail(
-                f'Order {order_number}',
-                'Thank you for your order',
-                'moya_powta@list.ru',
-                ["moya_powta@list.ru"],
-            )                
+            send_message_task.delay(order_number)
+            # send_mail(
+            #     f'Order {order_number}',
+            #     'Thank you for your order',
+            #     'admin@admin.ru',
+            #     ["user@user.ru"],
+            # )
+
         return HttpResponseRedirect ("/api/v1/order/")

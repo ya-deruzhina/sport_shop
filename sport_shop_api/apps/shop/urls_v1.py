@@ -27,7 +27,7 @@ urlpatterns = [
     # Basket
     path("basket/",BasketView.as_view()),
     path("basket/<int:product_id>/",BasketView.as_view()),
-    path("basket/add/<int:basket_id>/",BasketAddView.as_view()),
+    path("basket/add/<int:basket_id>/",BasketView.as_view()),
     path("basket/delete/<int:basket_id>/",BasketDeleteView.as_view()),
 
     # Order

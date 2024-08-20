@@ -1,4 +1,3 @@
-from apps.shop.views.basket.add_to_basket import BasketAddView
 from apps.shop.views.basket.basket import BasketView
 from apps.shop.views.basket.delete_from_basket import BasketDeleteView
 from apps.shop.views.order.history_of_orders_api import OrdersUserView
@@ -16,7 +15,6 @@ from apps.shop.views.filters.filter_amount_over import FilterAmountOverView
 
 
 all= (
-    "BasketAddView",
     "BasketView",
     "BasketDeleteView",
     "OrdersUserView",

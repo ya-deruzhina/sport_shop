@@ -1,5 +1,5 @@
 """
-ASGI config for internals project.
+ASGI config for sport_shop_api project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

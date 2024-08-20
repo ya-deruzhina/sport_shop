@@ -1,5 +1,5 @@
 """
-WSGI config for internals project.
+WSGI config for sport_shop_api project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

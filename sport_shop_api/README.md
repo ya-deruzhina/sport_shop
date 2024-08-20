@@ -15,7 +15,7 @@ The Swagger docs will be accessible on the `/doc` endpoint
 To log in use credentials from `seeds/admins.py`
 9. Run Python Console (IPython) by typing `pipenv run shell`. Main classes will be imported.
 10. To use the applicatin in production use gunicorn with Uvicorn. Example of the command:
-`pipenv run gunicorn internals.wsgi --workers 4 --bind 0.0.0.0:8003`
+`pipenv run gunicorn sport_shop_api.wsgi --workers 4 --bind 0.0.0.0:8003`
 
 ## How to work with Django Views
 1. Create any route at any hierarchy level inside `apps` folder.
@@ -70,3 +70,4 @@ docker exec -it {{id_container}} pipenv run python manage.py seed all
 sudo /etc/init.d/postgresql stop
 sudo /etc/init.d/redis-server stop
 
+(sport_shop_api) marina@marina:~/study/itexus/sport_shop/sport_shop_api$ celery -A sport_shop_api worker -l INFO

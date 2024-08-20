@@ -1,11 +1,11 @@
 """
-Django settings for internals project.
+Django settings for sport_shop_api project.
 """
 
 import datetime
 import os
 from pathlib import Path
-from dotenv import load_dotenv,find_dotenv
+from dotenv import load_dotenv
 load_dotenv()
 
 
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     # Project apps
     'apps.users',
     'apps.shop',
-    'internals',
+    'sport_shop_api',
 
     # Admin
     'smart_selects',
@@ -76,10 +76,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'internals.middlewares.RequestResponseLoggingMiddleWare',
+    'sport_shop_api.middlewares.RequestResponseLoggingMiddleWare'
 ]
 
-ROOT_URLCONF = 'internals.urls'
+ROOT_URLCONF = 'sport_shop_api.urls'
 
 TEMPLATES = [
     {
@@ -97,7 +97,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'internals.wsgi.application'
+WSGI_APPLICATION = 'sport_shop_api.wsgi.application'
 
 
 # Database
@@ -130,6 +130,13 @@ CELERY_DEFAULT_EXCHANGE = os.getenv('CELERY_DEFAULT_QUEUE')
 CELERY_DEFAULT_ROUTING_KEY = os.getenv('CELERY_DEFAULT_QUEUE')
 CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True
+
+
+REDIS_URL = os.getenv('REDIS_URL')
+REDIS_HOST = os.getenv('REDIS_HOST')
+REDIS_PORT = os.getenv('REDIS_PORT')
+REDIS_DB = os.getenv('REDIS_DB')
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -243,7 +250,8 @@ SERVER_TIMEZONE = pytz.UTC
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
     }
 }
 
