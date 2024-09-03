@@ -14,8 +14,3 @@ RUN pip install pipenv
 
 COPY . /code
 RUN pipenv install 
-
-# RUN chmod a+x /code/entrypoint.sh
-# ENTRYPOINT ["/bin/sh", "/code/entrypoint.sh"]
-
-# ENTRYPOINT ["/bin/sh", "-c", "tail -f /dev/null"]
