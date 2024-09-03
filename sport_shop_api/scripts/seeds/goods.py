@@ -25,5 +25,6 @@ def perform(*args, **kwargs):
         for i in subcategory:
             if not ProductsModel.objects.filter(category = i.id_parent.id, subcategory = i.id).exists():
                 GoodsService.create(get_goods_params(i.id_parent.id, i.id))
-
+        for n in range (0,10):
+            GoodsService.create(get_goods_params(1,1))
       

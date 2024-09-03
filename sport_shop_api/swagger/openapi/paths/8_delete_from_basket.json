@@ -19,9 +19,6 @@
                 "200": {
                     "$ref": "#/components/responses/Basket"
                 },
-                "302": {
-                    "$ref": "#/components/responses/Basket"
-                },
                 "400": {
                     "description": "Returned when request body is not valid",
                     "content": {

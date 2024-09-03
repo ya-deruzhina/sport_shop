@@ -200,7 +200,8 @@ ELASTICSEARCH_INDEX_NAMES = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': os.getenv('ELASTIC_HOST')
+        'hosts': os.getenv('ELASTIC_HOST'),
+        'port':os.getenv('ELASTIC_PORT')
     },
 }
 

@@ -72,8 +72,3 @@ class OrderAdmin(admin.ModelAdmin):
     date_hierarchy = 'order_time'
     list_display = ["user","order_time","pick_up_point","date_of_pick_up","time_of_pick_up","comment"]
     list_filter = ["user__username","pick_up_point__address","date_of_pick_up","time_of_pick_up"]
-
-
-@admin.register(SubCategoryModel)
-class SubCategoryAdmin(admin.ModelAdmin):
-    model = SubCategoryModel

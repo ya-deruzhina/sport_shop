@@ -1,19 +1,12 @@
 {
-    "/api/v1/catalog/{query}/": {
+    "/api/v1/catalog/search/": {
         "get": {
             "description": "Show products",
             "tags": [
                 "Catalog"
             ],
             "parameters": [
-                {
-                  "name": "query",
-                  "in": "path",
-                  "description": "search",
-                  "schema": {
-                    "type": "string"
-                  }
-                },
+
                 {
                     "name": "category",
                     "in": "query",
