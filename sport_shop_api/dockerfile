@@ -14,10 +14,8 @@ RUN pip install pipenv
 
 COPY . /code
 RUN pipenv install 
-# && pipenv run python manage.py migrate && pipenv run seed all
 
-# COPY . /code
+# RUN chmod a+x /code/entrypoint.sh
+# ENTRYPOINT ["/bin/sh", "/code/entrypoint.sh"]
 
-RUN chmod a+x /code/entrypoint.sh
-ENTRYPOINT ["/bin/sh", "/code/entrypoint.sh"]
 # ENTRYPOINT ["/bin/sh", "-c", "tail -f /dev/null"]

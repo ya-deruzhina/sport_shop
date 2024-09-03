@@ -4,7 +4,6 @@
 
 # environment variables
 .env
-.env.example
 
 # celery beat schedule file
 celerybeat-schedule

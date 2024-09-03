@@ -53,7 +53,8 @@ to avoid duplication in database
 # !!! After installing in Docker use next command in Docker Container
 1. pipenv run python manage.py makemigrations
 2. pipenv run python manage.py migrate
-3. pipenv run python manage.py seed all
+3. pipenv run seed all
+
 
 ## Or you can use command line in terminal
 1. docker exec -it {{id_container}} pipenv run python manage.py makemigrations

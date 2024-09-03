@@ -7,6 +7,7 @@ def send_message_task (order_number):
     send_mail(
                 f'Order {order_number}',
                 'Thank you for your order',
-                'admin@admin.ru',
-                ["user@user.ru"],
+                'moya_powta@list.ru',
+                ["moya_powta@list.ru"],
             )
+    print('Message Sent')

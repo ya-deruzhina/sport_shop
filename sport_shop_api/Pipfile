@@ -27,6 +27,7 @@ pytest_elasticsearch ="*"
 faker = "*"
 drf-spectacular = "*"
 django-redis ="*"
+redis-cli="*"
 
 [dev-packages]
 pre-commit = "*"
