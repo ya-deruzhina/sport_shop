@@ -1,0 +1,43 @@
+{
+    "/api/v1/order/{order_id}/": {
+        "get": {
+            "description": "Show one order",
+            "tags": [
+                "Order"
+            ],
+            "parameters": [
+                {
+                  "name": "order_id",
+                  "in": "path",
+                  "description": "Id of the order",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                    "$ref": "#/components/responses/OneOrder"
+                },
+                "400": {
+                    "description": "Returned when request body is not valid",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "errors": "404"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+} 

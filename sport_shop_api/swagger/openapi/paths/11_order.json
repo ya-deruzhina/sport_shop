@@ -1,0 +1,55 @@
+{
+    "/api/v1/order/": {
+        "post": {
+            "description": "Create Order",
+            "tags": [
+                "Order"
+            ],
+            "requestBody": {
+                "$ref": "#/components/requestBodies/OrderRequestBody"
+            },
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/OneOrder"
+                },
+                "400": {
+                    "description": "Returned when request body is not valid",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "errors":"404"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Returned after sending invalid set of credentials",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "detail": [
+                                                "Authentication credentials were not provided."
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+{
+    "/api/v1/catalog/": {
+        "get": {
+            "description": "Show products",
+            "tags": [
+                "Catalog"
+            ],
+            "parameters": [
+                {
+                  "name": "max_price",
+                  "in": "query",
+                  "schema": {
+                    "type": "integer"
+                  }
+                },
+                {
+                    "name": "min_price",
+                    "in": "query",
+                    "schema": {
+                      "type": "integer"
+                    }
+                },
+                {
+                    "name": "max_amount",
+                    "in": "query",
+                    "schema": {
+                      "type": "integer"
+                    }
+                },
+                {
+                    "name": "min_amount",
+                    "in": "query",
+                    "schema": {
+                      "type": "integer"
+                    }
+                },
+                {
+                    "name": "price_from_min",
+                    "in": "query",
+                    "schema": {
+                      "type": "str"
+                    }
+                  },
+                  {
+                      "name": "price_from_max",
+                      "in": "query",
+                      "schema": {
+                        "type": "str"
+                      }
+                  },
+                  {
+                      "name": "amount_from_min",
+                      "in": "query",
+                      "schema": {
+                        "type": "str"
+                      }
+                  },
+                  {
+                      "name": "amount_from_max",
+                      "in": "query",
+                      "schema": {
+                        "type": "str"
+                      }
+                  }
+              ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/Catalog"
+                }
+            }
+        }
+    }
+
+}

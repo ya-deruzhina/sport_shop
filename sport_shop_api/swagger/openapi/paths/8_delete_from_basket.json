@@ -1,0 +1,43 @@
+{
+    "/api/v1/basket/delete/{basket_id}/": {
+        "get": {
+            "description": "Delete from Basket",
+            "tags": [
+                "Basket"
+            ],
+            "parameters": [
+                {
+                  "name": "basket_id",
+                  "in": "path",
+                  "description": "Id of the Basket",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/Basket"
+                },
+                "400": {
+                    "description": "Returned when request body is not valid",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "errors": "404"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

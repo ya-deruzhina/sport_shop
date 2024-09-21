@@ -1,0 +1,88 @@
+version: '3.10'
+
+services:
+    postgres:
+        container_name: PostgreSQL
+        image: postgres
+        environment:
+            - POSTGRES_PASSWORD=Mariwa3886920
+            - POSTGRES_USER=postgres
+        volumes:
+            - postgres:/code/postgres
+        
+        build: ./postgreSQL
+        
+        ports:
+            - 5432:5432
+        networks:
+              - djangonetwork
+        restart: unless-stopped
+
+    redis:
+        container_name: Redis
+        image: redis:alpine 
+        restart: always
+        ports:
+            - 6379:6379
+        networks:
+              - djangonetwork
+
+    web:
+        container_name: Django
+        build:  ./sport_shop_api
+        restart: always
+        volumes:
+            - postgres:/code/postgres
+        command: bash -c "pipenv run python manage.py migrate && pipenv run python manage.py runserver 0.0.0.0:8000"
+        ports:
+            - 8000:8000
+        depends_on:
+            - postgres
+            - elasticsearch
+            - redis   
+        networks:
+              - djangonetwork  
+    
+    celery:
+        container_name: Celery
+        build:  ./sport_shop_api
+        command: "pipenv run celery -A sport_shop_api worker -l INFO"
+        depends_on:
+            - web
+            - redis
+            - postgres
+        restart: on-failure
+        networks:
+            - djangonetwork
+            
+    elasticsearch:
+        image: elasticsearch:7.16.1
+        container_name: es
+        environment:
+            discovery.type: single-node
+            ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+        ports:
+        - 9200:9200
+        networks:
+            - djangonetwork
+        depends_on:
+            - redis
+        restart: unless-stopped
+    
+    
+    kibana:
+        image: kibana:7.16.1
+        container_name: kib
+        ports:
+        - "5601:5601"
+        depends_on:
+        - elasticsearch
+        networks:
+        - djangonetwork
+
+networks:
+      djangonetwork:
+          driver: bridge
+
+volumes:
+    postgres:

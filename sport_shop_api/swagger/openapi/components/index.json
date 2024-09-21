@@ -1,0 +1,568 @@
+{
+  "responses": {    
+    "UnauthorizedResponse": {
+      "description": "Returned after making request with invalid credentials",
+      "content": {
+        "application/json": {
+          "schema": {
+            "example": {
+              "errors": {
+                "detail": [
+                  "Authentication credentials were not provided"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "SuccessfulSignInResponse": {
+      "description": "Successful sign in",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Successful authentication response body",
+            "properties": {
+              "user": {
+                "$ref": "#components/schemas/User"
+              },
+              "token": {
+                "$ref": "#components/schemas/Token"
+              }
+            }
+          }
+        }
+      }
+    },
+    "OneProduct":{
+      "description": "Page of one product",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "description": "Page of one product",
+              "properties": {
+                "id": {
+                "type": "integer",
+                "example": "1"},
+              "name":{
+                "type":"string",
+                "example":"Perry"},
+              "description": {
+                "type": "integer",
+                "example": "Yes employee far answer so respond campaign."},
+              "price": {
+                "type":"float",
+                "example":"10,00"},
+              "amount": {
+                "type":"integer",
+                "example":"10"},
+              "category": {
+                "type":"integer",
+                "example":"1"},
+              "subcategory": {
+                "type":"integer",
+                "example":"1"},
+              "comment": {
+                "type": "array",
+                "items": {"$ref": "#components/schemas/QueryComment"}},
+              "rating": {
+                "type":"integer",
+                "example":"1"}
+            }          
+          }
+        }
+      }
+    },
+    "Basket":{
+      "description": "Page of Basket",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+                "description": "Page of Basket",
+                  "properties": {
+                    "list": {
+                      "type": "array",
+                      "items": {"$ref": "#components/schemas/Basket"}
+                    },
+                    "price_all": {
+                      "type":"float",
+                      "example":"10,00"}           
+                  }
+                }
+              }
+            }
+          },
+    "OneOrder":{
+      "description": "Page of Order",
+      "content": {
+        "application/json": {
+        "schema": {
+          "type": "object",
+          "description": "Page of Order",
+          "properties": {
+            "order_number": {
+              "type": "integer",
+              "example": "1"
+              },
+            "order_time": {
+              "type": "string",
+              "example": "15:47:28 - 07.07.2024 "
+              },
+            "comment": {
+              "type": "string",
+              "example": "comment"
+              },
+            "name": {
+              "type": "string",
+              "example": "admin"
+              },
+            "email": {
+              "type": "string",
+              "example": "admin@admin.admin"
+              },
+            "pick_up_point": {
+              "type": "string",
+              "example": "Minsk"
+              },
+            "date_of_pick_up": {
+              "type": "string",
+              "example": "2024-07-10"
+              },
+            "time_of_pick_up": {
+              "type": "string",
+              "example": "9.00-10.00"
+              },
+            "all_price": {
+              "type": "float",
+              "example": "10.5"
+              },
+            "product": {
+              "type": "array",
+              "items": {"$ref": "#components/schemas/ProductInOrder"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "AllOrders":{
+      "description": "Page of All Orders",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Page of All Orders",
+            "properties": {
+              "count": {
+                "type":"integer",
+                "example":"3"},
+              "next":{
+                "type":"string",
+                "example":"null"},
+              "previous": {
+                "type":"string",
+                "example":"null"},
+              "results": {
+                "type": "array",
+                "items": {"$ref": "#components/schemas/QuerySetsOrder"}
+              }         
+            }
+          }
+        }
+      }
+    },
+    "Catalog":{
+      "description": "Page of All Products",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "description": "Page of All Products",
+            "properties": {
+              "count": {
+                "type":"integer",
+                "example":"2"},
+              "next":{
+                "type":"string",
+                "example":"null"},
+              "previous": {
+                "type":"string",
+                "example":"null"},
+              "results": {
+                "type": "array",
+                "items": {"$ref": "#components/schemas/QuerySetsProducts"}
+              }         
+            }
+          }
+        }
+      }
+    }                             
+  },
+
+  "requestBodies": {
+    "AuthRequestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "identity": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          },
+          "examples": {
+            "test@user.com": {
+              "summary": "An example of a user",
+              "value": {
+                "identity": "admin",
+                "password": "admin"
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "CommentRequestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "comment": {
+                "type": "string"
+              }
+            }
+          },
+          "examples": {
+            "product_1": {
+              "summary": "An example of a comment",
+              "value": {
+                "comment": "comment"
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "RatingRequestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "rating": {
+                "type": "integer"
+              }
+            }
+          },
+          "examples": {
+            "product_1": {
+              "summary": "An example of a rating",
+              "value": {
+                "rating": 5
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "OrderRequestBody": {
+      "content": {
+        "multipart/form-data": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "comment": {
+                "type": "string",
+                "example": "comment"
+              },
+              "pick_up_point": {
+                "type": "integer",
+                "example": "1"
+              },
+              "date_of_pick_up": {
+                "type": "string",
+                "example": "2024-07-01"
+              },
+              "time_of_pick_up": {
+                "type": "string",
+                "example": "10.00-11.00"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "schemas": {
+    "Token": {
+      "description": "Token model",
+      "type": "object",
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "Bearer <token>"
+        }
+      }
+    },
+
+    "User": {
+      "description": "User model",
+      "type": "object",
+      "required": [
+        "email",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "123"
+        },
+        "email": {
+          "type": "string",
+          "example": "test@user.com"
+        },
+        "first_name": {
+          "type": "string",
+          "example": "Jack"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "London"
+        },
+        "status": {
+          "type": "string",
+          "example": "active"
+        }
+      }
+    },
+
+    "QueryComment": {
+      "anyOf":[
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Comment"
+          },
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Comment"
+        }
+      ]
+    },
+
+    "Comment": {
+      "description": "Comment model",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "author": {
+          "type": "integer",
+          "example": "1"
+        },
+        "product": {
+          "type": "integer",
+          "example": "1"
+        },
+        "comment": {
+          "type": "string",
+          "example": "comment"
+        },
+         "time_comment": {
+          "type": "string",
+          "example": "2024-08-17T18:18:12.411338Z"}
+      }
+    },
+
+    "Basket": {
+      "description": "Basket",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "product": {
+          "type": "string",
+          "example": "Test"
+        },
+        "count": {
+          "type": "integer",
+          "example": "1"
+        },
+        "price_one": {
+          "type": "float",
+          "example": "31,5"
+        },
+        "price": {
+          "type": "float",
+          "example": "31,5"
+        },
+        "id": {
+          "type": "integer",
+          "example": "1"
+        }
+      }
+    },
+
+    "ProductInOrder":{
+      "description": "One Product in Order",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "product": {
+          "type": "string",
+          "example": "Product"},
+        "count":{
+          "type":"integer",
+          "example":"2"}
+      }
+    },
+
+    "Order": {
+      "description": "Orders",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "1"
+        },
+        "user": {
+          "type": "integer",
+          "example": "1"
+        },
+        "name": {
+          "type": "string",
+          "example": "admin"
+        },
+        "email": {
+          "type": "string",
+          "example": "admin@admin.admin"
+        },
+        "comment": {
+          "type": "string",
+          "example": "comment"
+        },
+        "pick_up_point": {
+          "type": "integer",
+          "example": "1"
+        },
+        "date_of_pick_up": {
+          "type": "string",
+          "example": "2024-07-10"
+        },
+        "time_of_pick_up": {
+          "type": "integer",
+          "example": "13.00-14.00"
+        },
+        "total_money": {
+          "type": "float",
+          "example": "10.50"
+        }
+      }
+    },
+
+    "QuerySetsProducts": {
+      "anyOf":[
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Products"
+          },
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Products"
+        }
+      ]
+    },
+
+    "Products": {
+      "description": "Products model",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "1"
+        },
+        "name": {
+          "type": "string",
+          "example": "First"
+        },
+        "description": {
+          "type": "string",
+          "example": "New"
+        },
+        "price": {
+          "type": "string",
+          "example": "10.50"
+        },
+        "amount": {
+          "type": "integer",
+          "example": "1"
+        },
+        "category": {
+          "$ref": "#components/schemas/Category"},         
+        "subcategory": {
+          "$ref": "#components/schemas/SubCategory"}
+        
+      }
+    },
+
+    "Category": {
+      "description": "Information about Category",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "category": {
+          "type": "string",
+          "example": "Category"}
+      }
+    },
+
+    "SubCategory": {
+      "description": "Information about SubCategory",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "subcategory": {
+          "type": "string",
+          "example": "SubCategory"}
+      }
+    },
+
+    "QuerySetsOrder": {
+      "anyOf":[
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Order"
+        },
+        {
+          "type": "array",
+          "$ref": "#components/schemas/Order"
+        }
+      ]
+    }
+  },
+
+    "securitySchemes": {
+      "BearerScheme": {
+        "type": "http",
+        "description": "Enter your JWT token",
+        "scheme": "bearer",
+        "bearerFormat": "Bearer"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+stages:
+  - deploy
+
+.deploy:
+  script:
+    - rsync -atvrzOP --exclude ".gitlab-ci.yml" --delete --delete-after --ignore-errors ./ $PROJECT_PATH/
+    - echo "$ENV_VARS" > "$PROJECT_PATH/.env"
+    - $VENV_PATH/bin/pip install -r requirements.txt
+    - $VENV_PATH/bin/python3.8 manage.py collectstatic --no-input
+    - $VENV_PATH/bin/python3.8 manage.py migrate
+  after_script:
+    - service gunicorn restart
+    - service nginx reload
+    - service gunicorn status
+
+deploy_QA:
+  extends: .deploy
+  stage: deploy
+  before_script:
+    - export PROJECT_PATH=$QA_PROJECT_PATH
+    - export ENV_VARS=$QA_ENV
+  only:
+    refs:
+      - dev
+  tags:
+    - app-qa-internal
+
+deploy_DEV:
+  extends: .deploy
+  stage: deploy
+  before_script:
+    - export PROJECT_PATH=$DEV_PROJECT_PATH
+    - export ENV_VARS=$DEV_ENV
+  only:
+    refs:
+      - dev
+  tags:
+    - app-dev-internal
