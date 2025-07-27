@@ -1,6 +1,6 @@
-# Django REST API Sport Shop
+# Django REST API
 
-## How to install and run (without Docker)
+## How to install and run
 
 1. Clone the repository
 2. Install requirements with dev requirements via pipenv `pipenv install --dev`. Use
@@ -11,7 +11,11 @@
 6. Run seeds `pipenv run seed all`
 7. Run API (FastAPI) server by typing `pipenv run server`
 The Swagger docs will be accessible on the `/doc` endpoint
-
+8. Run Admin Panel (Flask Admin) server by typing `pipenv run admin`
+To log in use credentials from `seeds/admins.py`
+9. Run Python Console (IPython) by typing `pipenv run shell`. Main classes will be imported.
+10. To use the applicatin in production use gunicorn with Uvicorn. Example of the command:
+`pipenv run gunicorn internals.wsgi --workers 4 --bind 0.0.0.0:8003`
 
 ## How to work with Django Views
 1. Create any route at any hierarchy level inside `apps` folder.
@@ -29,9 +33,11 @@ More details are in `swagger/swagger_json_builder.py` file.
 
 
 ## Seeds
+
 "admins" - inits database with default admin.
 
 ### Introduction
+
 Seeds are data initialization for models such as `<Model name>`, and etc.
 Sctipts are one time scripts
 
@@ -40,47 +46,27 @@ Sctipts are one time scripts
 3. Add filename into `script_names` in `scripts/run_seeds.py` or `scripts/run_script.py` file
 
 ### Usage
+
 1. Run script via `pipenv run seed seed_name` / `pipenv run script <args>`
 2. To run all seeds `pipenv run seed all`. Scripts has some params thus scipts can be run only by one
 
 ### !IMPORTANT
+
 Try to write yout script by using methods `get_or_create` or similar
 to avoid duplication in database
 
 #### Provided seeds
+
 - admin - create admin user. NOTE: Don't forget to change admin password after running.
-
-# !!! After installing in Docker use next command in Docker Container
-1. pipenv run python manage.py makemigrations
-2. pipenv run python manage.py migrate
-3. pipenv run seed all
+# sport_shop
 
 
-## Or you can use command line in terminal
-1. docker exec -it {{id_container}} pipenv run python manage.py makemigrations
-2. docker exec -it {{id_container}} pipenv run python manage.py migrate
-3. docker exec -it {{id_container}} pipenv run python manage.py seed all
+
+docker exec -it {{id_container}} pipenv run python manage.py makemigrations
+docker exec -it {{id_container}} pipenv run python manage.py migrate
+docker exec -it {{id_container}} pipenv run python manage.py seed all
 
 
-# Search in Project
-## class Generics
-### Search by price and amount work in path catalog/?
-1. max_price = 10
-2. min_price = 10
-3. price_from_min
-4. price_from_max
+sudo /etc/init.d/postgresql stop
+sudo /etc/init.d/redis-server stop
 
-5. max_amount = 10
-6. min_amount = 10
-7. amount_from_min
-8. amount_from_max
-
-## Elasticsearch
-### Search by params work in path catalog/<str:query>/? query==search
-#### a complete match
-1. category = Neq
-2. name = New
-3. subcategory = New 
-            
-#### partial match
-4. description = New

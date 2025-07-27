@@ -17,7 +17,7 @@
               ],
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/Basket"
+                    "$ref": "#/components/responses/AddToBasketFromBasket"
                 },
                 "400": {
                     "description": "Returned when request body is not valid",

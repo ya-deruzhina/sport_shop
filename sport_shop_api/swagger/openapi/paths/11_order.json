@@ -10,7 +10,7 @@
             },
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/OneOrder"
+                    "$ref": "#/components/responses/OrderAfterCreate"
                 },
                 "400": {
                     "description": "Returned when request body is not valid",
@@ -28,6 +28,37 @@
                             }
                         }
                     }
+                },
+                "401": {
+                    "description": "Returned after sending invalid set of credentials",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "errors": {
+                                        "type": "object",
+                                        "example": {
+                                            "detail": [
+                                                "Authentication credentials were not provided."
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        },
+        "get": {
+            "description": "View Order after Create",
+            "tags": [
+                "Shop"
+            ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/OrderAfterCreate"
                 },
                 "401": {
                     "description": "Returned after sending invalid set of credentials",

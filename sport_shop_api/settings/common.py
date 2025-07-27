@@ -1,11 +1,11 @@
 """
-Django settings for sport_shop_api project.
+Django settings for internals project.
 """
 
 import datetime
 import os
 from pathlib import Path
-from dotenv import load_dotenv
+from dotenv import load_dotenv,find_dotenv
 load_dotenv()
 
 
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     # Project apps
     'apps.users',
     'apps.shop',
-    'sport_shop_api',
+    'internals',
 
     # Admin
     'smart_selects',
@@ -76,10 +76,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'sport_shop_api.middlewares.RequestResponseLoggingMiddleWare'
+    'internals.middlewares.RequestResponseLoggingMiddleWare',
 ]
 
-ROOT_URLCONF = 'sport_shop_api.urls'
+ROOT_URLCONF = 'internals.urls'
 
 TEMPLATES = [
     {
@@ -97,7 +97,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sport_shop_api.wsgi.application'
+WSGI_APPLICATION = 'internals.wsgi.application'
 
 
 # Database
@@ -130,28 +130,17 @@ CELERY_DEFAULT_EXCHANGE = os.getenv('CELERY_DEFAULT_QUEUE')
 CELERY_DEFAULT_ROUTING_KEY = os.getenv('CELERY_DEFAULT_QUEUE')
 CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-CELERY_RESULT_BACKEND=os.getenv('CELERY_RESULT_BACKEND')
-
-
-REDIS_URL = os.getenv('REDIS_URL')
-REDIS_HOST = os.getenv('REDIS_HOST')
-REDIS_PORT = os.getenv('REDIS_PORT')
-REDIS_DB = os.getenv('REDIS_DB')
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # MailCatcher
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = os.getenv('EMAIL_PORT')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+EMAIL_HOST = '127.0.0.1'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
 
-DEFAULT_FROM_EMAIL  = os.getenv('DEFAULT_FROM_EMAIL')
-
-
+DEFAULT_FROM_EMAIL  = 'moya_powta@list.ru'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -200,8 +189,7 @@ ELASTICSEARCH_INDEX_NAMES = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': os.getenv('ELASTIC_HOST'),
-        'port':os.getenv('ELASTIC_PORT')
+        'hosts': 'localhost:9200'
     },
 }
 
@@ -255,8 +243,7 @@ SERVER_TIMEZONE = pytz.UTC
 
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
 

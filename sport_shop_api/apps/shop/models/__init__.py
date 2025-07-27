@@ -1,22 +1,21 @@
 from apps.shop.models.basket import BasketModel
-from apps.shop.models.comment import CommentOfProductsModel
-from apps.shop.models.products import ProductsModel
+from apps.shop.models.comment import CommentOfGoodsModel
+from apps.shop.models.goods import GoodsModel
 from apps.shop.models.order import OrderModel
 from apps.shop.models.pick_up_point import PickUpModel
 from apps.shop.models.product_in_order import ProductInOrder
-from apps.shop.models.rating import RatingOfProductsModel
-from apps.shop.models.category import CategoryModel
-from apps.shop.models.subcategory import SubCategoryModel
+from apps.shop.models.rating import RatingOfGoodsModel
+from apps.shop.models.category import CategoryModel, SubCategoryModel
 
 
 all= (
     'BasketModel',
-    'CommentOfProductsModel',
-    'ProductsModel',
+    'CommentOfGoodsModel',
+    'GoodsModel',
     'OrderModel',
     'PickUpModel',
     'ProductInOrder',
-    'RatingOfProductsModel',
+    'RatingOfGoodsModel',
     'CategoryModel', 
     'SubCategoryModel',
 )

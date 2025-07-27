@@ -1,5 +1,5 @@
 {
-  "responses": {    
+  "responses": {
     "UnauthorizedResponse": {
       "description": "Returned after making request with invalid credentials",
       "content": {
@@ -35,7 +35,7 @@
         }
       }
     },
-    "OneProduct":{
+    "OneProductCommon":{
       "description": "Page of one product",
         "content": {
           "application/json": {
@@ -43,165 +43,191 @@
               "type": "object",
               "description": "Page of one product",
               "properties": {
-                "id": {
-                "type": "integer",
-                "example": "1"},
-              "name":{
-                "type":"string",
-                "example":"Perry"},
-              "description": {
-                "type": "integer",
-                "example": "Yes employee far answer so respond campaign."},
-              "price": {
-                "type":"float",
-                "example":"10,00"},
-              "amount": {
-                "type":"integer",
-                "example":"10"},
-              "category": {
-                "type":"integer",
-                "example":"1"},
-              "subcategory": {
-                "type":"integer",
-                "example":"1"},
-              "comment": {
-                "type": "array",
-                "items": {"$ref": "#components/schemas/QueryComment"}},
-              "rating": {
-                "type":"integer",
-                "example":"1"}
-            }          
+                "information": {
+                  "$ref": "#components/schemas/Products"
+                },
+                "system": {
+                  "$ref": "#components/schemas/System"
+                }             
+              }
+            }
           }
         }
-      }
-    },
-    "Basket":{
-      "description": "Page of Basket",
+      },
+    "LeavedComment":{
+      "description": "For leaving Comment",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
-                "description": "Page of Basket",
+              "description": "For leaving Comment",
+              "properties": {
+                "information": {
+                  "$ref": "#components/schemas/Comment"
+                }            
+              }
+            }
+          }
+        }
+      },
+      "LeavedRating":{
+        "description": "For leaving Rating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "For leaving Rating",
+                "properties": {
+                  "information": {
+                    "$ref": "#components/schemas/Rating"
+                  }            
+                }
+              }
+            }
+          }
+        },
+        "AddToBasketFromBasket":{
+          "description": "Add To Basket From Basket",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Add To Basket From Basket",
                   "properties": {
-                    "list": {
-                      "type": "array",
-                      "items": {"$ref": "#components/schemas/Basket"}
-                    },
-                    "price_all": {
-                      "type":"float",
-                      "example":"10,00"}           
+                    "information": {
+                      "$ref": "#components/schemas/BasketView"
+                    }            
                   }
                 }
               }
             }
           },
-    "OneOrder":{
-      "description": "Page of Order",
-      "content": {
-        "application/json": {
-        "schema": {
-          "type": "object",
-          "description": "Page of Order",
-          "properties": {
-            "order_number": {
-              "type": "integer",
-              "example": "1"
-              },
-            "order_time": {
-              "type": "string",
-              "example": "15:47:28 - 07.07.2024 "
-              },
-            "comment": {
-              "type": "string",
-              "example": "comment"
-              },
-            "name": {
-              "type": "string",
-              "example": "admin"
-              },
-            "email": {
-              "type": "string",
-              "example": "admin@admin.admin"
-              },
-            "pick_up_point": {
-              "type": "string",
-              "example": "Minsk"
-              },
-            "date_of_pick_up": {
-              "type": "string",
-              "example": "2024-07-10"
-              },
-            "time_of_pick_up": {
-              "type": "string",
-              "example": "9.00-10.00"
-              },
-            "all_price": {
-              "type": "float",
-              "example": "10.5"
-              },
-            "product": {
-              "type": "array",
-              "items": {"$ref": "#components/schemas/ProductInOrder"}
+          "DeleteFromBasket":{
+            "description": "Delete From Basket",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "description": "Delete From Basket",
+                    "properties": {
+                      "information": {
+                        "$ref": "#components/schemas/BasketView"
+                      }            
+                    }
+                  }
+                }
               }
-            }
-          }
-        }
-      }
-    },
-    "AllOrders":{
-      "description": "Page of All Orders",
-      "content": {
-        "application/json": {
-          "schema": {
-            "type": "object",
-            "description": "Page of All Orders",
-            "properties": {
-              "count": {
-                "type":"integer",
-                "example":"3"},
-              "next":{
-                "type":"string",
-                "example":"null"},
-              "previous": {
-                "type":"string",
-                "example":"null"},
-              "results": {
-                "type": "array",
-                "items": {"$ref": "#components/schemas/QuerySetsOrder"}
-              }         
-            }
-          }
-        }
-      }
-    },
-    "Catalog":{
-      "description": "Page of All Products",
-      "content": {
-        "application/json": {
-          "schema": {
-            "type": "object",
-            "description": "Page of All Products",
-            "properties": {
-              "count": {
-                "type":"integer",
-                "example":"2"},
-              "next":{
-                "type":"string",
-                "example":"null"},
-              "previous": {
-                "type":"string",
-                "example":"null"},
-              "results": {
-                "type": "array",
-                "items": {"$ref": "#components/schemas/QuerySetsProducts"}
-              }         
-            }
-          }
-        }
-      }
-    }                             
+            },
+            "AddToBasketFromPage":{
+              "description": "Add To Basket From Page",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "description": "Add To Basket From Page",
+                      "properties": {
+                        "information": {
+                          "$ref": "#components/schemas/BasketView"
+                        }            
+                      }
+                    }
+                  }
+                }
+              },
+              "Basket":{
+                "description": "Page of Basket",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "description": "Page of Basket",
+                        "properties": {
+                          "0": {
+                            "$ref": "#components/schemas/Basket"
+                          },
+                          "system": {
+                            "$ref": "#components/schemas/PriceAll"
+                          }             
+                        }
+                      }
+                    }
+                  }
+                },
+                "Order":{
+                  "description": "Create of Order",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "description": "Create of Order",
+                          "properties": {
+                            "system": {
+                              "$ref": "#components/schemas/PriceAll"
+                            }             
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "OrderAfterCreate":{
+                    "description": "Page After Order",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "type": "object",
+                            "description": "Page After Order",
+                            "properties": {
+                              "Your order Send": {
+                                "type": "string",
+                                "example": "Order Number 62"
+                              },
+                              "order_inf": {
+                                "$ref": "#components/schemas/OrderProduct"
+                              },
+                              "product": {
+                                  "type": "array",
+                                  "items": {"$ref": "#components/schemas/QuerySetsProductsInOrder"
+                                  }
+                                }             
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "OneOrder":{
+                      "description": "Page of Order",
+                        "content": {
+                          "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "description": "Page of Order",
+                              "properties": {
+                                "product": {
+                                  "$ref": "#components/schemas/OrderInf"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                    "AllOrders":{
+                        "description": "Page of All Orders",
+                          "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "description": "Page of All Orders",
+                                "properties": {
+                                  "orders": {
+                                    "$ref": "#components/schemas/OrderInfInAll"
+                                  }         
+                                }
+                              }
+                            }
+                          }
+                        }
   },
-
+                           
   "requestBodies": {
     "AuthRequestBody": {
       "content": {
@@ -229,7 +255,6 @@
         }
       }
     },
-
     "CommentRequestBody": {
       "content": {
         "application/json": {
@@ -252,7 +277,6 @@
         }
       }
     },
-
     "RatingRequestBody": {
       "content": {
         "application/json": {
@@ -275,7 +299,6 @@
         }
       }
     },
-
     "OrderRequestBody": {
       "content": {
         "multipart/form-data": {
@@ -303,8 +326,8 @@
         }
       }
     }
-  },
 
+  },
   "schemas": {
     "Token": {
       "description": "Token model",
@@ -319,7 +342,6 @@
         }
       }
     },
-
     "User": {
       "description": "User model",
       "type": "object",
@@ -350,20 +372,109 @@
         }
       }
     },
-
-    "QueryComment": {
-      "anyOf":[
-        {
-          "type": "array",
-          "$ref": "#components/schemas/Comment"
-          },
-        {
-          "type": "array",
-          "$ref": "#components/schemas/Comment"
+    "ProductsInfo": {
+      "description": "Information about Products",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "1": 
+        {"type": "array",
+        "items": {"$ref": "#components/schemas/Products"}
+        },
+        "2": 
+        {"type": "array",
+        "items": {"$ref": "#components/schemas/Products"}
         }
-      ]
+      }
+    },
+    "Products": {
+      "description": "Products model",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "1"
+        },
+        "name": {
+          "type": "string",
+          "example": "weight"
+        },
+        "description": {
+          "type": "string",
+          "example": "10 kg"
+        },
+        "price": {
+          "type": "string",
+          "example": "10.50"
+        },
+        "amount": {
+          "type": "integer",
+          "example": "1"
+        },
+        "category": {
+              "$ref": "#components/schemas/InformationCategory"
+          },         
+        "subcategory": {
+          "$ref": "#components/schemas/InformationSubCategory"
+        }
+      }
+    },
+    "InformationCategory": {
+      "description": "Information about Category",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "category": {
+          "type": "string",
+          "example": "Category"
+        }
+      }
+    },
+    "InformationSubCategory": {
+      "description": "Information about SubCategory",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "subcategory": {
+          "type": "string",
+          "example": "Subcategory"
+        }
+      }
     },
 
+    "System": {
+      "description": "User model",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "comment": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/InformationComment"}
+        },
+        "rating": {
+          "type": "string",
+          "example": "No Rating"
+        }
+      }
+    },
+    "InformationComment": {
+      "description": "Information about Comment",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "1": 
+        {"type": "array",
+        "items": {"$ref": "#components/schemas/Comment"}
+        },
+        "2": 
+        {"type": "array",
+        "items": {"$ref": "#components/schemas/Comment"}
+        }
+      }
+    },
     "Comment": {
       "description": "Comment model",
       "type": "object",
@@ -380,13 +491,50 @@
         "comment": {
           "type": "string",
           "example": "comment"
-        },
-         "time_comment": {
-          "type": "string",
-          "example": "2024-08-17T18:18:12.411338Z"}
+        }
       }
     },
-
+    "Rating": {
+      "description": "Rating model",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "author": {
+          "type": "integer",
+          "example": "1"
+        },
+        "product": {
+          "type": "integer",
+          "example": "1"
+        },
+        "rating": {
+          "type": "integer",
+          "example": "5"
+        }
+      }
+    },
+    "BasketView": {
+      "description": "Basket View",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "1"
+        },"user": {
+          "type": "integer",
+          "example": "1"
+        },
+        "product": {
+          "type": "integer",
+          "example": "1"
+        },
+        "count": {
+          "type": "integer",
+          "example": "2"
+        }
+      }
+    },
     "Basket": {
       "description": "Basket",
       "type": "object",
@@ -402,11 +550,11 @@
         },
         "price_one": {
           "type": "float",
-          "example": "31,5"
+          "example": "31.5"
         },
         "price": {
           "type": "float",
-          "example": "31,5"
+          "example": "31.5"
         },
         "id": {
           "type": "integer",
@@ -415,29 +563,23 @@
       }
     },
 
-    "ProductInOrder":{
-      "description": "One Product in Order",
+    "PriceAll": {
+      "description": "Price of Order",
       "type": "object",
       "required": [],
       "properties": {
-        "product": {
-          "type": "string",
-          "example": "Product"},
-        "count":{
-          "type":"integer",
-          "example":"2"}
+        "all_price": {
+          "type": "float",
+          "example": "10.5"
+        }
       }
     },
-
-    "Order": {
-      "description": "Orders",
+    
+    "OrderProduct": {
+      "description": "Order",
       "type": "object",
       "required": [],
       "properties": {
-        "id": {
-          "type": "integer",
-          "example": "1"
-        },
         "user": {
           "type": "integer",
           "example": "1"
@@ -468,101 +610,209 @@
         },
         "total_money": {
           "type": "float",
-          "example": "10.50"
+          "example": "10.5"
         }
       }
     },
-
-    "QuerySetsProducts": {
-      "anyOf":[
-        {
-          "type": "array",
-          "$ref": "#components/schemas/Products"
+      "Product": {
+        "description": "Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
           },
-        {
-          "type": "array",
+          "order": {
+            "type": "integer",
+            "example": "1"
+          },
+          "product": {
+            "type": "integer",
+            "example": "1"
+          },
+          "count": {
+            "type": "integer",
+            "example": "1"
+          },
+          "price_one": {
+            "type": "float",
+            "example": "10.5"
+          }
+        }
+      },
+      "OrderInf": {
+        "description": "Information about Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "order_time": {
+            "type": "string",
+            "example": "15:47:28 - 07.07.2024 "
+          },
+          "comment": {
+            "type": "string",
+            "example": "comment"
+          },
+          "name": {
+            "type": "string",
+            "example": "admin"
+          },
+          "email": {
+            "type": "string",
+            "example": "admin@admin.admin"
+          },
+          "pick_up_point": {
+            "type": "string",
+            "example": "Minsk"
+          },
+          "date_of_pick_up": {
+            "type": "string",
+            "example": "2024-07-10"
+          },
+          "time_of_pick_up": {
+            "type": "string",
+            "example": "9.00-10.00"
+          },
+          "all_price": {
+            "type": "float",
+            "example": "10.5"
+          }
+        }
+      },
+      "ProductInOrder": {
+        "description": "Product In Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "0": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/ProductInfoInOrder"}
+          }           
+        }
+      },
+      "ProductInfoInOrder": {
+        "description": "Information about Product in Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "product": {
+            "type": "string",
+            "example": "Test"
+          },
+          "count": {
+            "type": "integer",
+            "example": "1"
+          }
+        }
+      },
+      "OrderInfInAll": {
+        "description": "I",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "0": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/InformationAboutOrder"}
+          },
+          "1": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/InformationAboutOrder"}
+          },
+          "2": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/InformationAboutOrder"}
+          }           
+           
+           
+        }
+      },
+      "InformationAboutOrder": {
+        "description": "Information about Product in Order",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "order_time": {
+            "type": "string",
+            "example": "20:38:30 - 07.07.2024"
+          },
+          "pick_up_point": {
+            "type": "string",
+            "example": "Minsk"
+          },
+          "date_of_pick_up": {
+            "type": "string",
+            "example": "2024-07-10"
+          },
+          "time_of_pick_up": {
+            "type": "string",
+            "example": "17.00-18.00"
+          },
+          "all_price": {
+            "type": "string",
+            "example": "17.5"
+          }
+        }
+      },
+      "Catalog": {
+        "description": "Catalog",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "count": {
+            "type": "string",
+            "example": "2"
+          },
+          "next": {
+            "type": "nullable",
+            "example": "null"
+          },
+          "previous": {
+            "type": "nullable",
+            "example": "null"
+          },
+          "results": {
+            "type": "array",
+            "items": {"$ref": "#components/schemas/QuerySetsProducts"
+            }
+          }
+        }
+      },
+      "QuerySetsProducts": {
+        "anyOf":[
+          {"type": "array",
           "$ref": "#components/schemas/Products"
+            },
+          {"type": "array",
+          "$ref": "#components/schemas/Products"
+            }
+
+          ]
+        },
+        "QuerySetsProductsInOrder": {
+          "anyOf":[
+            {"type": "array",
+            "$ref": "#components/schemas/Product"
+              },
+            {"type": "array",
+            "$ref": "#components/schemas/Product"
+              }
+  
+            ]
         }
-      ]
-    },
 
-    "Products": {
-      "description": "Products model",
-      "type": "object",
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "example": "1"
-        },
-        "name": {
-          "type": "string",
-          "example": "First"
-        },
-        "description": {
-          "type": "string",
-          "example": "New"
-        },
-        "price": {
-          "type": "string",
-          "example": "10.50"
-        },
-        "amount": {
-          "type": "integer",
-          "example": "1"
-        },
-        "category": {
-          "$ref": "#components/schemas/Category"},         
-        "subcategory": {
-          "$ref": "#components/schemas/SubCategory"}
-        
-      }
-    },
-
-    "Category": {
-      "description": "Information about Category",
-      "type": "object",
-      "required": [],
-      "properties": {
-        "category": {
-          "type": "string",
-          "example": "Category"}
-      }
-    },
-
-    "SubCategory": {
-      "description": "Information about SubCategory",
-      "type": "object",
-      "required": [],
-      "properties": {
-        "subcategory": {
-          "type": "string",
-          "example": "SubCategory"}
-      }
-    },
-
-    "QuerySetsOrder": {
-      "anyOf":[
-        {
-          "type": "array",
-          "$ref": "#components/schemas/Order"
-        },
-        {
-          "type": "array",
-          "$ref": "#components/schemas/Order"
-        }
-      ]
-    }
+      
   },
-
-    "securitySchemes": {
-      "BearerScheme": {
-        "type": "http",
-        "description": "Enter your JWT token",
-        "scheme": "bearer",
-        "bearerFormat": "Bearer"
+  "securitySchemes": {
+    "BearerScheme": {
+      "type": "http",
+      "description": "Enter your JWT token",
+      "scheme": "bearer",
+      "bearerFormat": "Bearer"
     }
   }
 }

@@ -4,6 +4,7 @@ from core import IsActive
 from apps.shop.serializers import CommentSerializer
 
 from rest_framework.views import APIView
+from rest_framework.response import Response  
   
 
 class CommentView(APIView):
@@ -20,4 +21,5 @@ class CommentView(APIView):
         
         else:
             serializer.save()
-            return HttpResponseRedirect (f"/api/v1/product/{product_id}/")
+            # return HttpResponseRedirect ("")
+            return Response ({"information":serializer.data})

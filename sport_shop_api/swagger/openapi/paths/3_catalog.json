@@ -3,69 +3,18 @@
         "get": {
             "description": "Show products",
             "tags": [
-                "Catalog"
+                "Shop"
             ],
-            "parameters": [
-                {
-                  "name": "max_price",
-                  "in": "query",
-                  "schema": {
-                    "type": "integer"
-                  }
-                },
-                {
-                    "name": "min_price",
-                    "in": "query",
-                    "schema": {
-                      "type": "integer"
-                    }
-                },
-                {
-                    "name": "max_amount",
-                    "in": "query",
-                    "schema": {
-                      "type": "integer"
-                    }
-                },
-                {
-                    "name": "min_amount",
-                    "in": "query",
-                    "schema": {
-                      "type": "integer"
-                    }
-                },
-                {
-                    "name": "price_from_min",
-                    "in": "query",
-                    "schema": {
-                      "type": "str"
-                    }
-                  },
-                  {
-                      "name": "price_from_max",
-                      "in": "query",
-                      "schema": {
-                        "type": "str"
-                      }
-                  },
-                  {
-                      "name": "amount_from_min",
-                      "in": "query",
-                      "schema": {
-                        "type": "str"
-                      }
-                  },
-                  {
-                      "name": "amount_from_max",
-                      "in": "query",
-                      "schema": {
-                        "type": "str"
-                      }
-                  }
-              ],
             "responses": {
                 "200": {
-                    "$ref": "#/components/responses/Catalog"
+                    "description": "Catalog",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Catalog" 
+                            }
+                        }
+                    }
                 }
             }
         }

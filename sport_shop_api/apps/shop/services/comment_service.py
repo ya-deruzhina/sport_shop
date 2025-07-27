@@ -1,9 +1,9 @@
-from ..models import CommentOfProductsModel
+from ..models import CommentOfGoodsModel
 from ..serializers import CommentSerializer
 
 
 class CommentService:
-    model = CommentOfProductsModel
+    model = CommentOfGoodsModel
 
     @classmethod
     def create(cls, data):

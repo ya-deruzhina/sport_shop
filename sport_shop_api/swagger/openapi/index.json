@@ -20,12 +20,12 @@
         "description": "User related endpoints"
       },
       {
-        "name": "Catalog",
-        "description": "Catalog related endpoints"
+        "name": "Search",
+        "description": "Search related endpoints"
       },
       {
         "name": "Products",
-        "description": "Product related endpoints"
+        "description": "Catalog related endpoints"
       },
       {
         "name": "Basket",
